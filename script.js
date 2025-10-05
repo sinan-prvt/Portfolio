@@ -1,6 +1,4 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Typed.js for hero subtitle
     var typed = new Typed('#typed', {
         strings: ['The Python Wizard', 'Full Stack Python Developer', 'FrontEnd Developer','BackEnd Developer','Creative Designer'],
         typeSpeed: 50,
@@ -8,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loop: true
     });
 
-    // Smooth scrolling for nav links
     document.querySelectorAll('.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -21,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hero animations
     gsap.from('.animate-hero', {
         opacity: 0,
         y: 50,
@@ -30,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out'
     });
 
-    // Hero Parallax Effect
     gsap.to('.hero', {
         backgroundPosition: '50% 100%',
         ease: 'none',
@@ -42,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Staggered Text Animation for About Section
     gsap.utils.toArray('#about p').forEach((paragraph, index) => {
         gsap.from(paragraph, {
             opacity: 0,
@@ -58,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Section animations
     gsap.utils.toArray('.section').forEach(section => {
         gsap.from(section, {
             opacity: 0,
@@ -73,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Skill item animations with more stagger and rotation
     gsap.utils.toArray('.skill-item').forEach((skill, index) => {
         gsap.from(skill, {
             opacity: 0,
@@ -90,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hover Animations for Skill Items
     gsap.utils.toArray('.skill-item').forEach(skill => {
         skill.addEventListener('mouseenter', () => {
             gsap.to(skill, {
@@ -112,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Project card animations with enhanced effects
     gsap.utils.toArray('.project-card').forEach((card, index) => {
         gsap.from(card, {
             opacity: 0,
@@ -129,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hover Animations for Project Cards
     gsap.utils.toArray('.project-card .card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card, {
@@ -151,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Contact form animation
     gsap.from('.contact-form', {
         opacity: 0,
         y: 50,
@@ -164,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Pulse Effect for Contact Form Button
     gsap.to('.contact-form button', {
         scale: 1.05,
         duration: 0.8,
@@ -173,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power1.inOut'
     });
 
-    // Additional GSAP for contact items
     gsap.utils.toArray('.contact-item').forEach((item, index) => {
         gsap.from(item, {
             opacity: 0,
@@ -189,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Footer animation
     gsap.from('footer', {
         opacity: 0,
         y: 50,
@@ -202,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Section visibility on scroll
     gsap.utils.toArray('.section').forEach(section => {
         ScrollTrigger.create({
             trigger: section,
@@ -213,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// EmailJS sendMail function
 function sendMail() {
     var parms = {
         name : document.getElementById("name1").value ,
