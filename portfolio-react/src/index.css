@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --color-bg: #ffffff;
+    --color-text: #1a1a1a;
+    --color-accent: #000000;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Outfit', 'Inter', sans-serif;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-white text-black font-sans antialiased;
+        cursor: none;
+    }
+
+    * {
+        @apply border-black/5;
+    }
+}
+
+@layer components {
+    .section-label {
+        @apply text-[10px] font-bold tracking-[0.6em] text-gray-300 uppercase;
+    }
+}
+
+/* Animations */
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-reveal {
+    animation: reveal 1.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+}
+
+.marquee-container:hover .animate-marquee {
+    animation-play-state: paused;
+}
+
+/* Custom Utilities */
+.py-editorial {
+    @apply py-32 lg:py-60;
+}
+
+.editorial-grid {
+    @apply grid grid-cols-12 gap-x-6 gap-y-12;
+}
+
+.tracking-tighter {
+    letter-spacing: -0.05em;
+}
+
+/* Custom Selection */
+::selection {
+    background: black;
+    color: white;
+}
