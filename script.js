@@ -1,332 +1,217 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Typed.js
     var typed = new Typed('#typed', {
-        strings: ['The Python Wizard', 'Full Stack Python Developer', 'FrontEnd Developer','BackEnd Developer','Creative Designer'],
+        strings: ['Python Wizard', 'Full Stack Developer', 'Creative Designer', 'Problem Solver'],
         typeSpeed: 50,
         backSpeed: 30,
-        loop: true
+        loop: true,
+        smartBackspace: true
     });
 
-    document.querySelectorAll('.nav-link').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            window.scrollTo({
-                top: targetElement.offsetTop - 70,
-                behavior: 'smooth'
-            });
+    // Custom Cursor Logic
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Dot follows instantly
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        // Outline follows with lag (handled by CSS transition or simple requestAnimationFrame if desired for smoother feel, but CSS is fine for simple lag)
+        cursorOutline.style.left = `${posX}px`;
+        cursorOutline.style.top = `${posY}px`;
+
+        // Simple interactivity
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 500, fill: "forwards" });
+    });
+
+    // Register GSAP Plugins
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navbar Scrolled State
+    const navbar = document.querySelector('#navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2', 'shadow-lg');
+            navbar.classList.remove('py-4');
+        } else {
+            navbar.classList.add('py-4');
+            navbar.classList.remove('py-2', 'shadow-lg');
+        }
+    });
+
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isMenuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            gsap.fromTo(mobileLinks,
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: 'back.out(1.7)' }
+            );
+        } else {
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        }
+    });
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            isMenuOpen = false;
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
         });
     });
 
-    gsap.from('.animate-hero', {
+    // --- GSAP Animations ---
+
+    // 1. Hero Text Reveal
+    const openTl = gsap.timeline();
+    openTl.from('.reveal-text', {
+        y: 100,
         opacity: 0,
-        y: 50,
         duration: 1,
-        stagger: 0.3,
+        stagger: 0.2,
+        ease: 'power4.out',
+        delay: 0.2
+    })
+        .from('.reveal-img', {
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        }, '-=0.8');
+
+    // 2. Section Headers
+    gsap.utils.toArray('section h2').forEach(header => {
+        gsap.from(header, {
+            scrollTrigger: {
+                trigger: header,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        });
+    });
+
+    // 3. About Section Image Reveal
+    gsap.from('.about-img-wrapper', {
+        scrollTrigger: {
+            trigger: '#about',
+            start: 'top 70%'
+        },
+        x: -100,
+        opacity: 0,
+        duration: 1,
         ease: 'power3.out'
     });
 
-    gsap.to('.hero', {
-        backgroundPosition: '50% 100%',
-        ease: 'none',
+    gsap.from('.about-text', {
         scrollTrigger: {
-            trigger: '.hero',
-            scrub: true,
-            start: 'top top',
-            end: 'bottom top'
-        }
-    });
-
-    gsap.utils.toArray('#about p').forEach((paragraph, index) => {
-        gsap.from(paragraph, {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            delay: index * 0.3,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '#about',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    gsap.utils.toArray('.section').forEach(section => {
-        gsap.from(section, {
-            opacity: 0,
-            y: 100,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    gsap.utils.toArray('.skill-item').forEach((skill, index) => {
-        gsap.from(skill, {
-            opacity: 0,
-            x: -50,
-            rotation: -10,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '#skills',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    gsap.utils.toArray('.skill-item').forEach(skill => {
-        skill.addEventListener('mouseenter', () => {
-            gsap.to(skill, {
-                scale: 1.1,
-                rotation: 5,
-                boxShadow: '0 10px 20px rgba(0,0,0,0.3)',
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-        skill.addEventListener('mouseleave', () => {
-            gsap.to(skill, {
-                scale: 1,
-                rotation: 0,
-                boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-    });
-
-    gsap.utils.toArray('.project-card').forEach((card, index) => {
-        gsap.from(card, {
-            opacity: 0,
-            scale: 0.9,
-            y: 50,
-            duration: 0.8,
-            delay: index * 0.2,
-            ease: 'back.out(1.7)',
-            scrollTrigger: {
-                trigger: '#projects',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-    });
-
-    gsap.utils.toArray('.project-card .card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            gsap.to(card, {
-                scale: 1.05,
-                y: -15,
-                boxShadow: '0 12px 24px rgba(0,0,0,0.2)',
-                duration: 0.4,
-                ease: 'elastic.out(1, 0.5)'
-            });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                scale: 1,
-                y: 0,
-                boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
-                duration: 0.4,
-                ease: 'power2.out'
-            });
-        });
-    });
-
-    gsap.from('.contact-form', {
+            trigger: '#about',
+            start: 'top 70%'
+        },
+        x: 100,
         opacity: 0,
-        y: 50,
         duration: 1,
         ease: 'power3.out',
+        delay: 0.2
+    });
+
+    // 4. Skills Stagger
+    gsap.from('.skill-card', {
         scrollTrigger: {
-            trigger: '#contact',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-        }
+            trigger: '#skills',
+            start: 'top 80%'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: 'back.out(1.2)'
     });
 
-    gsap.to('.contact-form button', {
-        scale: 1.05,
-        duration: 0.8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
-    });
-
-    gsap.utils.toArray('.contact-item').forEach((item, index) => {
+    // 5. Experience Timeline
+    gsap.utils.toArray('.timeline-item').forEach((item, i) => {
         gsap.from(item, {
-            opacity: 0,
-            x: -50,
-            duration: 0.8,
-            delay: index * 0.2,
-            ease: 'power2.out',
             scrollTrigger: {
-                trigger: '#contact',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            }
+                trigger: item,
+                start: 'top 85%'
+            },
+            x: -50,
+            opacity: 0,
+            duration: 0.8,
+            delay: i * 0.2,
+            ease: 'power3.out'
         });
     });
 
-    gsap.from('footer', {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: 'footer',
-            start: 'top bottom',
-            toggleActions: 'play none none reverse'
-        }
-    });
-
-    gsap.utils.toArray('.section').forEach(section => {
-        ScrollTrigger.create({
-            trigger: section,
-            start: 'top 80%',
-            onEnter: () => section.classList.add('visible'),
-            onLeaveBack: () => section.classList.remove('visible')
+    // 6. Projects Reveal
+    gsap.utils.toArray('.project-row').forEach((row, i) => {
+        gsap.from(row, {
+            scrollTrigger: {
+                trigger: row,
+                start: 'top 85%'
+            },
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
         });
     });
+
+    // Initialize EmailJS
+    (function () {
+        emailjs.init({
+            publicKey: "MTQ7X_pz4x1Mdmz5z",
+        });
+    })();
 });
 
+// Send Mail Function
 function sendMail() {
+    const btn = document.querySelector('#contactForm button');
+    const originalText = btn.innerText;
+    btn.innerText = 'Sending...';
+    btn.disabled = true;
+
     var parms = {
-        name : document.getElementById("name1").value ,
-        email : document.getElementById("email1").value ,
-        message : document.getElementById("message1").value ,
-        phone : document.getElementById("phone1").value 
-    } 
+        name: document.getElementById("name1").value,
+        email: document.getElementById("email1").value,
+        message: document.getElementById("message1").value,
+        phone: document.getElementById("phone1").value
+    }
 
-    const serviceID ="service_23qbh77";
-    const templateID ="template_lozinv4";
+    const serviceID = "service_23qbh77";
+    const templateID = "template_lozinv4";
 
-
-    emailjs
-    .send(serviceID,templateID,parms)
-    .then( res => {
-        document.getElementById("name1").value = "" ;
-        document.getElementById("email1").value = "";
-        document.getElementById("message1").value = "";
-        document.getElementById("phone1").value = "";
-        console.log(res);
-        alert("Your Message Sent Successfully");    
-    })
-    .catch((err) => console.log(err)); 
+    emailjs.send(serviceID, templateID, parms)
+        .then(res => {
+            document.getElementById("name1").value = "";
+            document.getElementById("email1").value = "";
+            document.getElementById("message1").value = "";
+            document.getElementById("phone1").value = "";
+            console.log(res);
+            alert("Your Message Sent Successfully!");
+            btn.innerText = originalText;
+            btn.disabled = false;
+        })
+        .catch((err) => {
+            console.log(err);
+            alert("Failed to send message. Please try again.");
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
 }
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-  
-    const style = document.createElement('style');
-    style.textContent = `
-        .reveal-element {
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal-element.before-reveal {
-            opacity: 0;
-        }
-
-        .reveal-element.before-reveal.from-left {
-            transform: translateX(-30px);
-        }
-
-        .reveal-element.before-reveal.from-right {
-            transform: translateX(30px);
-        }
-
-        .reveal-element.before-reveal.from-bottom {
-            transform: translateY(30px);
-        }
-
-        .reveal-element.before-reveal.fade-only {
-            transform: none;
-        }
-
-        .reveal-element.before-reveal.scale-in {
-            transform: scale(0.95);
-        }
-
-        .reveal-element.revealed {
-            opacity: 1;
-            transform: none;
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-        .reveal-delay-5 { transition-delay: 0.5s; }
-        .reveal-delay-6 { transition-delay: 0.6s; }
-    `;
-    document.head.appendChild(style);
-
-    const elementsToReveal = [
-        { selector: '.me', animation: 'from-left' },
-        { selector: '.txt1', animation: 'fade-only' },
-        { selector: '.txt2', animation: 'from-bottom' },
-        
-        { selector: '.skilltxt', animation: 'scale-in' },
-        { selector: '.grd1', animation: 'from-bottom', stagger: true },
-        
-        { selector: '.hpro', animation: 'fade-only' },
-        { selector: '.box1', animation: 'from-bottom' },
-        { selector: '.box2', animation: 'from-bottom' },
-        { selector: '.box3', animation: 'from-bottom' },
-        
-        { selector: '.contact-title', animation: 'from-bottom' },
-        { selector: '.address', animation: 'from-bottom' },
-        { selector: '.freelance', animation: 'from-bottom' },
-        { selector: '.email', animation: 'from-bottom' },
-        { selector: '.phone', animation: 'from-bottom' },
-        { selector: '.contact-form', animation: 'from-right' }
-    ];
-
-    elementsToReveal.forEach(config => {
-        const elements = document.querySelectorAll(config.selector);
-        elements.forEach((element, index) => {
-            element.classList.add('reveal-element', 'before-reveal', config.animation);
-            
-            if (config.stagger && elements.length > 1) {
-                const delayClass = `reveal-delay-${Math.min(index + 1, 6)}`;
-                element.classList.add(delayClass);
-            }
-        });
-    });
-
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.remove('before-reveal');
-                entry.target.classList.add('revealed');
-                
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    elementsToReveal.forEach(config => {
-        const elements = document.querySelectorAll(config.selector);
-        elements.forEach(element => {
-            observer.observe(element);
-        });
-    });
-
-    console.log('✨ Scroll reveal animations loaded - your layout is preserved!');
-});

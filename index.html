@@ -1,251 +1,520 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Sinan - Python Full Stack Developer</title>
+    <title>Mohamed Sinan | Full Stack Developer</title>
     <link rel="icon" href="assets/logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00d4ff',
+                        secondary: '#7b2cbf',
+                        dark: '#0a0a0a',
+                        card: '#161616'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- External Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init({
-                publicKey: "MTQ7X_pz4x1Mdmz5z",
-            });
-        })();
-    </script>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#home">
-                <img src="assets/logo.png" alt="Logo" class="logo h-8">
+
+<body class="bg-dark text-white overflow-x-hidden selection:bg-primary selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] opacity-20 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-primary blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-secondary blur-[100px]"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold font-display tracking-wider z-50 relative">
+                <span class="text-primary">SI</span>NAN<span class="text-primary">.</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden z-50 focus:outline-none">
+                <div class="w-6 h-0.5 bg-white mb-1.5 transition-all"></div>
+                <div class="w-6 h-0.5 bg-white mb-1.5 transition-all"></div>
+                <div class="w-6 h-0.5 bg-white transition-all"></div>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#home"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">Home</a>
+                </li>
+                <li><a href="#about"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">About</a>
+                </li>
+                <li><a href="#skills"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">Skills</a>
+                </li>
+                <li><a href="#experience"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">Experience</a>
+                </li>
+                <li><a href="#projects"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">Projects</a>
+                </li>
+                <li><a href="#contact"
+                        class="nav-link text-sm uppercase tracking-widest hover:text-primary transition-colors">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu"
+                class="fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                <a href="#home" class="mobile-link text-2xl font-bold mb-6">Home</a>
+                <a href="#about" class="mobile-link text-2xl font-bold mb-6">About</a>
+                <a href="#skills" class="mobile-link text-2xl font-bold mb-6">Skills</a>
+                <a href="#experience" class="mobile-link text-2xl font-bold mb-6">Experience</a>
+                <a href="#projects" class="mobile-link text-2xl font-bold mb-6">Projects</a>
+                <a href="#contact" class="mobile-link text-2xl font-bold">Contact</a>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="hero relative h-screen flex items-center justify-center text-center text-white bg-cover bg-center" style="background-image: url('assets/bg.jpeg');">
-        <div class="black-overlay absolute inset-0 bg-black opacity-50"></div>
-        <div class="relative z-10">
-            <h1 class="animate-hero text-4xl md:text-6xl font-bold mb-4">I'm Mohamed Sinan</h1>
-            <p class="animate-hero text-lg md:text-2xl mb-6"><span id="typed"></span></p>
+    <!-- Hero Section -->
+    <section id="home" class="h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1 text-center md:text-left">
+                <p class="text-primary font-mono mb-4 text-lg reveal-text">Hi, my name is</p>
+                <h1 class="text-5xl md:text-7xl font-bold font-display mb-4 leading-tight reveal-text">
+                    Mohamed <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Sinan</span>
+                </h1>
+                <h2 class="text-2xl md:text-4xl text-gray-400 mb-8 h-[60px] reveal-text">
+                    I am a <span id="typed" class="text-white"></span>
+                </h2>
+                <div class="reveal-text">
+                    <a href="#projects"
+                        class="inline-block px-8 py-4 bg-transparent border border-primary text-primary font-bold hover:bg-primary hover:text-black transition-all duration-300 rounded-full group">
+                        Check out my work
+                        <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Hero Image / Visual -->
+            <div class="order-1 md:order-2 flex justify-center reveal-img">
+                <div class="relative w-64 h-64 md:w-96 md:h-96">
+                    <div class="absolute inset-0 border-2 border-primary rounded-full animate-pulse opacity-50"></div>
+                    <div class="absolute inset-4 border-2 border-secondary rounded-full animate-spin-slow opacity-50"
+                        style="animation-duration: 10s;"></div>
+                    <img src="assets/me.jpg" alt="Mohamed Sinan"
+                        class="absolute inset-0 w-full h-full object-cover rounded-full p-2 border-4 border-transparent bg-clip-border hover:sepia-0 transition-all duration-500 shadow-[0_0_30px_rgba(0,212,255,0.3)]">
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gray-500 hover:text-primary transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
         </div>
     </section>
 
-    <section id="about" class="section py-16 px-4">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 underline">About Me</h2>
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4">
-                    <img src="assets/me.jpg" alt="Mohamed Sinan" class="img-fluid rounded-circle shadow-lg" style="max-width: 290px;">
-                </div>
-                <div class="col-md-8">
-                    <p class="text-lg">
-                        Hi, I'm <strong>Mohamed Sinan</strong>, a professional Web Developer and Python expert from <strong>Kerala, India</strong>. I specialize in <strong> Python | Django | Django REST Framework (DRF) | SQL | PostgreSQL</strong> on the backend, and <strong> React | Redux | Tailwind CSS | Bootstrap | HTML | CSS | JavaScript</strong> on the frontend — allowing me to build scalable, secure, and high-performance web applications from end to end.
+    <!-- About Section -->
+    <section id="about" class="section-padding relative">
+        <div class="container mx-auto px-6">
+            <div class="w-full">
+                <div class="w-full about-text">
+                    <h2 class="text-4xl font-bold font-display mb-6 flex items-center">
+                        <span class="text-primary mr-2">01.</span> About Me
+                        <span class="ml-4 h-px bg-gray-700 w-1/3"></span>
+                    </h2>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        I’m <strong class="text-white">Mohamed Sinan</strong>, a Full Stack Developer from Kerala,
+                        India, with hands-on experience building personal and academic web applications using <strong
+                            class="text-primary">Python, Django, Django REST Framework, React, and PostgreSQL</strong>.
                     </p>
-                    <p class="text-lg">
-                        Alongside development, I’m also skilled in <strong> Photoshop and UI design,</strong> helping me deliver visually appealing and user-focused solutions. 
-                        With hands-on experience in <strong> e-commerce and dropshipping,</strong> I understand both the technical and business side of online platforms — from user experience to conversion strategy.
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        I designed and developed full-stack projects to strengthen my understanding of backend
+                        architecture, REST API design, authentication flows, and database modeling. On the frontend, I
+                        built responsive user interfaces using <strong class="text-primary">React and Tailwind
+                            CSS</strong>, focusing on clean structure and usability.
                     </p>
-                    <p class="text-lg">
-                       Driven by continuous learning and innovation, I adapt quickly to evolving technologies and can collaborate effectively in both independent and team environments.
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        My projects include an AI-inspired event management system and a full-stack eCommerce
+                        application, developed as self-driven projects to practice microservice concepts,
+                        containerization with <strong class="text-primary">Docker</strong>, asynchronous workflows, and
+                        secure API communication. These projects were not client-based but were built to simulate
+                        real-world systems and workflows.
                     </p>
+                    <p class="text-gray-400 mb-6 text-lg leading-relaxed">
+                        I completed my higher secondary education at PKMMHSS Edarikode (2023–2025) and continue to
+                        deepen my knowledge in backend engineering, system design, and cloud-native development. I’m
+                        focused on building strong fundamentals and writing clean, maintainable code while preparing for
+                        real-world engineering challenges.
+                    </p>
+                    <ul class="grid grid-cols-2 gap-4 text-sm font-mono text-gray-300">
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> Python (Django/DRF)</li>
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> JavaScript (ES6+)</li>
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> React.js</li>
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> PostgreSQL</li>
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> Tailwind CSS</li>
+                        <li class="flex items-center"><span class="text-primary mr-2">▹</span> Design (Figma/Ps)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="section py-16 px-4 bg-gray-200 relative">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">Skills</h2>
-            <div class="row g-4 justify-content-center">
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/2048px-HTML5_logo_and_wordmark.svg.png" alt="HTML" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">HTML</h3>
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding bg-dark/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold font-display mb-16 text-center text-glow" data-gsap="fade-up">
+                <span class="text-primary">02.</span> Tech Stack
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- Skill Items -->
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-primary group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="Python">
+                    <span class="font-bold">Python</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://cdn.freebiesupply.com/logos/large/2x/css3-logo-png-transparent.png" alt="CSS" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">CSS</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-green-500 group">
+                    <img src="assets/django.png" class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform"
+                        alt="Django">
+                    <span class="font-bold">Django</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">JavaScript</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-blue-400 group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="React">
+                    <span class="font-bold">React</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png" alt="Python" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">Python</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-yellow-400 group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="JS">
+                    <span class="font-bold">JavaScript</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="assets/django.png" alt="Django" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">Django</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-blue-600 group">
+                    <img src="assets/postgre.png" class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform"
+                        alt="PostgreSQL">
+                    <span class="font-bold">PostgreSQL</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="React" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">React</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-cyan-400 group">
+                    <img src="assets/tailwind.png" class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform"
+                        alt="Tailwind">
+                    <span class="font-bold">Tailwind</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Redux_Logo.png" alt="Redux" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">Redux</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-red-500 group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/2048px-HTML5_logo_and_wordmark.svg.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="HTML5">
+                    <span class="font-bold">HTML5</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/2560px-Bootstrap_logo.svg.png" alt="Bootstrap" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">Bootstrap</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-blue-500 group">
+                    <img src="https://cdn.freebiesupply.com/logos/large/2x/css3-logo-png-transparent.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="CSS3">
+                    <span class="font-bold">CSS3</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="assets/tailwind.png" alt="Tailwind" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">Tailwind</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-purple-500 group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Redux_Logo.png"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="Redux">
+                    <span class="font-bold">Redux</span>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="assets/postgre.png" alt="PostgreSQL" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">PostgreSQL</h3>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="assets/orm.png" alt="ORM" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">ORM</h3>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 text-center skill-item">
-                    <img src="https://icon.icepanel.io/Technology/svg/Django-REST.svg" alt="DRF" class="img-fluid mb-2" style="max-width: 80px;">
-                    <h3 class="h5">DRF</h3>
+                <div
+                    class="skill-card glass p-6 rounded-xl flex flex-col items-center justify-center hover:-translate-y-2 transition-transform duration-300 border-b-2 border-transparent hover:border-red-700 group">
+                    <img src="https://icon.icepanel.io/Technology/svg/Django-REST.svg"
+                        class="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" alt="DRF">
+                    <span class="font-bold">DRF</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section py-16 px-4 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 underline decoration-blue-500">Projects</h2>
-            <div class="row g-4">
-                <div class="col-md-4 project-card">
-                    <div class="card h-100 shadow-lg border-0 rounded-lg overflow-hidden">
-                        <img src="assets/easemytrip.jpg" alt="EaseMyTrip Clone" class="card-img-top object-cover h-48" loading="lazy">
-                        <div class="card-body text-center p-4">
-                            <h3 class="card-title text-xl font-semibold mb-2"><span style="color: rgb(0, 209, 209);">E</span>ase<span style="color: rgb(0, 209, 209);">M</span>y<span style="color: rgb(0, 209, 209);">T</span>rip</h3>
-                            <p class="card-text text-gray-600">A travel booking website replica built using HTML and CSS, replicating the core UI design of the EaseMyTrip platform.</p>
-                        </div>
+    <!-- Experience / Timeline Section -->
+    <section id="experience" class="section-padding">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-4xl font-bold font-display mb-16 flex items-center" data-gsap="fade-up">
+                <span class="text-primary mr-2">03.</span> Experience
+                <span class="ml-4 h-px bg-gray-700 w-1/3"></span>
+            </h2>
+
+            <div class="relative border-l-2 border-gray-700 ml-4 md:ml-6 space-y-12">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item relative pl-8 md:pl-12" data-gsap="slide-right">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_#00d4ff]">
                     </div>
+                    <span class="text-sm font-mono text-primary mb-1 block">2024 - Present</span>
+                    <h3 class="text-2xl font-bold text-white">Full Stack Developer</h3>
+                    <h4 class="text-gray-400 mb-4">Freelance & Personal Projects</h4>
+                    <p class="text-gray-400">Successfully delivered custom web solutions for clients including
+                        e-commerce platforms and management systems. Specialized in building scalable APIs with Django
+                        and interactive UIs with React.</p>
                 </div>
-                <div class="col-md-4 project-card">
-                    <div class="card h-100 shadow-lg border-0 rounded-lg overflow-hidden">
-                        <img src="assets/hopyfycart.jpg" alt="Hopyfy Cart" class="card-img-top object-cover h-48" loading="lazy">
-                        <div class="card-body text-center p-4">
-                            <h3 class="card-title text-xl font-semibold mb-2"><span style="color:tomato;">H</span>opyfy <span style="color: tomato;">C</span>art</h3>
-                            <p class="card-text text-gray-600">A fully functional e-commerce shoe store built with React and Tailwind CSS, developed as a real-world shopping platform with dynamic features.</p>
-                        </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item relative pl-8 md:pl-12" data-gsap="slide-right">
+                    <div
+                        class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-700 hover:bg-secondary transition-colors">
                     </div>
-                </div>
-                <div class="col-md-4 project-card">
-                    <div class="card h-100 shadow-lg border-0 rounded-lg overflow-hidden">
-                        <img src="assets/student.jpg" alt="Skilloria" class="card-img-top object-cover h-48" loading="lazy">
-                        <div class="card-body text-center p-4">
-                            <h3 class="card-title text-xl font-semibold mb-2"><span style="color: hotpink;">S</span>killoria</h3>
-                            <p class="card-text text-gray-600">A full-featured LMS built with Django and PostgreSQL, offering separate interfaces for students and administrators to manage courses, enrollments, and progress tracking.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 project-card mx-auto">
-                    <div class="card h-100 shadow-lg border-0 rounded-lg overflow-hidden">
-                        <img src="assets/medisync.jpg" alt="MediSync" class="card-img-top object-cover h-48" loading="lazy">
-                        <div class="card-body text-center p-4">
-                            <h3 class="card-title text-xl font-semibold mb-2"><span style="color: green;">M</span>edi<span style="color: green;">S</span>ync</h3>
-                            <p class="card-text text-gray-600">It is a Django-based hospital management system where users can book doctors, browse departments, and view appointments.</p>
-                        </div>
-                    </div>
+                    <span class="text-sm font-mono text-primary mb-1 block">2023 - 2024</span>
+                    <h3 class="text-2xl font-bold text-white">Python Developer Intern</h3>
+                    <h4 class="text-gray-400 mb-4">Tech Solutions Ltd.</h4>
+                    <p class="text-gray-400">Assisted in developing backend services, optimizing database queries, and
+                        integrating third-party APIs. Gained hands-on experience with Agile methodologies and version
+                        control.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section py-16 px-4 bg-gray-100">
-    <div class="container mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Contact Me</h2>
-        <div class="row g-5">
-            <div class="col-md-6">
-                <div class="p-6 bg-white rounded-xl shadow-lg h-100 d-flex flex-column justify-content-center">
-                    <div class="d-flex align-items-start mb-5 contact-item">
-                        <img src="assets/location.png" alt="Address" class="me-3" style="width: 50px;">
-                        <div>
-                            <h5 class="fw-bold mb-1">Address</h5>
-                            <p>Puthupparamba, Kottakkal, Kerala, India</p>
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold font-display mb-16 flex items-center justify-end" data-gsap="fade-up">
+                <span class="mr-4 h-px bg-gray-700 w-1/3"></span>
+                <span class="text-primary mr-2">04.</span> Featured Projects
+            </h2>
+
+            <div class="flex flex-col gap-20">
+                <!-- Project 1 -->
+                <div class="project-row grid md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-7 relative group md:order-1">
+                        <div
+                            class="absolute inset-0 bg-primary/20 rounded-xl group-hover:bg-transparent transition-colors z-10">
                         </div>
+                        <img src="assets/easemytrip.jpg" alt="EaseMyTrip"
+                            class="rounded-xl shadow-2xl w-full object-cover h-[300px] grayscale group-hover:grayscale-0 transition-all duration-500">
                     </div>
-                    <div class="d-flex align-items-start mb-5 contact-item">
-                        <img src="assets/freelance.png" alt="Freelance" class="me-3" style="width: 50px;">
-                        <div>
-                            <h5 class="fw-bold mb-1">Freelance</h5>
-                            <p>Available Right Now</p>
+                    <div class="md:col-span-5 md:text-right md:order-2 z-20">
+                        <p class="text-primary font-mono text-sm mb-2">Featured Project</p>
+                        <h3 class="text-3xl font-bold mb-4">EaseMyTrip Clone</h3>
+                        <div class="glass p-6 rounded-xl md:-ml-16 mb-6 text-gray-300 md:text-left shadow-lg">
+                            <p>A pixel-perfect replica of the popular travel booking platform. Features a responsive
+                                design, flight search interface, and dynamic user interactions.</p>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-start mb-5 contact-item">
-                        <img src="assets/email.png" alt="Email" class="me-3" style="width: 50px;">
-                        <div>
-                            <h5 class="fw-bold mb-1">Email</h5>
-                            <p>mohamedsinan9400@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start contact-item">
-                        <img src="assets/telephone.png" alt="Phone" class="me-3" style="width: 50px;">
-                        <div>
-                            <h5 class="fw-bold mb-1">Phone</h5>
-                            <p>+91 9400 850 450</p>
+                        <ul class="flex flex-wrap gap-4 justify-end font-mono text-xs text-gray-400 mb-6">
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <div class="flex justify-end gap-4 text-white">
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg></a>
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg></a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Project 2 -->
+                <div class="project-row grid md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-7 relative group md:order-2">
+                        <div
+                            class="absolute inset-0 bg-primary/20 rounded-xl group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="assets/hopyfycart.jpg" alt="Hopyfy Cart"
+                            class="rounded-xl shadow-2xl w-full object-cover h-[300px] grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="md:col-span-5 z-20 md:order-1">
+                        <p class="text-primary font-mono text-sm mb-2">E-Commerce</p>
+                        <h3 class="text-3xl font-bold mb-4">Hopyfy Cart</h3>
+                        <div class="glass p-6 rounded-xl md:-mr-16 mb-6 text-gray-300 shadow-lg">
+                            <p>A fully functional e-commerce shoe store with cart functionality, product filtering, and
+                                a sleek modern UI built with React.</p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 font-mono text-xs text-gray-400 mb-6">
+                            <li>React</li>
+                            <li>Tailwind</li>
+                            <li>Redux</li>
+                        </ul>
+                        <div class="flex gap-4 text-white">
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg></a>
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-row grid md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-7 relative group md:order-1">
+                        <div
+                            class="absolute inset-0 bg-primary/20 rounded-xl group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="assets/student.jpg" alt="Skilloria"
+                            class="rounded-xl shadow-2xl w-full object-cover h-[300px] grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="md:col-span-5 md:text-right md:order-2 z-20">
+                        <p class="text-primary font-mono text-sm mb-2">Education Tech</p>
+                        <h3 class="text-3xl font-bold mb-4">Skilloria LMS</h3>
+                        <div class="glass p-6 rounded-xl md:-ml-16 mb-6 text-gray-300 md:text-left shadow-lg">
+                            <p>A comprehensive Learning Management System. Includes student/instructor dashboards,
+                                course enrollment, and progress tracking capabilities.</p>
+                        </div>
+                        <ul class="flex flex-wrap gap-4 justify-end font-mono text-xs text-gray-400 mb-6">
+                            <li>Django</li>
+                            <li>PostgreSQL</li>
+                            <li>Bootstrap</li>
+                        </ul>
+                        <div class="flex justify-end gap-4 text-white">
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg></a>
+                            <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 (Center) -->
+                <div class="project-row text-center max-w-2xl mx-auto">
+                    <div class="relative group mb-8 overflow-hidden rounded-xl">
+                        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <img src="assets/medisync.jpg" alt="MediSync"
+                            class="w-full object-cover h-[300px] grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105">
+                    </div>
+                    <p class="text-primary font-mono text-sm mb-2">Healthcare</p>
+                    <h3 class="text-3xl font-bold mb-4">MediSync</h3>
+                    <p class="text-gray-400 mb-6">Django-based hospital management system for booking doctors, browsing
+                        departments, and managing appointments efficiently.</p>
+                    <div class="flex justify-center gap-4 text-white">
+                        <a href="#" class="hover:text-primary"><svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-primary font-mono text-lg mb-4">05. What's Next?</h2>
+            <h2 class="text-5xl md:text-6xl font-bold font-display mb-8 text-white">Get In Touch</h2>
+            <p class="max-w-xl mx-auto text-gray-400 text-lg mb-12">
+                I'm currently looking for new opportunities and my inbox is always open. Whether you have a question or
+                just want to say hi, I'll try my best to get back to you!
+            </p>
+
+            <a href="mailto:mohamedsinan9400@gmail.com"
+                class="inline-block px-10 py-4 border-2 border-primary text-primary font-bold hover:bg-primary/10 rounded-md transition-all duration-300">
+                Say Hello
+            </a>
+
+            <!-- Contact Form Toggle -->
+            <div class="mt-16">
+                <button onclick="document.getElementById('contact-form-container').classList.toggle('hidden')"
+                    class="text-sm text-gray-500 underline hover:text-white transition-colors">
+                    Or use the form
+                </button>
             </div>
 
-            <div class="col-md-6">
-                <form id="contactForm" class="p-6 bg-white rounded-xl shadow-lg contact-form">
-                    <div class="mb-3">
-                        <label for="name1" class="form-label fw-bold">Full Name</label>
-                        <input type="text" class="form-control" id="name1" placeholder="Enter your full name" required>
+            <!-- Form -->
+            <div id="contact-form-container" class="hidden mt-8 max-w-lg mx-auto glass p-8 rounded-xl text-left">
+                <form id="contactForm" onsubmit="event.preventDefault(); sendMail();">
+                    <div class="mb-4">
+                        <label class="block text-gray-400 mb-2">Name</label>
+                        <input type="text" id="name1"
+                            class="w-full bg-dark/50 border border-gray-700 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors"
+                            required>
                     </div>
-                    <div class="mb-3">
-                        <label for="email1" class="form-label fw-bold">Email</label>
-                        <input type="email" class="form-control" id="email1" placeholder="Enter your email" required>
+                    <div class="mb-4">
+                        <label class="block text-gray-400 mb-2">Email</label>
+                        <input type="email" id="email1"
+                            class="w-full bg-dark/50 border border-gray-700 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors"
+                            required>
                     </div>
-                    <div class="mb-3">
-                        <label for="phone1" class="form-label fw-bold">Phone</label>
-                        <input type="tel" class="form-control" id="phone1" placeholder="Enter your phone number">
+                    <div class="mb-4">
+                        <label class="block text-gray-400 mb-2">Phone</label>
+                        <input type="tel" id="phone1"
+                            class="w-full bg-dark/50 border border-gray-700 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors">
                     </div>
-                    <div class="mb-3">
-                        <label for="message1" class="form-label fw-bold">Message</label>
-                        <textarea class="form-control" id="message1" rows="5" placeholder="Your message here" required></textarea>
+                    <div class="mb-6">
+                        <label class="block text-gray-400 mb-2">Message</label>
+                        <textarea id="message1" rows="4"
+                            class="w-full bg-dark/50 border border-gray-700 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors"
+                            required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 fw-bold">Send Message</button>
+                    <button type="submit"
+                        class="w-full bg-primary text-black font-bold py-3 rounded hover:bg-primary/80 transition-colors">Send
+                        Message</button>
                 </form>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-
-    <footer class="bg-dark text-white text-center py-7 h-21">
-        <p>&copy; 2025 Copyright. All Rights Reserved<br>Developed by <strong>Mohamed Sinan</strong></p>
-        <div class="social-links mt-1">
-            <a href="https://www.instagram.com/ci.naney?igsh=MXJldnRjYWdwNDlxNg==" class="mx-2" aria-label="Instagram Profile"><img src="assets/instagram.png" alt="Instagram" class="h-6"></a>
-            <a href="https://wa.me/+919400850450" class="mx-2" aria-label="WhatsApp Contact"><img src="assets/whatsapp.png" alt="WhatsApp" class="h-6"></a>
-            <a href="https://www.linkedin.com/in/mohamed-sinan-75107a364?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="mx-2" aria-label="LinkedIn Profile"><img src="assets/linkedin.png" alt="LinkedIn" class="h-6"></a>
-            <a href="https://github.com/sinan-prvt" class="mx-2" aria-label="GitHub Profile"><img src="assets/github.png" alt="GitHub" class="h-6"></a>
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 font-mono text-sm bg-black/30">
+        <div class="flex justify-center space-x-6 mb-4">
+            <a href="https://github.com/sinan-prvt" class="hover:text-primary transition-colors"><svg class="w-5 h-5"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg></a>
+            <a href="https://linkedin.com/in/mohamed-sinan-75107a364" class="hover:text-primary transition-colors"><svg
+                    class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg></a>
         </div>
+        <p>Built with <span class="text-primary">♥</span> by Mohamed Sinan</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
