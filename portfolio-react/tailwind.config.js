@@ -10,7 +10,8 @@ export default {
                 primary: '#00d4ff',
                 secondary: '#7b2cbf',
                 dark: '#0a0a0a',
-                card: '#161616'
+                card: '#161616',
+                muted: '#F8F8F7'
             },
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],

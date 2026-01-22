@@ -1,38 +1,80 @@
 const projects = [
     {
-        title: 'AIVENT',
-        tag: 'Universal Event Operating System — 01',
-        desc: 'Built a full-stack AI-driven event platform connecting vendors, customers, and admins. Developed microservice backend with Django REST Framework, PostgreSQL, RabbitMQ, and Docker Compose.',
-        tech: ['DRF', 'React 19', 'Docker', 'RabbitMQ', 'Celery'],
-        live: 'https://aivent.example.com/',
+        title: 'EASEMYTRIP CLONE',
+        tag: 'Travel Booking Architecture — 01',
+        desc: 'A comprehensive travel platform clone featuring flight search, booking workflows, and responsive UI with complex state management.',
+        tech: ['React', 'Tailwind', 'Rest API'],
+        live: 'https://easemytrip-g0g4.onrender.com',
+        github: 'https://github.com/sinan-prvt/EaseMyTrip',
         img: '/assets/easemytrip.jpg',
     },
     {
-        title: 'HopyfyCart',
-        tag: 'Scalable E-Commerce Ecosystem — 02',
-        desc: 'Designed a scalable eCommerce site with React and Redux. Built backend with DRF and PostgreSQL, implementing Razorpay and secure authentication. Deployed using AWS EC2 & S3.',
-        tech: ['React', 'Redux', 'DRF', 'Razorpay', 'AWS'],
-        live: 'https://hopyfycart.example.com/',
-        img: '/assets/restuarant.jpg',
+        title: 'STUDENT MGMT',
+        tag: 'Academic Data Ecosystem — 02',
+        desc: 'A backend-driven portal for managing students, courses, and grading, built with high security and relational integrity.',
+        tech: ['Python', 'Django', 'PostgreSQL'],
+        live: '#',
+        github: '#',
+        img: '/assets/student.jpg',
+    },
+    {
+        title: 'HOPYFY CART',
+        tag: 'Scalable E-Commerce Solution — 03',
+        desc: 'A unified e-commerce platform with multi-vendor support, integrated payment systems, and streamlined user experiences.',
+        tech: ['React', 'DRF', 'Razorpay'],
+        live: '#',
+        github: '#',
+        img: '/assets/hopyfycart.jpg',
+    },
+    {
+        title: 'MEDI SYNC',
+        tag: 'Healthcare Data Nexus — 04',
+        desc: 'A health-tech solution for synchronizing medical data, doctor availability, and patient history across clinical departments.',
+        tech: ['Django', 'DRF', 'React'],
+        live: '#',
+        github: '#',
+        img: '/assets/medisync.jpg',
+    },
+    {
+        title: 'AIVENT',
+        tag: 'Universal Event Operating System — 05',
+        desc: 'An AI-powered universal event operating system for complex event management and architectural vendor coordination.',
+        tech: ['React 19', 'DRF', 'Docker'],
+        live: '#',
+        github: '#',
+        img: '/assets/bg.jpeg',
     },
 ];
 
 export default function Projects() {
     return (
-        <section id="projects" className="relative py-editorial bg-[#fcfcfc] text-black overflow-hidden border-t border-black/5">
+        <section id="projects" className="relative py-32 lg:py-60 bg-muted text-black overflow-hidden border-t border-black/5">
+            {/* Background Structural Line */}
+            <div className="absolute left-[8%] top-0 bottom-0 w-px bg-black/[0.03] hidden lg:block" />
+
             <div className="mx-auto max-w-7xl px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-40 gap-16">
-                    <div className="space-y-6">
-                        <span className="section-label">04 — STUDIO GALLERY</span>
-                        <h2 className="text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.85]">
-                            CURATED<br />
+                <div className="grid grid-cols-12 gap-x-6 mb-40">
+                    {/* Vertical Sidebar Label */}
+                    <div className="hidden lg:flex col-span-1 flex-col items-center pt-2">
+                        <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
+                            03 — WORKS
+                        </span>
+                        <div className="flex-grow w-px bg-black/10 mt-12" />
+                    </div>
+
+                    {/* Header Content */}
+                    <div className="col-span-12 lg:col-span-11 lg:pl-20 space-y-12">
+                        <div className="flex items-center gap-6">
+                            <div className="w-12 h-px bg-black" />
+                            <span className="text-[11px] font-bold tracking-[0.4em] text-black uppercase">
+                                STUDIO GALLERY
+                            </span>
+                        </div>
+
+                        <h2 className="text-6xl lg:text-8xl font-bold tracking-tighter uppercase leading-[0.85]">
+                            CURATED <br />
                             <span className="italic font-serif font-light lowercase text-gray-400">works</span>
                         </h2>
-                    </div>
-                    <div className="max-w-sm space-y-6 border-l border-black/10 pl-10">
-                        <p className="text-gray-500 font-light text-xl leading-relaxed italic">
-                            A selection of digital structures, each solving a unique challenge in logic and scale.
-                        </p>
                     </div>
                 </div>
 
@@ -76,11 +118,17 @@ export default function Projects() {
                                     ))}
                                 </div>
 
-                                <div className="flex items-center gap-12 pt-12 border-t border-black/5">
-                                    <a href={p.live} className="group relative text-[10px] font-bold tracking-[0.6em] uppercase flex items-center gap-4 overflow-hidden py-3">
-                                        <span className="relative z-10 transition-colors duration-300 group-hover:text-white">REQUISITION LIVE</span>
+                                <div className="flex flex-wrap items-center gap-8 pt-12 border-t border-black/5">
+                                    <a href={p.live} className="group relative text-[10px] font-bold tracking-[0.4em] uppercase flex items-center gap-4 overflow-hidden py-3">
+                                        <span className="relative z-10 transition-colors duration-300 group-hover:text-white px-4">LIVE</span>
                                         <div className="absolute inset-0 bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500 -z-0" />
-                                        <div className="h-0.5 w-12 bg-black/20" />
+                                        <div className="h-px w-8 bg-black/20" />
+                                    </a>
+
+                                    <a href={p.github} className="group relative text-[10px] font-bold tracking-[0.4em] uppercase flex items-center gap-4 overflow-hidden py-3">
+                                        <span className="relative z-10 transition-colors duration-300 group-hover:text-white px-4">SOURCE</span>
+                                        <div className="absolute inset-0 bg-black translate-x-full group-hover:translate-x-0 transition-transform duration-500 -z-0" />
+                                        <div className="h-px w-8 bg-black/20" />
                                     </a>
                                 </div>
                             </div>

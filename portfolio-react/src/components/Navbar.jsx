@@ -22,7 +22,7 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 inset-x-0 z-[100] transition-all duration-700">
             <div
-                className={`mx-auto px-6 md:px-12 py-5 flex items-center justify-between transition-all duration-700 ${scrolled ? 'bg-white/80 backdrop-blur-2xl py-4 shadow-sm border-b border-black/[0.03]' : 'bg-transparent'
+                className={`mx-auto px-6 md:px-12 py-5 flex items-center justify-between transition-all duration-700 ${scrolled ? 'bg-muted/80 backdrop-blur-2xl py-4 shadow-sm border-b border-black/[0.03]' : 'bg-transparent'
                     }`}
             >
                 <a href="#home" className="text-xl font-bold tracking-[0.4em] text-black uppercase">
@@ -66,8 +66,8 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Menu */}
-            <div className={`fixed inset-0 bg-white z-[90] transition-transform duration-700 md:hidden ${open ? 'translate-y-0' : '-translate-y-full'}`}>
-                <div className="flex flex-col items-center justify-center h-full space-y-12 bg-[#fdfdfd]">
+            <div className={`fixed inset-0 bg-muted z-[90] transition-transform duration-700 md:hidden ${open ? 'translate-y-0' : '-translate-y-full'}`}>
+                <div className="flex flex-col items-center justify-center h-full space-y-12 bg-muted">
                     <span className="text-[10px] font-bold tracking-[1em] text-gray-200 uppercase mb-8">NAVIGATION</span>
                     {links.map((l) => (
                         <a

@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <section id="about" className="relative py-editorial bg-white text-black overflow-hidden border-t border-black/[0.02]">
+        <section id="about" className="relative py-editorial bg-muted text-black overflow-hidden border-t border-black/[0.02]">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 <div className="editorial-grid items-start gap-y-32">
                     {/* Portrait Side */}

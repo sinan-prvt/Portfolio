@@ -16,7 +16,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section id="home" className="relative min-h-screen flex flex-col items-center bg-white overflow-hidden pt-32 lg:pt-48">
+        <section id="home" className="relative min-h-screen flex flex-col items-center bg-muted overflow-hidden pt-32 lg:pt-48">
             {/* Background Texture Overlay */}
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-20 pointer-events-none z-1" />
 
