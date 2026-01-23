@@ -23,7 +23,7 @@ const projects = [
         desc: 'A unified e-commerce platform with multi-vendor support, integrated payment systems, and streamlined user experiences.',
         tech: ['React', 'DRF', 'Razorpay'],
         live: '#',
-        github: '#',
+        github: 'https://github.com/sinan-prvt/Hopyfy_Cart',
         img: '/assets/hopyfycart.jpg',
     },
     {
@@ -41,8 +41,8 @@ const projects = [
         desc: 'An AI-powered universal event operating system for complex event management and architectural vendor coordination.',
         tech: ['React 19', 'DRF', 'Docker'],
         live: '#',
-        github: '#',
-        img: '/assets/bg.jpeg',
+        github: 'https://github.com/sinan-prvt/Aivent_frontend',
+        img: '/assets/aivent.jpeg',
     },
 ];
 
