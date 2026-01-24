@@ -6,7 +6,7 @@ export default function Hero() {
 
     useEffect(() => {
         const typed = new Typed(typedRef.current, {
-            strings: ['System Architecture', 'Full Stack Engineering', 'Digital Experiences'],
+            strings: ['System Architecture', 'Full Stack Developer', 'Digital Experiences'],
             typeSpeed: 50,
             backSpeed: 30,
             loop: true,
@@ -25,7 +25,7 @@ export default function Hero() {
                     <div className="flex items-center gap-4 animate-fade-in-up delay-100">
                         <div className="h-px w-12 bg-black/20" />
                         <span className="text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase">
-                            PORTFOLIO 2026
+                            FULL STACK DEVELOPER
                         </span>
                         <div className="h-px w-12 bg-black/20" />
                     </div>

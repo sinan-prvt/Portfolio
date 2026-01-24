@@ -2,28 +2,26 @@ const skills = [
     { name: "Python", slug: "python" },
     { name: "Django", slug: "django" },
     { name: "React", slug: "react" },
-    { name: "TypeScript", slug: "typescript" },
     { name: "PostgreSQL", slug: "postgresql" },
     { name: "Redux", slug: "redux" },
     { name: "Tailwind", slug: "tailwindcss" },
     { name: "JavaScript", slug: "javascript" },
     { name: "Docker", slug: "docker" },
-    { name: "AWS", slug: "amazonaws" },
+    { name: "AWS", slug: "aws" },
     { name: "Redis", slug: "redis" },
-    { name: "Nginx", slug: "nginx" },
     { name: "Git", slug: "git" },
     { name: "HTML5", slug: "html5" },
-    { name: "CSS3", slug: "css3" },
-    { name: "Linux", slug: "linux" },
-    { name: "Figma", slug: "figma" },
-    { name: "Next.js", slug: "nextdotjs" },
+    { name: "CSS3", slug: "css" },
+    { name: "Kubernetes", slug: "kubernetes" },
+    { name: "Celery", slug: "celery" },
+    { name: "ORM", slug: "orm" },
 ];
 
 export default function Skills() {
     // Split skills into 3 rows for visual balance
-    const row1 = skills.slice(0, 6);
-    const row2 = skills.slice(6, 12);
-    const row3 = skills.slice(12, 18);
+    const row1 = skills.slice(0, 18);
+    const row2 = skills.slice(0, 18);
+    const row3 = skills.slice(0, 18);
 
     return (
         <section id="skills" className="relative py-32 bg-white text-black overflow-hidden border-t border-black/5">
@@ -49,11 +47,7 @@ export default function Skills() {
                                 A curated selection of technologies used to build scalable, high-performance digital solutions.
                             </p>
 
-                            <div className="pt-8">
-                                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/30 border-b border-black/10 pb-2">
-                                    UPDATED 2026
-                                </span>
-                            </div>
+
                         </div>
                     </div>
 
