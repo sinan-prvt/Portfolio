@@ -1,53 +1,110 @@
 const skills = [
-    { name: "Python", localImg: "/assets/python.png" },
-    { name: "Django", localImg: "/assets/django.png" },
-    { name: "React", localImg: "/assets/react.png" },
-    { name: "DRF", localImg: "/assets/drf.png" },
-    { name: "PostgreSQL", localImg: "/assets/postgre.png" },
+    { name: "Python", slug: "python" },
+    { name: "Django", slug: "django" },
+    { name: "React", slug: "react" },
+    { name: "TypeScript", slug: "typescript" },
+    { name: "PostgreSQL", slug: "postgresql" },
     { name: "Redux", slug: "redux" },
-    { name: "Tailwind", localImg: "/assets/tailwind.png" },
-    { name: "JavaScript", localImg: "/assets/js.png" },
+    { name: "Tailwind", slug: "tailwindcss" },
+    { name: "JavaScript", slug: "javascript" },
     { name: "Docker", slug: "docker" },
-    { name: "AWS", externalImg: "https://skillicons.dev/icons?i=aws" },
+    { name: "AWS", slug: "amazonaws" },
     { name: "Redis", slug: "redis" },
-    { name: "RabbitMQ", slug: "rabbitmq" },
-    { name: "Postman", slug: "postman" },
-    { name: "HTML5", localImg: "/assets/html.png" },
-    { name: "CSS3", localImg: "/assets/css.png" },
+    { name: "Nginx", slug: "nginx" },
+    { name: "Git", slug: "git" },
+    { name: "HTML5", slug: "html5" },
+    { name: "CSS3", slug: "css3" },
+    { name: "Linux", slug: "linux" },
+    { name: "Figma", slug: "figma" },
+    { name: "Next.js", slug: "nextdotjs" },
 ];
 
 export default function Skills() {
-    return (
-        <section id="stack" className="relative py-24 bg-muted overflow-hidden border-t border-black/5">
-            <div className="flex flex-col gap-16">
-                <div className="flex items-center gap-6 px-12">
-                    <div className="h-px w-12 bg-black/10" />
-                    <span className="text-[10px] font-bold tracking-[0.5em] text-black/40 uppercase">02 — TECHNICAL FACULTY</span>
-                </div>
+    // Split skills into 3 rows for visual balance
+    const row1 = skills.slice(0, 6);
+    const row2 = skills.slice(6, 12);
+    const row3 = skills.slice(12, 18);
 
-                <div className="marquee-container relative flex overflow-hidden">
-                    <div className="animate-marquee whitespace-nowrap flex py-10 items-center">
-                        {/* Use triple set for super smooth infinite loop */}
-                        {[...skills, ...skills, ...skills].map((skill, idx) => (
-                            <div key={idx} className="flex items-center mx-12 md:mx-20 group">
-                                <div className="relative flex flex-col items-center gap-4 transition-all duration-700 hover:scale-110">
-                                    <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center">
-                                        <img
-                                            src={skill.localImg || skill.externalImg || `https://cdn.simpleicons.org/${skill.slug}`}
-                                            alt={skill.name}
-                                            className="max-w-full max-h-full object-contain opacity-60 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
-                                        />
-                                    </div>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-black/20 group-hover:text-black transition-all duration-700 uppercase">
-                                        {skill.name}
-                                    </span>
-                                </div>
-                                <div className="mx-12 md:mx-20 w-1.5 h-1.5 bg-black/5 rounded-full" />
+    return (
+        <section id="skills" className="relative py-32 bg-white text-black overflow-hidden border-t border-black/5">
+            <div className="mx-auto max-w-7xl px-6 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-start">
+
+                    {/* Featured Left Block - Sticky & Open */}
+                    <div className="col-span-1 lg:col-span-4 lg:sticky lg:top-32">
+                        <div className="flex flex-col items-start space-y-8 lg:pr-12">
+                            {/* Decorative Line */}
+                            <div className="w-12 h-px bg-black/20" />
+
+                            <div className="space-y-4">
+                                <span className="block text-sm font-bold tracking-[0.4em] uppercase text-black">
+                                    THE
+                                </span>
+                                <h2 className="text-6xl lg:text-7xl font-serif italic font-light tracking-tight leading-[0.9] text-gray-400">
+                                    toolkit
+                                </h2>
                             </div>
-                        ))}
+
+                            <p className="text-gray-500 text-lg leading-relaxed font-light font-sans max-w-xs">
+                                A curated selection of technologies used to build scalable, high-performance digital solutions.
+                            </p>
+
+                            <div className="pt-8">
+                                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/30 border-b border-black/10 pb-2">
+                                    UPDATED 2026
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Scrolling Rows Right Block */}
+                    <div className="col-span-1 lg:col-span-8 flex flex-col gap-12 lg:pt-8">
+                        {/* Fader Gradients for the container */}
+                        <div className="relative">
+                            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
+                            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
+
+                            <div className="space-y-8">
+                                {/* Row 1 - Scroll Left */}
+                                <MarqueeRow items={row1} direction="normal" speed="40s" />
+
+                                {/* Row 2 - Scroll Right */}
+                                <MarqueeRow items={row2} direction="reverse" speed="50s" />
+
+                                {/* Row 3 - Scroll Left */}
+                                <MarqueeRow items={row3} direction="normal" speed="45s" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+    );
+}
+
+function MarqueeRow({ items, direction = "normal", speed = "40s" }) {
+    return (
+        <div className="flex overflow-hidden group">
+            <div
+                className={`flex gap-4 items-center animate-marquee ${direction === 'reverse' ? 'animate-marquee-reverse' : ''} group-hover:pause`}
+                style={{ animationDuration: speed }}
+            >
+                {[...items, ...items, ...items, ...items].map((skill, idx) => (
+                    <div
+                        key={`${skill.name}-${idx}`}
+                        className="flex-shrink-0 flex items-center gap-3 bg-white border border-black/5 rounded-full px-6 py-4 shadow-sm hover:shadow-md hover:border-black/20 transition-all duration-300 cursor-default"
+                    >
+                        <img
+                            src={`https://cdn.simpleicons.org/${skill.slug}`}
+                            alt={skill.name}
+                            className="w-5 h-5 opacity-60"
+                        />
+                        <span className="text-sm font-bold text-gray-600 tracking-wide uppercase">
+                            {skill.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }

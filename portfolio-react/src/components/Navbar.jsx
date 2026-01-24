@@ -20,32 +20,33 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className="fixed top-0 inset-x-0 z-[100] transition-all duration-700">
+        <header className="fixed top-0 inset-x-0 z-[100]">
             <div
-                className={`mx-auto px-6 md:px-12 py-5 flex items-center justify-between transition-all duration-700 ${scrolled ? 'bg-muted/80 backdrop-blur-2xl py-4 shadow-sm border-b border-black/[0.03]' : 'bg-transparent'
+                className={`mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md py-4 border-b border-black/5' : 'bg-transparent'
                     }`}
             >
-                <a href="#home" className="text-xl font-bold tracking-[0.4em] text-black uppercase">
+                <a href="#home" className="text-xl font-bold tracking-[0.4em] text-black uppercase z-[110]">
                     SINAN
                 </a>
 
-                <nav className="hidden md:flex items-center gap-12 text-[10px] font-bold uppercase tracking-[0.4em]">
+                {/* Desktop Nav */}
+                <nav className="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em]">
                     {links.map((l) => (
                         <a
                             key={l.href}
                             href={l.href}
-                            className="text-black transition-all duration-300 hover:opacity-40 relative group"
+                            className="text-black/60 hover:text-black transition-colors duration-300"
                         >
                             {l.label}
-                            <div className="absolute -bottom-2 left-0 w-0 h-px bg-black transition-all duration-500 group-hover:w-full" />
                         </a>
                     ))}
                 </nav>
 
                 <div className="hidden md:flex items-center">
                     <a
-                        href="/Sinan-CV.pdf"
-                        className="group relative text-[10px] font-bold tracking-[0.5em] uppercase border border-black/10 px-6 py-3 hover:bg-black hover:text-white transition-all duration-500"
+                        href="/Mohamed-Sinan-FullStack.pdf"
+                        download
+                        className="text-[10px] font-bold tracking-[0.3em] uppercase bg-black text-white px-6 py-3 hover:bg-gray-800 transition-colors duration-300"
                     >
                         CV / 2026
                     </a>
@@ -54,41 +55,40 @@ export default function Navbar() {
                 {/* Mobile Trigger */}
                 <button
                     onClick={() => setOpen(!open)}
-                    className="md:hidden text-black p-2 focus:outline-none"
+                    className="md:hidden text-black focus:outline-none z-[110]"
                     aria-label="Toggle menu"
                 >
-                    <div className="w-6 h-4 relative flex flex-col justify-between">
-                        <div className={`h-0.5 w-full bg-black transition-all duration-500 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
-                        <div className={`h-0.5 w-full bg-black transition-all duration-500 ${open ? 'opacity-0' : ''}`} />
-                        <div className={`h-0.5 w-full bg-black transition-all duration-500 ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+                    <div className="space-y-1.5">
+                        <div className={`w-8 h-px bg-black transition-transform duration-500 ${open ? 'rotate-45 translate-y-2' : ''}`} />
+                        <div className={`w-8 h-px bg-black transition-opacity duration-500 ${open ? 'opacity-0' : ''}`} />
+                        <div className={`w-8 h-px bg-black transition-transform duration-500 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
                     </div>
                 </button>
             </div>
 
             {/* Mobile Menu */}
-            <div className={`fixed inset-0 bg-muted z-[90] transition-transform duration-700 md:hidden ${open ? 'translate-y-0' : '-translate-y-full'}`}>
-                <div className="flex flex-col items-center justify-center h-full space-y-12 bg-muted">
-                    <span className="text-[10px] font-bold tracking-[1em] text-gray-200 uppercase mb-8">NAVIGATION</span>
+            <div className={`fixed inset-0 bg-white z-[100] transition-transform duration-700 md:hidden flex flex-col items-center justify-center ${open ? 'translate-y-0' : '-translate-y-full'}`}>
+                <nav className="flex flex-col items-center space-y-8">
                     {links.map((l) => (
                         <a
                             key={l.href}
                             href={l.href}
                             onClick={() => setOpen(false)}
-                            className="text-4xl font-bold tracking-tighter uppercase text-black hover:italic transition-all duration-300"
+                            className="text-4xl font-bold tracking-tighter uppercase text-black hover:text-gray-500 transition-colors"
                         >
                             {l.label}
                         </a>
                     ))}
-                    <div className="pt-12">
-                        <a
-                            href="/Sinan-CV.pdf"
-                            onClick={() => setOpen(false)}
-                            className="text-xs font-bold tracking-[0.5em] border-b-2 border-black pb-2 uppercase"
-                        >
-                            Download Blueprint
-                        </a>
-                    </div>
-                </div>
+                    <div className="w-12 h-px bg-black/10 my-8" />
+                    <a
+                        href="/Mohamed-Sinan-FullStack.pdf"
+                        download
+                        onClick={() => setOpen(false)}
+                        className="text-xs font-bold tracking-[0.4em] uppercase"
+                    >
+                        DOWNLOAD CV
+                    </a>
+                </nav>
             </div>
         </header>
     );

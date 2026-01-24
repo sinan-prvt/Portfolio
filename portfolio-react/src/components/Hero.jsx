@@ -1,69 +1,65 @@
-import Typed from 'typed.js';
 import { useEffect, useRef } from 'react';
+import Typed from 'typed.js';
 
 export default function Hero() {
     const typedRef = useRef(null);
 
     useEffect(() => {
         const typed = new Typed(typedRef.current, {
-            strings: ['Clean Code', 'Full Stack Development', 'System Architecture'],
-            typeSpeed: 60,
-            backSpeed: 40,
+            strings: ['System Architecture', 'Full Stack Engineering', 'Digital Experiences'],
+            typeSpeed: 50,
+            backSpeed: 30,
             loop: true,
-            cursorChar: '_',
+            showCursor: false,
         });
         return () => typed.destroy();
     }, []);
 
     return (
-        <section id="home" className="relative min-h-screen flex flex-col items-center bg-muted overflow-hidden pt-32 lg:pt-48">
-            {/* Background Texture Overlay */}
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')] opacity-20 pointer-events-none z-1" />
+        <section id="home" className="relative h-screen min-h-[800px] flex items-center justify-center bg-white overflow-hidden pt-20">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-            <div className="mx-auto max-w-7xl px-6 w-full relative z-10 text-center">
-                <div className="flex flex-col items-center space-y-12 animate-reveal">
-                    {/* Header Section */}
-                    <div className="space-y-4">
-                        <div className="relative inline-block">
-                            <h1 className="text-[10vw] lg:text-[7vw] font-bold leading-[0.85] text-black uppercase tracking-tighter">
-                                MOHAMED<br />
-                                <span className="italic font-serif font-light lowercase text-gray-400">sinan</span>
-                            </h1>
-                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] font-bold tracking-[0.8em] text-black/40 uppercase whitespace-nowrap">
-                                FULL STACK DEVELOPER
-                            </div>
-                        </div>
+            <div className="mx-auto max-w-7xl px-6 relative z-10 w-full">
+                <div className="flex flex-col items-center text-center space-y-12">
+                    {/* Top Label */}
+                    <div className="flex items-center gap-4 animate-fade-in-up delay-100">
+                        <div className="h-px w-12 bg-black/20" />
+                        <span className="text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase">
+                            PORTFOLIO 2026
+                        </span>
+                        <div className="h-px w-12 bg-black/20" />
                     </div>
 
-                    {/* Typing Logic & Subtext */}
-                    <div className="space-y-12 max-w-4xl mx-auto">
-                        <p className="text-lg lg:text-2xl text-gray-400 font-light leading-snug font-serif italic">
-                            "Designing invisible structures with <br className="hidden sm:block" />
-                            <span ref={typedRef} className="text-black italic font-serif" />"
+                    {/* Main Title */}
+                    <h1 className="text-[12vw] lg:text-[10vw] font-bold leading-[0.8] text-black uppercase tracking-tighter animate-fade-in-up delay-200">
+                        MOHAMED<br />
+                        <span className="text-gray-300">SINAN</span>
+                    </h1>
+
+                    {/* Subtext */}
+                    <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up delay-300">
+                        <p className="text-xl lg:text-2xl text-gray-600 font-serif italic leading-relaxed">
+                            "Specializing in{' '}
+                            <span ref={typedRef} className="text-black not-italic font-sans font-medium" />"
                         </p>
+                    </div>
 
-                        <div className="flex flex-col items-center gap-10 pt-8">
-                            <a href="#projects" className="group relative overflow-hidden bg-black text-white px-16 py-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
-                                <span className="relative z-10 text-[11px] font-bold tracking-[0.6em] uppercase">VIEW REPOSITORY</span>
-                                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                                <span className="absolute inset-0 z-20 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-[11px] font-bold tracking-[0.6em] uppercase">EXPLORE</span>
-                            </a>
-
-                            <div className="flex items-center gap-6 opacity-30">
-                                <div className="h-px w-12 bg-black" />
-                                <span className="text-[10px] font-bold tracking-[0.4em] text-black uppercase">SOFTWARE CRAFTSMAN</span>
-                                <div className="h-px w-12 bg-black" />
-                            </div>
-                        </div>
+                    {/* Action */}
+                    <div className="pt-8 animate-fade-in-up delay-400">
+                        <a href="#projects" className="group relative inline-flex items-center gap-4 text-[11px] font-bold tracking-[0.4em] uppercase text-black hover:text-black/60 transition-colors">
+                            <span className="border-b border-black pb-1 group-hover:border-black/60 transition-colors">EXPLORE WORKS</span>
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="transform group-hover:translate-x-1 transition-transform">
+                                <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            {/* Scroll Icon Instead of Text */}
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-12 flex flex-col items-center gap-4 animate-bounce">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black/20">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-                </svg>
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                <span className="text-[9px] font-bold tracking-[0.3em] text-black/30 uppercase">SCROLL</span>
+                <div className="w-px h-12 bg-gradient-to-b from-black/30 to-transparent" />
             </div>
         </section>
     );
