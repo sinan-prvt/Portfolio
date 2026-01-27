@@ -18,7 +18,6 @@ const skills = [
 ];
 
 export default function Skills() {
-    // Split skills into 3 rows for visual balance
     const row1 = skills.slice(0, 18);
     const row2 = skills.slice(0, 18);
     const row3 = skills.slice(0, 18);
@@ -28,10 +27,8 @@ export default function Skills() {
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-6 items-start">
 
-                    {/* Featured Left Block - Sticky & Open */}
                     <div className="col-span-1 lg:col-span-4 lg:sticky lg:top-32">
                         <div className="flex flex-col items-start space-y-8 lg:pr-12">
-                            {/* Decorative Line */}
                             <div className="w-12 h-px bg-black/20" />
 
                             <div className="space-y-4">
@@ -47,26 +44,20 @@ export default function Skills() {
                                 A curated selection of technologies used to build scalable, high-performance digital solutions.
                             </p>
 
-
                         </div>
                     </div>
 
-                    {/* Scrolling Rows Right Block */}
                     <div className="col-span-1 lg:col-span-8 flex flex-col gap-12 lg:pt-8">
-                        {/* Fader Gradients for the container */}
                         <div className="relative">
                             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
                             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
 
                             <div className="space-y-8">
-                                {/* Row 1 - Scroll Left */}
-                                <MarqueeRow items={row1} direction="normal" speed="40s" />
+                                <MarqueeRow items={row1} direction="normal" speed="80s" />
 
-                                {/* Row 2 - Scroll Right */}
-                                <MarqueeRow items={row2} direction="reverse" speed="50s" />
+                                <MarqueeRow items={row2} direction="reverse" speed="90s" />
 
-                                {/* Row 3 - Scroll Left */}
-                                <MarqueeRow items={row3} direction="normal" speed="45s" />
+                                <MarqueeRow items={row3} direction="normal" speed="80s" />
                             </div>
                         </div>
                     </div>

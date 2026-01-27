@@ -1,12 +1,10 @@
 export default function Contact() {
     return (
         <section id="contact" className="relative py-32 lg:py-60 bg-muted text-black overflow-hidden border-t border-black/5">
-            {/* Background Structural Line */}
             <div className="absolute left-[8%] top-0 bottom-0 w-px bg-black/[0.03] hidden lg:block" />
 
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 <div className="grid grid-cols-12 gap-x-6">
-                    {/* Vertical Sidebar Label */}
                     <div className="hidden lg:flex col-span-1 flex-col items-center pt-2">
                         <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
                             05 — PARTNERSHIP
@@ -14,7 +12,6 @@ export default function Contact() {
                         <div className="flex-grow w-px bg-black/10 mt-12" />
                     </div>
 
-                    {/* Content */}
                     <div className="col-span-12 lg:col-span-11 lg:pl-20 space-y-20">
                         <div className="space-y-12">
                             <div className="flex items-center gap-6">

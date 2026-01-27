@@ -34,7 +34,6 @@
     }
 }
 
-/* Animations */
 @keyframes reveal {
     from {
         opacity: 0;
@@ -85,7 +84,6 @@
     animation-play-state: paused;
 }
 
-/* Custom Utilities */
 .py-editorial {
     @apply py-32 lg:py-60;
 }
@@ -98,7 +96,6 @@
     letter-spacing: -0.05em;
 }
 
-/* Custom Selection */
 ::selection {
     background: black;
     color: white;

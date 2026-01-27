@@ -49,12 +49,10 @@ const projects = [
 export default function Projects() {
     return (
         <section id="projects" className="relative py-32 lg:py-60 bg-muted text-black overflow-hidden border-t border-black/5">
-            {/* Background Structural Line */}
             <div className="absolute left-[8%] top-0 bottom-0 w-px bg-black/[0.03] hidden lg:block" />
 
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 <div className="grid grid-cols-12 gap-x-6 mb-40">
-                    {/* Vertical Sidebar Label */}
                     <div className="hidden lg:flex col-span-1 flex-col items-center pt-2">
                         <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
                             03 — WORKS
@@ -62,7 +60,6 @@ export default function Projects() {
                         <div className="flex-grow w-px bg-black/10 mt-12" />
                     </div>
 
-                    {/* Header Content */}
                     <div className="col-span-12 lg:col-span-11 lg:pl-20 space-y-12">
                         <div className="flex items-center gap-6">
                             <div className="w-12 h-px bg-black" />
@@ -84,7 +81,6 @@ export default function Projects() {
                             key={p.title}
                             className={`col-span-12 editorial-grid items-center ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
                         >
-                            {/* Image Showcase */}
                             <div className={`col-span-12 lg:col-span-8 ${idx % 2 !== 0 ? 'lg:order-2 lg:pl-12' : 'lg:pr-12'}`}>
                                 <div className="relative group overflow-hidden bg-white shadow-[0_50px_100px_rgba(0,0,0,0.03)] transition-all duration-700 hover:shadow-[0_80px_150px_rgba(0,0,0,0.07)]">
                                     <div className="absolute inset-0 bg-black/5 z-10 group-hover:bg-transparent transition-colors duration-1000" />
@@ -99,7 +95,6 @@ export default function Projects() {
                                 </div>
                             </div>
 
-                            {/* Content Panel */}
                             <div className={`col-span-12 lg:col-span-4 space-y-12 ${idx % 2 !== 0 ? 'lg:order-1' : ''}`}>
                                 <div className="space-y-6">
                                     <span className="text-[10px] font-bold tracking-[0.6em] text-gray-300 uppercase">{p.tag}</span>

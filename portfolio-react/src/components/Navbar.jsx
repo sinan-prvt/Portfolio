@@ -29,7 +29,6 @@ export default function Navbar() {
                     SINAN
                 </a>
 
-                {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em]">
                     {links.map((l) => (
                         <a
@@ -52,7 +51,6 @@ export default function Navbar() {
                     </a>
                 </div>
 
-                {/* Mobile Trigger */}
                 <button
                     onClick={() => setOpen(!open)}
                     className="md:hidden text-black focus:outline-none z-[110]"
@@ -66,7 +64,6 @@ export default function Navbar() {
                 </button>
             </div>
 
-            {/* Mobile Menu */}
             <div className={`fixed inset-0 bg-white z-[100] transition-transform duration-700 md:hidden flex flex-col items-center justify-center ${open ? 'translate-y-0' : '-translate-y-full'}`}>
                 <nav className="flex flex-col items-center space-y-8">
                     {links.map((l) => (

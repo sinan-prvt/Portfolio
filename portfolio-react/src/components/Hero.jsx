@@ -21,7 +21,6 @@ export default function Hero() {
 
             <div className="mx-auto max-w-7xl px-6 relative z-10 w-full">
                 <div className="flex flex-col items-center text-center space-y-12">
-                    {/* Top Label */}
                     <div className="flex items-center gap-4 animate-fade-in-up delay-100">
                         <div className="h-px w-12 bg-black/20" />
                         <span className="text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase">
@@ -30,13 +29,11 @@ export default function Hero() {
                         <div className="h-px w-12 bg-black/20" />
                     </div>
 
-                    {/* Main Title */}
                     <h1 className="text-[12vw] lg:text-[10vw] font-bold leading-[0.8] text-black uppercase tracking-tighter animate-fade-in-up delay-200">
                         MOHAMED<br />
                         <span className="text-gray-300">SINAN</span>
                     </h1>
 
-                    {/* Subtext */}
                     <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up delay-300">
                         <p className="text-xl lg:text-2xl text-gray-600 font-serif italic leading-relaxed">
                             "Specializing in{' '}
@@ -44,7 +41,6 @@ export default function Hero() {
                         </p>
                     </div>
 
-                    {/* Action */}
                     <div className="pt-8 animate-fade-in-up delay-400">
                         <a href="#projects" className="group relative inline-flex items-center gap-4 text-[11px] font-bold tracking-[0.4em] uppercase text-black hover:text-black/60 transition-colors">
                             <span className="border-b border-black pb-1 group-hover:border-black/60 transition-colors">EXPLORE WORKS</span>
@@ -56,7 +52,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
                 <span className="text-[9px] font-bold tracking-[0.3em] text-black/30 uppercase">SCROLL</span>
                 <div className="w-px h-12 bg-gradient-to-b from-black/30 to-transparent" />

@@ -3,7 +3,6 @@ import React from 'react';
 const PhotoSection = ({ image = "/assets/me.jpg", caption = "Visual Architecture" }) => {
     return (
         <section className="relative w-full h-[100vh] overflow-hidden bg-black group">
-            {/* Background Texture */}
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/p6-dark.png')] opacity-20 z-10" />
 
             <img
