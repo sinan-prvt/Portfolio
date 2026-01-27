@@ -1,41 +1,142 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function Cursor() {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
+    const cursorRef = useRef(null);
+    const dotRef = useRef(null);
+    const mousePos = useRef({ x: 0, y: 0 });
+    const cursorPos = useRef({ x: 0, y: 0 });
+    const isHovering = useRef(false);
+    const isClicking = useRef(false);
 
     useEffect(() => {
-        const moveCursor = (e) => {
-            setPosition({ x: e.clientX, y: e.clientY });
+        const cursor = cursorRef.current;
+        const dot = dotRef.current;
+
+        if (!cursor || !dot) return;
+
+        // Mouse move handler
+        const handleMouseMove = (e) => {
+            mousePos.current = { x: e.clientX, y: e.clientY };
         };
 
-        const handleHover = (e) => {
-            if (e.target.closest('a, button, [role="button"]')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
+        // Hover detection
+        const handleMouseOver = (e) => {
+            const hovering = e.target.closest('a, button, input, textarea, [role="button"]');
+            isHovering.current = !!hovering;
+
+            if (hovering) {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.borderColor = 'rgba(0, 0, 0, 0.3)';
+                dot.style.width = '4px';
+                dot.style.height = '4px';
+                dot.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            } else if (!isClicking.current) {
+                cursor.style.width = '48px';
+                cursor.style.height = '48px';
+                cursor.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+                dot.style.width = '6px';
+                dot.style.height = '6px';
+                dot.style.backgroundColor = 'rgba(0, 0, 0, 1)';
             }
         };
 
-        window.addEventListener('mousemove', moveCursor);
-        window.addEventListener('mouseover', handleHover);
-
-        return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('mouseover', handleHover);
+        // Click handlers
+        const handleMouseDown = () => {
+            isClicking.current = true;
+            cursor.style.width = '40px';
+            cursor.style.height = '40px';
+            cursor.style.borderColor = 'rgba(0, 0, 0, 0.5)';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
+            dot.style.backgroundColor = 'rgba(0, 0, 0, 1)';
         };
-    }, []);
+
+        const handleMouseUp = () => {
+            isClicking.current = false;
+            if (isHovering.current) {
+                cursor.style.width = '64px';
+                cursor.style.height = '64px';
+                cursor.style.borderColor = 'rgba(0, 0, 0, 0.3)';
+                dot.style.width = '4px';
+                dot.style.height = '4px';
+                dot.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            } else {
+                cursor.style.width = '48px';
+                cursor.style.height = '48px';
+                cursor.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+                dot.style.width = '6px';
+                dot.style.height = '6px';
+                dot.style.backgroundColor = 'rgba(0, 0, 0, 1)';
+            }
+        };
+
+        // Smooth animation loop - runs continuously
+        let animationFrameId;
+        const animate = () => {
+            // Smooth follow for outer circle
+            const dx = mousePos.current.x - cursorPos.current.x;
+            const dy = mousePos.current.y - cursorPos.current.y;
+
+            cursorPos.current.x += dx * 0.15;
+            cursorPos.current.y += dy * 0.15;
+
+            // Update cursor position
+            cursor.style.left = `${cursorPos.current.x}px`;
+            cursor.style.top = `${cursorPos.current.y}px`;
+
+            // Update dot position (instant follow)
+            dot.style.left = `${mousePos.current.x}px`;
+            dot.style.top = `${mousePos.current.y}px`;
+
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        // Add event listeners
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseover', handleMouseOver);
+        window.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mouseup', handleMouseUp);
+
+        // Start animation loop
+        animationFrameId = requestAnimationFrame(animate);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseover', handleMouseOver);
+            window.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mouseup', handleMouseUp);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+        };
+    }, []); // Empty dependency array - runs once!
 
     return (
         <>
+            {/* Main cursor circle */}
             <div
-                className={`fixed top-0 left-0 w-10 h-10 rounded-full border border-black/40 pointer-events-none z-[9999] transition-all duration-300 -translate-x-1/2 -translate-y-1/2 mix-blend-difference ${isHovering ? 'scale-[2] bg-white border-transparent' : 'scale-100'
-                    } hidden md:block`}
-                style={{ left: `${position.x}px`, top: `${position.y}px` }}
+                ref={cursorRef}
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block border-2"
+                style={{
+                    width: '48px',
+                    height: '48px',
+                    borderColor: 'rgba(0, 0, 0, 0.2)',
+                    transition: 'width 0.3s ease, height 0.3s ease, border-color 0.3s ease',
+                }}
             />
+
+            {/* Inner dot */}
             <div
-                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block"
-                style={{ left: `${position.x}px`, top: `${position.y}px` }}
+                ref={dotRef}
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+                style={{
+                    width: '6px',
+                    height: '6px',
+                    backgroundColor: 'rgba(0, 0, 0, 1)',
+                    transition: 'width 0.15s ease, height 0.15s ease, background-color 0.15s ease',
+                }}
             />
         </>
     );

@@ -20,7 +20,31 @@
     body {
         background-color: var(--color-bg);
         @apply text-black font-sans antialiased;
+    }
+
+    /* Hide default cursor only on non-text elements */
+    body,
+    a,
+    button,
+    img,
+    video,
+    div:not(input):not(textarea) {
         cursor: none;
+    }
+
+    /* Allow text cursor on text elements */
+    input,
+    textarea,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    span,
+    li {
+        cursor: auto !important;
     }
 
     * {
@@ -94,6 +118,22 @@
 
 .tracking-tighter {
     letter-spacing: -0.05em;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slide-in 0.3s cubic-bezier(0.2, 0, 0.2, 1) forwards;
 }
 
 ::selection {
