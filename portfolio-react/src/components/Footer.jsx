@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-12">
 
           <div className="space-y-4">
-            <img src="/assets/logo.png" alt="SINAN" className="h-8 md:h-10 w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
+            <img src="/assets/logo.png" alt="SINAN" className="h-12 md:h-16 w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
             <p className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase max-w-xs leading-relaxed">
               Crafting digital experiences with a focus on structural integrity and details.
             </p>
