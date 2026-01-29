@@ -25,8 +25,8 @@ export default function Navbar() {
                 className={`mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md py-4 border-b border-black/5' : 'bg-transparent'
                     }`}
             >
-                <a href="#home" className="text-xl font-bold tracking-[0.4em] text-black uppercase z-[110]">
-                    SINAN
+                <a href="#home" className="flex items-center z-[110]">
+                    <img src="/assets/logo.png" alt="SINAN" className="h-8 md:h-10 w-auto object-contain transition-transform duration-300 hover:scale-105" />
                 </a>
 
                 <nav className="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em]">
