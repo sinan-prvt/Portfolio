@@ -1,8 +1,8 @@
 export default function About() {
     return (
-        <section id="about" className="relative py-12 md:py-24 lg:py-48 bg-white text-black overflow-hidden border-t border-black/5">
+        <section id="about" className="relative py-8 md:py-24 lg:py-48 bg-white text-black overflow-hidden border-t border-black/5">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-start">
 
                     <div className="hidden md:flex md:col-span-1 flex-col items-center pt-2 h-full justify-start">
                         <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
@@ -27,7 +27,7 @@ export default function About() {
 
                     <div className="col-span-12 md:col-span-6 space-y-10">
                         <div>
-                            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold tracking-tighter text-black mb-4">
+                            <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold tracking-tighter text-black mb-4">
                                 I am <br /> Mohamed Sinan.
                             </h2>
                             <div className="flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-gray-400">
@@ -37,7 +37,7 @@ export default function About() {
                         </div>
 
                         <div className="space-y-8">
-                            <p className="text-xl lg:text-2xl leading-relaxed font-serif italic text-black font-light">
+                            <p className="text-lg md:text-2xl leading-relaxed font-serif italic text-black font-light">
                                 As a versatile Full Stack Developer, I specialize in architecting scalable digital solutions that bridge complex backend logic with intuitive frontend experiences.
                             </p>
 
