@@ -7,14 +7,14 @@ const skills = [
     { name: "Tailwind", slug: "tailwindcss" },
     { name: "JavaScript", slug: "javascript" },
     { name: "Docker", slug: "docker" },
-    { name: "AWS", slug: "aws" },
+    { name: "AWS", slug: "aws", url: "https://icongr.am/simple/amazonaws.svg" },
     { name: "Redis", slug: "redis" },
     { name: "Git", slug: "git" },
     { name: "HTML5", slug: "html5" },
     { name: "CSS3", slug: "css" },
     { name: "Kubernetes", slug: "kubernetes" },
     { name: "Celery", slug: "celery" },
-    { name: "ORM", slug: "orm" },
+    { name: "ORM", slug: "sqlalchemy" },
 ];
 
 export default function Skills() {
@@ -80,7 +80,7 @@ function MarqueeRow({ items, direction = "normal", speed = "40s" }) {
                         className="flex-shrink-0 flex items-center gap-3 bg-white border border-black/5 rounded-full px-6 py-4 shadow-sm hover:shadow-md hover:border-black/20 transition-all duration-300 cursor-default"
                     >
                         <img
-                            src={`https://cdn.simpleicons.org/${skill.slug}`}
+                            src={skill.url || `https://cdn.simpleicons.org/${skill.slug}`}
                             alt={skill.name}
                             className="w-5 h-5 opacity-60"
                         />
