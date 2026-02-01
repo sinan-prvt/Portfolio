@@ -6,9 +6,7 @@
 
 :root {
     --primary-color: #00d4ff;
-    /* Neon Cyan */
     --secondary-color: #7b2cbf;
-    /* Deep Violet */
     --dark-bg: #0a0a0a;
     --card-bg: #161616;
     --text-color: #e0e0e0;
@@ -20,7 +18,6 @@ body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     cursor: none;
-    /* Custom cursor */
 }
 
 h1,
@@ -32,7 +29,6 @@ h6 {
     font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -46,7 +42,6 @@ h6 {
     border-radius: 4px;
 }
 
-/* Custom Cursor */
 .cursor-dot,
 .cursor-outline {
     position: fixed;
@@ -71,7 +66,6 @@ h6 {
     transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
 
-/* Glassmorphism */
 .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -85,24 +79,20 @@ h6 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Neon Text Glow */
 .text-glow {
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
 }
 
-/* Section Spacing */
 .section-padding {
     padding: 120px 0;
 }
 
-/* Custom Utilities */
 .gradient-text {
     background: linear-gradient(to right, #00d4ff, #7b2cbf);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* Logo Loop Fade Effect */
 .mask-fade {
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);

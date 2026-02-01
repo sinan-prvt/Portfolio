@@ -14,12 +14,10 @@ export default function Cursor() {
 
         if (!cursor || !dot) return;
 
-        // Mouse move handler
         const handleMouseMove = (e) => {
             mousePos.current = { x: e.clientX, y: e.clientY };
         };
 
-        // Hover detection
         const handleMouseOver = (e) => {
             const hovering = e.target.closest('a, button, input, textarea, [role="button"]');
             isHovering.current = !!hovering;
@@ -41,7 +39,6 @@ export default function Cursor() {
             }
         };
 
-        // Click handlers
         const handleMouseDown = () => {
             isClicking.current = true;
             cursor.style.width = '40px';
@@ -71,37 +68,30 @@ export default function Cursor() {
             }
         };
 
-        // Smooth animation loop - runs continuously
         let animationFrameId;
         const animate = () => {
-            // Smooth follow for outer circle
             const dx = mousePos.current.x - cursorPos.current.x;
             const dy = mousePos.current.y - cursorPos.current.y;
 
             cursorPos.current.x += dx * 0.15;
             cursorPos.current.y += dy * 0.15;
 
-            // Update cursor position
             cursor.style.left = `${cursorPos.current.x}px`;
             cursor.style.top = `${cursorPos.current.y}px`;
 
-            // Update dot position (instant follow)
             dot.style.left = `${mousePos.current.x}px`;
             dot.style.top = `${mousePos.current.y}px`;
 
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        // Add event listeners
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseover', handleMouseOver);
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
 
-        // Start animation loop
         animationFrameId = requestAnimationFrame(animate);
 
-        // Cleanup
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseover', handleMouseOver);
@@ -111,11 +101,10 @@ export default function Cursor() {
                 cancelAnimationFrame(animationFrameId);
             }
         };
-    }, []); // Empty dependency array - runs once!
+    }, []);
 
     return (
         <>
-            {/* Main cursor circle */}
             <div
                 ref={cursorRef}
                 className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block border-2"
@@ -127,7 +116,6 @@ export default function Cursor() {
                 }}
             />
 
-            {/* Inner dot */}
             <div
                 ref={dotRef}
                 className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block"

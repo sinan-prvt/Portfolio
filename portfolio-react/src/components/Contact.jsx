@@ -17,7 +17,6 @@ export default function Contact() {
     const handleSubmit = () => {
         setIsSubmitting(true);
 
-        // We give the iframe a moment to receive the post before resetting
         setTimeout(() => {
             showToast('Success! Message sent to mohamedsinan9400@gmail.com', 'success');
             setFormData({ name: '', email: '', message: '' });
@@ -31,7 +30,6 @@ export default function Contact() {
 
     return (
         <section id="contact" className="relative py-32 lg:py-40 bg-white text-black overflow-hidden border-t border-black/5">
-            {/* Toast Notification */}
             {toast.show && (
                 <div className={`fixed top-8 right-8 z-[10000] px-8 py-4 rounded-lg shadow-2xl transition-all duration-500 ${toast.type === 'success' ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'
                     } animate-slide-in`}>
@@ -51,7 +49,6 @@ export default function Contact() {
                     </div>
 
                     <div className="col-span-12 lg:col-span-11 lg:pl-20">
-                        {/* Header */}
                         <div className="space-y-12 mb-20">
                             <div className="flex items-center gap-6">
                                 <div className="w-12 h-px bg-black" />
@@ -66,9 +63,7 @@ export default function Contact() {
                             </h2>
                         </div>
 
-                        {/* Split Layout */}
                         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-                            {/* Left: Contact Info */}
                             <div className="space-y-12">
                                 <div className="space-y-8">
                                     <div className="group">
@@ -111,7 +106,6 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            {/* Right: Contact Form */}
                             <div className="bg-muted/30 p-8 lg:p-12 border border-black/5">
                                 <form
                                     action="https://formsubmit.co/mohamedsinan9400@gmail.com"
@@ -120,7 +114,6 @@ export default function Contact() {
                                     onSubmit={handleSubmit}
                                     className="space-y-8"
                                 >
-                                    {/* FormSubmit Configuration */}
                                     <input type="hidden" name="_captcha" value="false" />
                                     <input type="hidden" name="_template" value="table" />
                                     <input type="hidden" name="_subject" value={`Portfolio Message from ${formData.name}`} />
@@ -185,7 +178,6 @@ export default function Contact() {
                                     </button>
                                 </form>
 
-                                {/* Hidden iframe to prevent page reload */}
                                 <iframe name="hidden_iframe" id="hidden_iframe" className="hidden"></iframe>
                             </div>
                         </div>
