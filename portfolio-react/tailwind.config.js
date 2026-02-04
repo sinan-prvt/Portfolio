@@ -7,18 +7,20 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#00d4ff',
-                secondary: '#7b2cbf',
-                dark: '#0a0a0a',
-                card: '#161616',
-                muted: '#F8F8F7'
+                primary: '#000000',
+                secondary: '#71717a',
+                accent: '#E5C100', // Gold/Yellow glow from design
+                bg: '#FEFEFB',
+                card: '#F8F8F7',
+                muted: '#F1F1F0'
             },
             fontFamily: {
-                sans: ['Poppins', 'sans-serif'],
-                display: ['Space Grotesk', 'sans-serif'],
+                sans: ['Inter', 'Outfit', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'],
             },
             animation: {
                 'spin-slow': 'spin 10s linear infinite',
+                'fade-in-up': 'reveal 1s cubic-bezier(0.2, 0, 0.2, 1) forwards',
             }
         },
     },

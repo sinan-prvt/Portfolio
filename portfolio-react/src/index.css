@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-    --color-bg: #F8F8F7;
+    --color-bg: #FDFCF6;
     --color-text: #1a1a1a;
     --color-accent: #000000;
     --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Outfit', 'Inter', sans-serif;
+    --font-sans: 'Inter', 'Outfit', sans-serif;
 }
 
 @layer base {
@@ -20,6 +20,10 @@
     body {
         background-color: var(--color-bg);
         @apply text-black font-sans antialiased;
+        overflow-x: hidden;
+        min-height: 100vh;
+        height: auto;
+        position: relative;
     }
 
     body,
@@ -45,9 +49,7 @@
         cursor: auto !important;
     }
 
-    * {
-        @apply border-black/5;
-    }
+
 }
 
 @layer components {

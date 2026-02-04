@@ -1,58 +1,56 @@
-const items = [
+const experiences = [
     {
-        range: 'MAY 2025 — PRESENT',
-        role: 'FULL STACK DEVELOPER INTERN',
-        place: 'BRIDGEON SOLUTION / CALICUT',
-        detail: 'Collaborating with cross-functional teams to design, implement, and test frontend/backend features. Building and maintaining responsive UIs using React, Redux, and Tailwind CSS. Developing REST APIs for seamless communication between systems.',
+        year: '2024 — PRESENT',
+        role: 'Full Stack Engineer',
+        company: 'Freelance Studio',
+        desc: 'Crafting high-end digital experiences and scalable web architectures for global clients, focusing on React and Python ecosystems.'
     },
+    {
+        year: '2023 — 2024',
+        role: 'Frontend Developer',
+        company: 'Creative Agency',
+        desc: 'Specialized in building pixel-perfect, interactive user interfaces with GSAP animations and modern frontend frameworks.'
+    },
+    {
+        year: '2022 — 2023',
+        role: 'Python Developer Intern',
+        company: 'Tech Solutions',
+        desc: 'Developed robust backend systems and automated workflows using Django and REST APIs.'
+    }
 ];
 
 export default function Experience() {
     return (
         <section id="experience" className="relative py-32 bg-white text-black overflow-hidden border-t border-black/5">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
-                <div className="grid grid-cols-12 gap-x-6">
-                    <div className="hidden lg:flex col-span-1 flex-col items-center pt-2">
-                        <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
-                            04 — JOURNEY
-                        </span>
-                        <div className="flex-grow w-px bg-black/10 mt-12" />
-                    </div>
+                <div className="mb-24 animate-fade-in-up">
+                    <h2 className="text-4xl lg:text-6xl font-bold tracking-tight uppercase mb-4">PROFESSIONAL JOURNEY</h2>
+                    <div className="h-1 w-24 bg-black" />
+                </div>
 
-                    <div className="col-span-12 lg:col-span-11 lg:pl-20">
-                        <div className="mb-20">
-                            <h2 className="text-4xl lg:text-6xl font-bold tracking-tighter uppercase leading-none">
-                                PROFESSIONAL <span className="text-gray-400 font-serif italic font-light lowercase">experience</span>
-                            </h2>
+                <div className="space-y-0">
+                    {experiences.map((exp, idx) => (
+                        <div
+                            key={exp.company}
+                            className="group grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-x-12 py-16 border-b border-black/5 items-start animate-fade-in-up"
+                            style={{ animationDelay: `${idx * 150}ms` }}
+                        >
+                            <div className="md:col-span-3">
+                                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+                                    {exp.year}
+                                </span>
+                            </div>
+                            <div className="md:col-span-4">
+                                <h3 className="text-2xl font-bold uppercase leading-tight mb-2">{exp.role}</h3>
+                                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">{exp.company}</p>
+                            </div>
+                            <div className="md:col-span-5">
+                                <p className="text-lg text-gray-500 font-medium leading-relaxed italic border-l border-black/10 pl-8">
+                                    "{exp.desc}"
+                                </p>
+                            </div>
                         </div>
-
-                        <div className="space-y-24">
-                            {items.map((item, idx) => (
-                                <div key={idx} className="group grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                                    <div className="col-span-12 lg:col-span-4 relative pl-8 border-l border-black/10 lg:border-l-0 lg:pl-0 lg:pr-8 lg:text-right lg:border-r">
-                                        <span className="text-[10px] font-bold tracking-[0.2em] text-black/40 uppercase block mb-2">
-                                            {item.range}
-                                        </span>
-                                        <h4 className="text-sm font-bold tracking-[0.2em] uppercase text-black">
-                                            {item.place}
-                                        </h4>
-
-                                        <div className="absolute left-0 top-0 w-1.5 h-1.5 -translate-x-[3.5px] bg-black rounded-full lg:hidden" />
-                                        <div className="absolute right-0 top-2 w-1.5 h-1.5 translate-x-[3.5px] bg-black rounded-full hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    </div>
-
-                                    <div className="col-span-12 lg:col-span-8 pl-8 lg:pl-12 space-y-6">
-                                        <h3 className="text-3xl lg:text-4xl font-bold uppercase tracking-tight leading-none">
-                                            {item.role}
-                                        </h3>
-                                        <p className="text-lg text-gray-500 font-serif italic leading-relaxed font-light">
-                                            {item.detail}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </section>

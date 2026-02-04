@@ -3,10 +3,8 @@ import { useState, useEffect } from 'react';
 const links = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Stack' },
+    { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Works' },
-    { href: '#experience', label: 'Journey' },
-    { href: '#contact', label: 'Talk' },
 ];
 
 export default function Navbar() {
@@ -22,24 +20,19 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 inset-x-0 z-[100]">
             <div
-                className={`mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md py-4 border-b border-black/5' : 'bg-transparent'
+                className={`mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-[#FDFCF6]/90 backdrop-blur-md py-4' : 'bg-transparent'
                     }`}
             >
                 <a href="#home" className="flex items-center z-[1100]">
-                    <img
-                        src="/assets/logo.png"
-                        alt="SINAN"
-                        className={`w-auto object-contain transition-all duration-500 hover:scale-105 ${scrolled ? 'h-10 md:h-12' : 'h-16 md:h-18'
-                            }`}
-                    />
+                    <span className="text-2xl font-serif italic font-bold tracking-tighter">Sinan.</span>
                 </a>
 
-                <nav className="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em]">
+                <nav className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2 gap-10 text-[11px] font-medium uppercase tracking-[0.2em]">
                     {links.map((l) => (
                         <a
                             key={l.href}
                             href={l.href}
-                            className="text-black/60 hover:text-black transition-colors duration-300"
+                            className="text-black/80 hover:text-black transition-colors duration-300"
                         >
                             {l.label}
                         </a>
@@ -48,11 +41,10 @@ export default function Navbar() {
 
                 <div className="hidden md:flex items-center">
                     <a
-                        href="/Mohamed-Sinan-FullStack.pdf"
-                        download
-                        className="text-[10px] font-bold tracking-[0.3em] uppercase bg-black text-white px-6 py-3 hover:bg-gray-800 transition-colors duration-300"
+                        href="#contact"
+                        className="text-[11px] font-bold tracking-[0.2em] uppercase bg-black text-white px-8 py-3.5 rounded-full hover:bg-gray-800 transition-all duration-300 shadow-lg shadow-black/10"
                     >
-                        CV / 2026
+                        Contact
                     </a>
                 </div>
 

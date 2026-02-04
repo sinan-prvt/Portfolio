@@ -1,61 +1,63 @@
-import { useEffect, useRef } from 'react';
-import Typed from 'typed.js';
-
 export default function Hero() {
-    const typedRef = useRef(null);
-
-    useEffect(() => {
-        const typed = new Typed(typedRef.current, {
-            strings: ['System Architecture', 'Full Stack Developer', 'Digital Experiences'],
-            typeSpeed: 50,
-            backSpeed: 30,
-            loop: true,
-            showCursor: false,
-        });
-        return () => typed.destroy();
-    }, []);
-
     return (
-        <section id="home" className="relative h-screen min-h-[800px] flex items-center justify-center bg-white overflow-hidden pt-20">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+        <section id="home" className="relative min-h-screen bg-[#FDFCF6] flex flex-col items-center">
+            {/* Exact Reference Glows - Warm Sunny Yellow */}
+            <div className="absolute top-[10%] left-[-15%] w-[80vw] h-[90vw] bg-[#FEF08A40] blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute top-[5%] right-[-15%] w-[75vw] h-[85vw] bg-[#FEF08A30] blur-[130px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[90vw] h-[50vw] bg-[#FFFBEB30] blur-[100px] rounded-full pointer-events-none" />
 
-            <div className="mx-auto max-w-7xl px-6 relative z-10 w-full">
-                <div className="flex flex-col items-center text-center space-y-12">
-                    <div className="flex items-center gap-4 animate-fade-in-up delay-100">
-                        <div className="h-px w-12 bg-black/20" />
-                        <span className="text-[10px] font-bold tracking-[0.4em] text-gray-500 uppercase">
-                            FULL STACK DEVELOPER
-                        </span>
-                        <div className="h-px w-12 bg-black/20" />
+            <div className="relative w-full max-w-[1800px] h-screen px-10">
+
+                {/* 1. "Hey," and "there" Background Layer */}
+                <div className="absolute top-[22%] left-0 w-full flex justify-between px-[10%] z-0 pointer-events-none select-none">
+                    <h2 className="text-[12vw] lg:text-[15vw] font-serif italic leading-none text-black/90 animate-reveal opacity-0" style={{ animationDelay: '200ms' }}>
+                        Hey,
+                    </h2>
+                    <h2 className="text-[12vw] lg:text-[15vw] font-serif italic leading-none text-black/90 animate-reveal opacity-0" style={{ animationDelay: '400ms' }}>
+                        there
+                    </h2>
+                </div>
+
+                {/* 2. Main Profile Image Layer */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none">
+                    <div className="relative h-[85vh] w-auto">
+                        <img
+                            src="/assets/sinan_nobg.png"
+                            alt="Mohamed Sinan"
+                            className="h-full w-auto object-contain animate-fade-in-up contrast-110"
+                            style={{
+                                maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                                WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* 3. Foreground Content Layer */}
+                <div className="relative h-full w-full z-20 pointer-events-none ">
+
+
+
+
+
+                    {/* I AM SINAN - Bottom Left */}
+                    <div className="absolute left-0 bottom-[12%] animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
+                        <h1 className="text-[7vw] lg:text-[6vw] font-black leading-[0.8] uppercase tracking-tighter text-black">
+                            I AM<br />SINAN
+                        </h1>
                     </div>
 
-                    <h1 className="text-[12vw] lg:text-[10vw] font-bold leading-[0.8] text-black uppercase tracking-tighter animate-fade-in-up delay-200">
-                        MOHAMED<br />
-                        <span className="text-gray-300">SINAN</span>
-                    </h1>
-
-                    <div className="max-w-2xl mx-auto space-y-8 animate-fade-in-up delay-300">
-                        <p className="text-xl lg:text-2xl text-gray-600 font-serif italic leading-relaxed">
-                            "Specializing in{' '}
-                            <span ref={typedRef} className="text-black not-italic font-sans font-medium" />"
-                        </p>
+                    {/* ROLE - Bottom Right */}
+                    <div className="absolute right-0 bottom-[12%] text-right animate-fade-in-up" style={{ animationDelay: '1200ms' }}>
+                        <h2 className="text-[4vw] lg:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black">
+                            PYTHON<br />FULL STACK<br />DEVELOPER
+                        </h2>
                     </div>
 
-                    <div className="pt-8 animate-fade-in-up delay-400">
-                        <a href="#projects" className="group relative inline-flex items-center gap-4 text-[11px] font-bold tracking-[0.4em] uppercase text-black hover:text-black/60 transition-colors">
-                            <span className="border-b border-black pb-1 group-hover:border-black/60 transition-colors">EXPLORE WORKS</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="transform group-hover:translate-x-1 transition-transform">
-                                <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-                <span className="text-[9px] font-bold tracking-[0.3em] text-black/30 uppercase">SCROLL</span>
-                <div className="w-px h-12 bg-gradient-to-b from-black/30 to-transparent" />
-            </div>
+
         </section>
     );
 }

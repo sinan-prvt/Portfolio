@@ -1,27 +1,22 @@
 export default function Footer() {
   return (
-    <footer className="py-12 bg-white text-black border-t border-black/5">
+    <footer className="py-12 bg-transparent text-black">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-12">
-
-          <div className="space-y-4">
-            <img src="/assets/logo.png" alt="SINAN" className="h-12 md:h-16 w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
-            <p className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase max-w-xs leading-relaxed">
-              Crafting digital experiences with a focus on structural integrity and details.
-            </p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-serif italic font-bold">Sinan.</span>
+            <div className="w-1 h-1 bg-black rounded-full" />
+            <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400">Full Stack Development</span>
           </div>
 
-          <div className="flex flex-col md:items-end gap-4">
-            <div className="flex gap-8 text-[10px] font-bold tracking-[0.2em] uppercase text-black/60">
-              <a href="https://github.com/sinan-prvt" className="hover:text-black transition-colors">Github</a>
-              <a href="https://linkedin.com/in/mohamed-sinan-75107a364" className="hover:text-black transition-colors">Linkedin</a>
-              <a href="mailto:mohamedsinan9400@gmail.com" className="hover:text-black transition-colors">Mail</a>
-            </div>
-            <span className="text-[9px] font-bold tracking-[0.2em] text-gray-300 uppercase">
-              &copy; 2026 MOHAMED SINAN — ALL RIGHTS RESERVED
-            </span>
+          <div className="flex items-center gap-12 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400">
+            <a href="https://github.com/sinan-prvt" className="hover:text-black transition-colors">GitHub</a>
+            <a href="https://linkedin.com/in/mohamed-sinan-75107a364" className="hover:text-black transition-colors">LinkedIn</a>
           </div>
 
+          <span className="text-[9px] font-bold tracking-[0.2em] text-gray-300 uppercase">
+            &copy; 2026 — ALL RIGHTS RESERVED
+          </span>
         </div>
       </div>
     </footer>

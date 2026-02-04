@@ -110,10 +110,9 @@ const KNOWLEDGE_BASE = [
 ];
 
 const DEFAULT_SUGGESTIONS = [
-    "What's your background?",
+    "Tell me about yourself",
     "Tell me about your tech stack",
-    "Show me your projects",
-    "How old are you?"
+    "Show me your projects"
 ];
 
 const ChatBot = () => {
@@ -183,7 +182,7 @@ const ChatBot = () => {
             const capitalizedSkill = mentionedSkill.charAt(0).toUpperCase() + mentionedSkill.slice(1);
             return {
                 response: `Definitely! I'm very comfortable with ${capitalizedSkill}. I've used it in several projects, like ${mentionedSkill === 'django' ? 'Medi Sync and Skilloria' : mentionedSkill === 'react' ? 'Aivent and Hopyfy Cart' : 'a few of my scalable web apps'}.`,
-                suggestions: ["What else can you do?", "Show me your projects", "Tell me about your experience"]
+                suggestions: ["Show me your projects", "Tell me about your experience"]
             };
         }
 
@@ -224,31 +223,31 @@ const ChatBot = () => {
         <div className="fixed bottom-8 right-8 z-[9999] font-sans">
             {/* Chat Window */}
             {isOpen && (
-                <div className="absolute bottom-20 right-0 w-[400px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[80vh] bg-white shadow-2xl border border-black/5 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+                <div className="absolute bottom-20 right-0 w-[400px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[80vh] bg-white/95 backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-black/5 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 rounded-2xl">
                     {/* Header */}
-                    <div className="p-6 bg-black text-white flex justify-between items-center">
-                        <div>
-                            <h3 className="text-xs font-bold tracking-[0.2em] uppercase">Sinan Virtual</h3>
-                            <div className="flex items-center gap-2 mt-1">
-                                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                <span className="text-[10px] text-white/50 uppercase tracking-widest">Active</span>
+                    <div className="p-6 bg-black text-white flex justify-between items-center relative overflow-hidden">
+                        <div className="relative z-10">
+                            <h3 className="text-sm font-serif font-bold tracking-widest uppercase">Sinan Virtual</h3>
+                            <div className="flex items-center gap-2 mt-1.5">
+                                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                                <span className="text-[9px] text-white/60 font-medium uppercase tracking-[0.3em]">AI Assistant Online</span>
                             </div>
                         </div>
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="text-white/50 hover:text-white transition-colors"
+                            className="relative z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors duration-300"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                            <svg className="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                         </button>
                     </div>
 
                     {/* Messages */}
-                    <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 bg-gray-50/50">
+                    <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 bg-[#FAFAFA]">
                         {messages.map((msg, idx) => (
                             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`shadow-sm max-w-[85%] p-4 text-xs leading-relaxed ${msg.role === 'user'
-                                    ? 'bg-black text-white'
-                                    : 'bg-white text-black border border-black/5'
+                                <div className={`relative max-w-[85%] px-5 py-3.5 text-[13px] leading-relaxed transition-all duration-300 ${msg.role === 'user'
+                                    ? 'bg-black text-white rounded-2xl rounded-tr-none shadow-md'
+                                    : 'bg-white text-black rounded-2xl rounded-tl-none border border-black/5 shadow-sm'
                                     }`}>
                                     {msg.content.split('\n').map((line, i) => (
                                         <p key={i} className={i > 0 ? 'mt-2' : ''}>{line}</p>
@@ -258,12 +257,10 @@ const ChatBot = () => {
                         ))}
                         {isTyping && (
                             <div className="flex justify-start">
-                                <div className="bg-white border border-black/5 p-4 shadow-sm">
-                                    <div className="flex gap-1">
-                                        <div className="w-1 h-1 bg-black/20 rounded-full animate-bounce" />
-                                        <div className="w-1 h-1 bg-black/20 rounded-full animate-bounce [animation-delay:0.2s]" />
-                                        <div className="w-1 h-1 bg-black/20 rounded-full animate-bounce [animation-delay:0.4s]" />
-                                    </div>
+                                <div className="bg-white border border-black/5 px-4 py-3 rounded-2xl rounded-tl-none flex items-center gap-1">
+                                    <div className="w-1 h-1 bg-black/40 rounded-full animate-bounce [animation-duration:0.6s]" />
+                                    <div className="w-1 h-1 bg-black/40 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.2s]" />
+                                    <div className="w-1 h-1 bg-black/40 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.4s]" />
                                 </div>
                             </div>
                         )}
@@ -271,12 +268,12 @@ const ChatBot = () => {
 
                     {/* Dynamic Suggestions */}
                     {!isTyping && (
-                        <div className="px-6 py-4 bg-white flex flex-wrap gap-2 border-t border-black/5">
+                        <div className="px-6 py-4 bg-white flex flex-wrap gap-2 border-t border-black/[0.03]">
                             {currentSuggestions.map((suggestion, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => handleSuggestionClick(suggestion)}
-                                    className="text-[10px] bg-gray-50 hover:bg-black hover:text-white border border-black/5 px-3 py-1.5 transition-all duration-300 uppercase tracking-wider font-bold"
+                                    className="text-[10px] bg-white hover:bg-black hover:text-white border border-black/10 px-4 py-2 rounded-full transition-all duration-300 uppercase tracking-widest font-bold"
                                 >
                                     {suggestion}
                                 </button>
@@ -285,21 +282,22 @@ const ChatBot = () => {
                     )}
 
                     {/* Input */}
-                    <div className="p-4 bg-white border-t border-black/5">
+                    <div className="p-6 bg-white border-t border-black/[0.03]">
                         <div className="relative flex items-center">
                             <input
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                                placeholder="Type your question..."
-                                className="w-full text-xs p-4 bg-gray-50 border-none focus:ring-1 focus:ring-black outline-none pr-12 transition-all"
+                                placeholder="Inquire about my work..."
+                                className="w-full text-[13px] py-4 pl-4 pr-14 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-black/20 outline-none transition-all duration-300 placeholder:text-gray-400 font-sans"
                             />
                             <button
                                 onClick={() => handleSend()}
-                                className="absolute right-4 text-black hover:opacity-50 transition-opacity"
+                                className="absolute right-2 w-10 h-10 flex items-center justify-center bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-300 disabled:opacity-20"
+                                disabled={!input.trim()}
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+                                <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
                             </button>
                         </div>
                     </div>
@@ -309,13 +307,18 @@ const ChatBot = () => {
             {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 hover:scale-110 active:scale-95 ${isOpen ? 'bg-black text-white' : 'bg-white text-black border border-black/10'
+                className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-110 active:scale-95 group ${isOpen
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border border-black/10'
                     }`}
             >
                 {isOpen ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                    <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                 ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+                    <div className="relative">
+                        <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+                        <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-black border-2 border-white rounded-full group-hover:animate-ping" />
+                    </div>
                 )}
             </button>
         </div>

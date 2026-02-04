@@ -1,67 +1,23 @@
 export default function About() {
     return (
-        <section id="about" className="relative py-8 md:py-24 lg:py-48 bg-white text-black overflow-hidden border-t border-black/5">
-            <div className="mx-auto max-w-7xl px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-start">
+        <section id="about" className="relative pb-24 pt-32 bg-transparent text-black">
+            {/* Blending Glows */}
+            <div className="absolute top-[0%] left-1/2 -translate-x-1/2 w-[70vw] h-[70vw] bg-slate-100/30 blur-[140px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-[#FEF08A15] blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="hidden md:flex md:col-span-1 flex-col items-center pt-2 h-full justify-start">
-                        <span className="text-[10px] font-bold tracking-[1em] text-black/20 uppercase [writing-mode:vertical-lr] rotate-180">
-                            01 — PROFILE
-                        </span>
-                        <div className="h-32 w-px bg-black/10 mt-12" />
+            <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
+                <div className="space-y-12 animate-reveal">
+                    <div>
+                        <span className="text-xs font-black uppercase tracking-[0.5em] text-gray-300">About Me</span>
+                        <div className="h-[1px] w-12 bg-black/10 mx-auto mt-4" />
                     </div>
 
-                    <div className="col-span-12 md:col-span-5 relative group mt-8 md:mt-0">
-                        <div className="absolute top-6 -right-6 w-full h-full border-2 border-black/5 hidden md:block transition-transform duration-700 group-hover:translate-x-2 group-hover:-translate-y-2" />
-
-                        <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 w-3/4 h-3/4 bg-gray-50 -z-10" />
-
-                        <div className="relative z-10 shadow-xl overflow-hidden bg-white">
-                            <img
-                                src="/assets/me.jpg"
-                                alt="Mohamed Sinan Profile"
-                                className="w-full aspect-[3/4] object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="col-span-12 md:col-span-6 space-y-10">
-                        <div>
-                            <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold tracking-tighter text-black mb-4">
-                                I am <br /> Mohamed Sinan.
-                            </h2>
-                            <div className="flex items-center gap-3 text-sm font-bold tracking-[0.2em] uppercase text-gray-400">
-                                <div className="w-8 h-px bg-black/20" />
-                                <span>Malappuram, Kerala</span>
-                            </div>
-                        </div>
-
-                        <div className="space-y-8">
-                            <p className="text-lg md:text-2xl leading-relaxed font-serif italic text-black font-light">
-                                As a versatile Full Stack Developer, I specialize in architecting scalable digital solutions that bridge complex backend logic with intuitive frontend experiences.
-                            </p>
-
-                            <p className="text-base lg:text-lg leading-relaxed font-light text-gray-600">
-                                My expertise lies in building robust systems using <strong className="text-black font-medium">Python (Django)</strong> and <strong className="text-black font-medium">React</strong>. Beyond the code, I am deeply focused on modern DevOps practices, leveraging <strong className="text-black font-medium">Docker</strong> and <strong className="text-black font-medium">AWS</strong> to deploy resilient infrastructure.
-                            </p>
-
-                            <div className="bg-gray-50 p-6 border-l-2 border-black">
-                                <span className="block text-[10px] font-bold tracking-[0.2em] uppercase text-black/40 mb-3">
-                                    MY MISSION
-                                </span>
-                                <p className="text-lg font-light text-gray-800 italic">
-                                    "Passionate about delivering scalable, high-performance software with clean code and modern workflows."
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="pt-2">
-                            <a href="#contact" className="group inline-flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase text-black border-b border-black pb-1 hover:opacity-50 transition-opacity">
-                                <span>Let's collaborate</span>
-                            </a>
-                        </div>
-                    </div>
-
+                    <p className="text-2xl lg:text-3xl font-medium text-black leading-[1.6] tracking-tight">
+                        I am Mohamed Sinan, a 19-year-old Full Stack Developer from Kerala, India. My journey in tech is driven by a passion for backend-centric development and system design.
+                        With a deep interest in performance and scalability, I specialize in building resilient architectures using Python (Django) and React.
+                        I thrive on solving complex architectural challenges and bridging the gap between robust server-side logic and fluid, intuitive user interfaces.
+                        My goal is always to create digital experiences that are not only functional but also clean, efficient, and built to last.
+                    </p>
                 </div>
             </div>
         </section>
