@@ -43,7 +43,7 @@ export default function Skills() {
             <div className="mx-auto max-w-7xl px-6 mb-16 relative z-10">
                 <div className="animate-fade-in-up">
                     <span className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400 block mb-4">Capabilities</span>
-                    <h2 className="text-4xl lg:text-5xl font-bold uppercase tracking-tight">EXPERIENCE & SKILLS</h2>
+                    <h2 className="text-4xl lg:text-5xl font-bold uppercase tracking-tight">SKILLS</h2>
                 </div>
             </div>
 

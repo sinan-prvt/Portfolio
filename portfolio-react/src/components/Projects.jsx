@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 const projects = [
     {
         title: 'AIVENT',
@@ -38,6 +40,22 @@ const projects = [
 ];
 
 export default function Projects() {
+    const [showToast, setShowToast] = useState(false);
+
+    useEffect(() => {
+        if (showToast) {
+            const timer = setTimeout(() => setShowToast(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [showToast]);
+
+    const handleProjectClick = (e, liveUrl) => {
+        if (!liveUrl || liveUrl === '#') {
+            e.preventDefault();
+            setShowToast(true);
+        }
+    };
+
     return (
         <section id="projects" className="relative py-24 md:py-32 bg-[#FDFCF6] text-black overflow-hidden">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
@@ -70,9 +88,10 @@ export default function Projects() {
                             <div className="w-full md:w-3/5 group">
                                 <a
                                     href={p.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block relative aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100 shadow-[20px_20px_60px_#e3e2db,-20px_-20px_60px_#ffffff] transition-all duration-700"
+                                    onClick={(e) => handleProjectClick(e, p.live)}
+                                    target={!p.live || p.live === '#' ? undefined : "_blank"}
+                                    rel={!p.live || p.live === '#' ? undefined : "noopener noreferrer"}
+                                    className={`block relative aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100 shadow-[20px_20px_60px_#e3e2db,-20px_-20px_60px_#ffffff] transition-all duration-700 ${!p.live || p.live === '#' ? 'cursor-default' : ''}`}
                                 >
                                     <img
                                         src={p.img}
@@ -145,6 +164,14 @@ export default function Projects() {
                     >
                         View Full Archive
                     </a>
+                </div>
+            </div>
+
+            {/* Toast Notification */}
+            <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
+                <div className="bg-black/80 backdrop-blur-md text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-4">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Live Link Unavailable</span>
                 </div>
             </div>
         </section>
