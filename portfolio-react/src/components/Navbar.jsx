@@ -18,10 +18,22 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    // Prevent body scroll when menu is open
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto'; // Cleanup
+        };
+    }, [open]);
+
     return (
         <header className="fixed top-0 inset-x-0 z-[100]">
             <div
-                className={`mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-[#FDFCF6]/90 backdrop-blur-md py-4' : 'bg-transparent'
+                className={`relative z-[110] mx-auto px-6 md:px-12 py-6 flex items-center justify-between transition-all duration-500 ${scrolled ? 'bg-[#FDFCF6]/90 backdrop-blur-md py-4' : 'bg-transparent'
                     }`}
             >
                 <a href="#home" className="flex items-center z-[1100]">

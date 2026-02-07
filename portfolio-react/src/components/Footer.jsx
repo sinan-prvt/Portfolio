@@ -6,7 +6,7 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span className="text-xl font-serif italic font-bold">Sinan.</span>
             <div className="w-1 h-1 bg-black rounded-full" />
-            <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400">Full Stack Development</span>
+            <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400">Full Stack Developer</span>
           </div>
 
           <div className="flex items-center gap-12 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400">
@@ -15,7 +15,7 @@ export default function Footer() {
           </div>
 
           <span className="text-[9px] font-bold tracking-[0.2em] text-gray-300 uppercase">
-            &copy; 2026 — ALL RIGHTS RESERVED
+            &copy; 2025 — ALL RIGHTS RESERVED
           </span>
         </div>
       </div>
