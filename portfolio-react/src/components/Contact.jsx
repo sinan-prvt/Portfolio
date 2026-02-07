@@ -70,7 +70,6 @@ export default function Contact() {
                                 <div className="flex gap-6">
                                     <a href="https://www.linkedin.com/in/mohamedsinann" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-gray-500 transition-colors">LinkedIn</a>
                                     <a href="https://github.com/sinan-prvt" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-gray-500 transition-colors">GitHub</a>
-                                    <a href="#" className="font-bold hover:text-gray-500 transition-colors">Instagram</a>
                                 </div>
                             </div>
                             <div className="pt-6">
