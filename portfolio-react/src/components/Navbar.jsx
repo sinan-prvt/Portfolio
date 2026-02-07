@@ -76,7 +76,7 @@ export default function Navbar() {
                     ))}
                     <div className="w-12 h-px bg-black/10 my-8" />
                     <a
-                        href="/Mohamed-Sinan-FullStack.pdf"
+                        href="/Mohamed-Sinan-FullStack-CV.pdf"
                         download
                         onClick={() => setOpen(false)}
                         className="text-xs font-bold tracking-[0.4em] uppercase"

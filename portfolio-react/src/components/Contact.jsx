@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useScrollAnimation from '../hooks/useScrollAnimation';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -8,6 +9,10 @@ export default function Contact() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [toast, setToast] = useState({ show: false, message: '', type: '' });
+
+    const headerRef = useScrollAnimation();
+    const leftRef = useScrollAnimation({ delay: 0.2 });
+    const rightRef = useScrollAnimation({ delay: 0.4 });
 
     const showToast = (message, type) => {
         setToast({ show: true, message, type });
@@ -43,13 +48,13 @@ export default function Contact() {
             )}
 
             <div className="mx-auto max-w-7xl px-6 relative z-10">
-                <div className="text-center mb-24 animate-fade-in-up">
+                <div ref={headerRef} className="text-center mb-24 opacity-0 translate-y-8">
                     <h2 className="text-4xl lg:text-6xl font-bold tracking-tight uppercase mb-4">LET'S CONNECT</h2>
                     <div className="h-1 w-24 bg-black mx-auto" />
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-                    <div className="space-y-12 animate-fade-in-up">
+                    <div ref={leftRef} className="space-y-12 opacity-0 translate-y-8">
                         <div className="space-y-4">
                             <h3 className="text-3xl font-serif italic text-gray-400">Ready to start your next <span className="text-black font-bold">project?</span></h3>
                             <p className="text-lg text-gray-500 max-w-md">I am always open to discussing new projects, creative ideas or architectural challenges.</p>
@@ -70,7 +75,7 @@ export default function Contact() {
                             </div>
                             <div className="pt-6">
                                 <a
-                                    href="/Mohamed-Sinan-FullStack.pdf"
+                                    href="/Mohamed-Sinan-FullStack-CV.pdf"
                                     download
                                     className="inline-flex items-center gap-4 bg-black text-white px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gray-800 transition-all shadow-xl shadow-black/10 group"
                                 >
@@ -85,7 +90,7 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-8 lg:p-12 rounded-[40px] shadow-2xl shadow-black/5 animate-fade-in-up delay-200">
+                    <div ref={rightRef} className="bg-white p-8 lg:p-12 rounded-[40px] shadow-2xl shadow-black/5 opacity-0 translate-y-8">
                         <form
                             action="https://formsubmit.co/mohamedsinan9400@gmail.com"
                             method="POST"

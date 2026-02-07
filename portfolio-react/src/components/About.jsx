@@ -1,4 +1,8 @@
+import useScrollAnimation from '../hooks/useScrollAnimation';
+
 export default function About() {
+    const textRef = useScrollAnimation();
+
     return (
         <section id="about" className="relative pb-24 pt-32 bg-transparent text-black">
             {/* Blending Glows */}
@@ -6,7 +10,7 @@ export default function About() {
             <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-[#FEF08A15] blur-[120px] rounded-full pointer-events-none" />
 
             <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
-                <div className="space-y-12 animate-reveal">
+                <div ref={textRef} className="space-y-12 opacity-0 translate-y-8">
                     <div>
                         <span className="text-xs font-black uppercase tracking-[0.5em] text-gray-300">About Me</span>
                         <div className="h-[1px] w-12 bg-black/10 mx-auto mt-4" />

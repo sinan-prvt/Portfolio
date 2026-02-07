@@ -34,14 +34,20 @@ const skillRows = [
     }
 ];
 
+import React from 'react';
+import useScrollAnimation from '../hooks/useScrollAnimation';
+import ScrollReveal from './ScrollReveal';
+
 export default function Skills() {
+    const headerRef = useScrollAnimation();
+
     return (
         <section id="skills" className="relative pt-24 pb-32 bg-transparent text-black overflow-hidden">
             {/* Blending Glows from About to Skills */}
             <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#FEF08A20] blur-[150px] rounded-full pointer-events-none" />
 
             <div className="mx-auto max-w-7xl px-6 mb-16 relative z-10">
-                <div className="animate-fade-in-up">
+                <div ref={headerRef} className="opacity-0 translate-y-8">
                     <span className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400 block mb-4">Capabilities</span>
                     <h2 className="text-4xl lg:text-5xl font-bold uppercase tracking-tight">SKILLS</h2>
                 </div>
@@ -49,23 +55,25 @@ export default function Skills() {
 
             <div className="space-y-8 relative">
                 {skillRows.map((row, rowIdx) => (
-                    <div key={rowIdx} className="marquee-container flex overflow-hidden">
-                        <div className={`${row.direction} flex whitespace-nowrap gap-6 py-4 px-4`}>
-                            {[...row.skills, ...row.skills, ...row.skills].map((skill, idx) => (
-                                <div
-                                    key={`${skill.name}-${idx}`}
-                                    className="flex items-center gap-4 bg-white px-8 py-5 rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-black/5 hover:border-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group"
-                                >
-                                    <img
-                                        src={`https://skillicons.dev/icons?i=${skill.icon}`}
-                                        alt={skill.name}
-                                        className="w-6 h-6 object-contain group-hover:scale-110 transition-transform duration-300"
-                                    />
-                                    <span className="text-lg font-bold tracking-tight text-black/80">{skill.name}</span>
-                                </div>
-                            ))}
+                    <ScrollReveal key={rowIdx} delay={rowIdx * 0.1}>
+                        <div className="marquee-container flex overflow-hidden">
+                            <div className={`${row.direction} flex whitespace-nowrap gap-6 py-4 px-4`}>
+                                {[...row.skills, ...row.skills, ...row.skills].map((skill, idx) => (
+                                    <div
+                                        key={`${skill.name}-${idx}`}
+                                        className="flex items-center gap-4 bg-white px-8 py-5 rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-black/5 hover:border-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group"
+                                    >
+                                        <img
+                                            src={`https://skillicons.dev/icons?i=${skill.icon}`}
+                                            alt={skill.name}
+                                            className="w-6 h-6 object-contain group-hover:scale-110 transition-transform duration-300"
+                                        />
+                                        <span className="text-lg font-bold tracking-tight text-black/80">{skill.name}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </ScrollReveal>
                 ))}
 
                 {/* Glass Overlays for smooth edges */}
