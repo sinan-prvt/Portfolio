@@ -220,10 +220,10 @@ const ChatBot = () => {
     };
 
     return (
-        <div className="fixed bottom-8 right-8 z-[9999] font-sans">
+        <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] font-sans">
             {/* Chat Window */}
             {isOpen && (
-                <div className="absolute bottom-20 right-0 w-[400px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[80vh] bg-white/95 backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-black/5 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 rounded-2xl">
+                <div className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[400px] h-[550px] max-h-[80vh] bg-white/95 backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-black/5 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 rounded-2xl">
                     {/* Header */}
                     <div className="p-6 bg-black text-white flex justify-between items-center relative overflow-hidden">
                         <div className="relative z-10">
