@@ -66,7 +66,7 @@ export default function Hero() {
                 </div>
 
                 {/* 2. Main Profile Image Layer */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
+                <div className="absolute bottom-0 left-[55%] md:left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
                     <div className="relative h-[85vh] md:h-[85vh] w-auto">
                         <img
                             ref={imageRef}
