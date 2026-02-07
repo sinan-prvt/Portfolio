@@ -66,7 +66,7 @@ export default function Hero() {
                 </div>
 
                 {/* 2. Main Profile Image Layer */}
-                <div className="absolute bottom-0 left-[55%] md:left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
+                <div className="absolute bottom-0 left-[53%] md:left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
                     <div className="relative h-[85vh] md:h-[85vh] w-auto">
                         <img
                             ref={imageRef}
@@ -78,7 +78,7 @@ export default function Hero() {
                                 WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
                             }}
                         />
-                        {/* Extra Gradient Overlay for smooth blending */}
+                        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-t from-[#FDFCF6] via-[#FDFCF6]/80 to-transparent" />
                         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#FDFCF6] to-transparent" />
                     </div>
                 </div>
