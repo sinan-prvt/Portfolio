@@ -48,28 +48,38 @@ export default function Hero() {
             <div className="relative w-full max-w-[1800px] h-screen px-10">
 
                 {/* 1. "Hey," and "there" Background Layer */}
-                <div className="absolute top-[22%] left-0 w-full flex justify-between px-[10%] z-0 pointer-events-none select-none">
-                    <h2 ref={text1Ref} className="text-[12vw] lg:text-[15vw] font-serif italic leading-none text-black/90">
+                <div className="absolute top-[20%] md:top-[22%] left-0 w-full flex justify-between px-[6%] md:px-[10%] z-0 pointer-events-none select-none">
+                    <h2
+                        ref={text1Ref}
+                        className="text-[14vw] md:text-[15vw] font-serif italic leading-none text-black/90 transition-transform duration-500 hover:scale-110 pointer-events-auto cursor-none"
+                        data-cursor="text"
+                    >
                         Hey,
                     </h2>
-                    <h2 ref={text2Ref} className="text-[12vw] lg:text-[15vw] font-serif italic leading-none text-black/90">
+                    <h2
+                        ref={text2Ref}
+                        className="text-[14vw] md:text-[15vw] font-serif italic leading-none text-black/90 transition-transform duration-500 hover:scale-110 pointer-events-auto cursor-none"
+                        data-cursor="text"
+                    >
                         there
                     </h2>
                 </div>
 
                 {/* 2. Main Profile Image Layer */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none">
-                    <div className="relative h-[85vh] w-auto">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
+                    <div className="relative h-[70vh] md:h-[85vh] w-auto">
                         <img
                             ref={imageRef}
                             src="/assets/sinan_nobg.png"
                             alt="Mohamed Sinan"
                             className="h-full w-auto object-contain contrast-110"
                             style={{
-                                maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
-                                WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+                                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
                             }}
                         />
+                        {/* Extra Gradient Overlay for smooth blending */}
+                        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#FDFCF6] to-transparent" />
                     </div>
                 </div>
 
@@ -77,15 +87,21 @@ export default function Hero() {
                 <div className="relative h-full w-full z-20 pointer-events-none ">
 
                     {/* I AM SINAN - Bottom Left */}
-                    <div ref={titleRef} className="absolute left-0 bottom-[12%]">
-                        <h1 className="text-[7vw] lg:text-[6vw] font-black leading-[0.8] uppercase tracking-tighter text-black">
+                    <div ref={titleRef} className="absolute left-0 bottom-[10%] md:bottom-[12%]">
+                        <h1
+                            className="text-[10vw] md:text-[6vw] font-black leading-[0.8] uppercase tracking-tighter text-black transition-transform duration-500 hover:scale-105 origin-bottom-left pointer-events-auto cursor-none"
+                            data-cursor="text"
+                        >
                             I AM<br />SINAN
                         </h1>
                     </div>
 
                     {/* ROLE - Bottom Right */}
-                    <div ref={roleRef} className="absolute right-0 bottom-[12%] text-right">
-                        <h2 className="text-[4vw] lg:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black">
+                    <div ref={roleRef} className="absolute right-0 bottom-[10%] md:bottom-[12%] text-right">
+                        <h2
+                            className="text-[4vw] md:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black transition-transform duration-500 hover:scale-105 origin-bottom-right pointer-events-auto cursor-none"
+                            data-cursor="text"
+                        >
                             PYTHON<br />FULL STACK<br />DEVELOPER
                         </h2>
                     </div>
