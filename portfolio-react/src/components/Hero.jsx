@@ -67,7 +67,7 @@ export default function Hero() {
 
                 {/* 2. Main Profile Image Layer */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
-                    <div className="relative h-[70vh] md:h-[85vh] w-auto">
+                    <div className="relative h-[85vh] md:h-[85vh] w-auto">
                         <img
                             ref={imageRef}
                             src="/assets/sinan_nobg.png"
@@ -87,7 +87,7 @@ export default function Hero() {
                 <div className="relative h-full w-full z-20 pointer-events-none ">
 
                     {/* I AM SINAN - Bottom Left */}
-                    <div ref={titleRef} className="absolute left-0 bottom-[10%] md:bottom-[12%]">
+                    <div ref={titleRef} className="absolute left-0 bottom-[18%] md:bottom-[12%]">
                         <h1
                             className="text-[10vw] md:text-[6vw] font-black leading-[0.8] uppercase tracking-tighter text-black transition-transform duration-500 hover:scale-105 origin-bottom-left pointer-events-auto cursor-none"
                             data-cursor="text"
@@ -97,7 +97,7 @@ export default function Hero() {
                     </div>
 
                     {/* ROLE - Bottom Right */}
-                    <div ref={roleRef} className="absolute right-0 bottom-[10%] md:bottom-[12%] text-right">
+                    <div ref={roleRef} className="absolute right-0 bottom-[19%] md:bottom-[12%] text-right">
                         <h2
                             className="text-[4vw] md:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black transition-transform duration-500 hover:scale-105 origin-bottom-right pointer-events-auto cursor-none"
                             data-cursor="text"
