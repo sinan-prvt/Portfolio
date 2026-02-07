@@ -19,6 +19,14 @@ export default function Contact() {
         setTimeout(() => setToast({ show: false, message: '', type: '' }), 4000);
     };
 
+    const handleCopyEmail = (e) => {
+        e.preventDefault();
+        const email = 'mohamedsinan9400@gmail.com';
+        navigator.clipboard.writeText(email).then(() => {
+            showToast('Email copied to clipboard!', 'success');
+        });
+    };
+
     const handleSubmit = () => {
         setIsSubmitting(true);
         setTimeout(() => {
@@ -28,9 +36,7 @@ export default function Contact() {
         }, 1000);
     };
 
-    const handleRemove = () => {
-        setIsRemoving(False)
-    }
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,7 +44,6 @@ export default function Contact() {
 
     return (
         <section id="contact" className="relative py-32 bg-transparent text-black">
-            {/* Reference Shade Glows */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[80vw] h-[50vw] bg-[#FEF08A05] blur-[140px] pointer-events-none" />
 
             {toast.show && (
@@ -63,7 +68,26 @@ export default function Contact() {
                         <div className="space-y-6">
                             <div className="group">
                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-2">Write me at</p>
-                                <a href="mailto:mohamedsinan9400@gmail.com" className="text-xl font-bold hover:text-gray-500 transition-colors">mohamedsinan9400@gmail.com</a>
+                                <div className="flex items-center gap-4">
+                                    <a
+                                        href="mailto:mohamedsinan9400@gmail.com"
+                                        onClick={handleCopyEmail}
+                                        data-cursor="copy"
+                                        className="text-xl font-bold hover:text-gray-500 transition-colors"
+                                    >
+                                        mohamedsinan9400@gmail.com
+                                    </a>
+                                    <button
+                                        onClick={handleCopyEmail}
+                                        className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors opacity-0 group-hover:opacity-100"
+                                        title="Copy Email"
+                                    >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                             <div className="group">
                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-2">Find me on</p>
@@ -106,7 +130,7 @@ export default function Contact() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         required
-                                        placeholder="John Carter"
+                                        placeholder="Enter your name"
                                         className="w-full bg-gray-50 rounded-full px-6 py-4 outline-none focus:ring-2 focus:ring-[#FF4D00]/20 transition-all"
                                     />
                                 </div>
