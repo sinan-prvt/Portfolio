@@ -78,7 +78,7 @@ export default function Hero() {
                                 WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
                             }}
                         />
-                        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-t from-[#FDFCF6] via-[#FDFCF6]/80 to-transparent" />
+                        <div className="absolute bottom-0 left-0 w-full h-[40vh] md:h-[20vh] bg-gradient-to-t from-[#FDFCF6] via-[#FDFCF6]/90 md:via-[#FDFCF6]/60 to-transparent" />
                         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#FDFCF6] to-transparent" />
                     </div>
                 </div>
