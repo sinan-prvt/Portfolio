@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 export const useScrollAnimation = (config = {}) => {
     const elementRef = useRef(null);
 
-    // Destructure config to ensure stable dependencies
     const {
         y = 50,
         opacity = 0,

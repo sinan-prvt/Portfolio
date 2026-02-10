@@ -18,7 +18,8 @@ const skillRows = [
             { name: 'CSS', icon: 'css' },
             { name: 'Postman', icon: 'postman' },
             { name: 'DRF', icon: 'django' },
-            { name: 'Axios', icon: 'js' }
+            { name: 'Axios', icon: 'js' },
+            { name: 'Jira', icon: 'jira' }
         ]
     },
     {
@@ -43,7 +44,6 @@ export default function Skills() {
 
     return (
         <section id="skills" className="relative pt-24 pb-32 bg-transparent text-black overflow-hidden">
-            {/* Blending Glows from About to Skills */}
             <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#FEF08A20] blur-[150px] rounded-full pointer-events-none" />
 
             <div className="mx-auto max-w-7xl px-6 mb-16 relative z-10">
@@ -76,7 +76,6 @@ export default function Skills() {
                     </ScrollReveal>
                 ))}
 
-                {/* Glass Overlays for smooth edges */}
                 <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#FDFCF6] to-transparent z-10 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#FDFCF6] to-transparent z-10 pointer-events-none" />
             </div>

@@ -14,7 +14,6 @@ function App() {
     <div className="relative bg-[#FDFCF6] selection:bg-black selection:text-white overflow-hidden">
       <Cursor />
 
-      {/* Global Blending Glows */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
         <div className="absolute top-[10%] right-[-10%] w-[70vw] h-[70vw] bg-[#FEF08A10] blur-[150px] rounded-full" />
         <div className="absolute bottom-[20%] left-[-10%] w-[80vw] h-[80vw] bg-[#FEF08A08] blur-[180px] rounded-full" />

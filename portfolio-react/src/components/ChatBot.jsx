@@ -139,11 +139,8 @@ const ChatBot = () => {
         setInput('');
         setIsTyping(true);
 
-        // Pre-calculate response to determine delay
         const responseObj = getResponse(userMessage);
 
-        // Calculate delay based on response length (simulating typing speed)
-        // Min 1.5s, Max 3.5s, roughly 20ms per character
         const delay = Math.min(3500, Math.max(1500, responseObj.response.length * 20));
 
         setTimeout(() => {
@@ -176,7 +173,6 @@ const ChatBot = () => {
     const getResponse = (query) => {
         const lowerQuery = query.toLowerCase();
 
-        // Check for specific skills
         const mentionedSkill = SKILLS.find(skill => lowerQuery.includes(skill));
         if (mentionedSkill && (lowerQuery.includes('know') || lowerQuery.includes('skill') || lowerQuery.includes('have') || lowerQuery.includes('use'))) {
             const capitalizedSkill = mentionedSkill.charAt(0).toUpperCase() + mentionedSkill.slice(1);
@@ -186,7 +182,6 @@ const ChatBot = () => {
             };
         }
 
-        // Check for specific projects
         const mentionedProject = PROJECTS.find(project => lowerQuery.includes(project));
         if (mentionedProject) {
             if (mentionedProject === 'aivent') return {
@@ -203,7 +198,6 @@ const ChatBot = () => {
             };
         }
 
-        // General keyword matching
         for (const entry of KNOWLEDGE_BASE) {
             if (entry.keywords.some(keyword => lowerQuery.includes(keyword))) {
                 return {
@@ -221,10 +215,8 @@ const ChatBot = () => {
 
     return (
         <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] font-sans">
-            {/* Chat Window */}
             {isOpen && (
                 <div className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[400px] h-[550px] max-h-[80vh] bg-white/95 backdrop-blur-xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-black/5 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 rounded-2xl">
-                    {/* Header */}
                     <div className="p-6 bg-black text-white flex justify-between items-center relative overflow-hidden">
                         <div className="relative z-10">
                             <h3 className="text-sm font-serif font-bold tracking-widest uppercase">Sinan Virtual</h3>
@@ -241,7 +233,6 @@ const ChatBot = () => {
                         </button>
                     </div>
 
-                    {/* Messages */}
                     <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 bg-[#FAFAFA]">
                         {messages.map((msg, idx) => (
                             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -266,7 +257,6 @@ const ChatBot = () => {
                         )}
                     </div>
 
-                    {/* Dynamic Suggestions */}
                     {!isTyping && (
                         <div className="px-6 py-4 bg-white flex flex-wrap gap-2 border-t border-black/[0.03]">
                             {currentSuggestions.map((suggestion, idx) => (
@@ -281,7 +271,6 @@ const ChatBot = () => {
                         </div>
                     )}
 
-                    {/* Input */}
                     <div className="p-6 bg-white border-t border-black/[0.03]">
                         <div className="relative flex items-center">
                             <input
@@ -304,7 +293,6 @@ const ChatBot = () => {
                 </div>
             )}
 
-            {/* Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-500 hover:scale-110 active:scale-95 group ${isOpen

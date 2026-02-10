@@ -18,7 +18,6 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    // Prevent body scroll when menu is open
     useEffect(() => {
         if (open) {
             document.body.style.overflow = 'hidden';
@@ -26,7 +25,7 @@ export default function Navbar() {
             document.body.style.overflow = 'auto';
         }
         return () => {
-            document.body.style.overflow = 'auto'; // Cleanup
+            document.body.style.overflow = 'auto';
         };
     }, [open]);
 

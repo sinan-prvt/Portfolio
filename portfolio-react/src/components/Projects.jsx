@@ -62,7 +62,6 @@ export default function Projects() {
     return (
         <section id="projects" className="relative py-24 md:py-32 bg-[#FDFCF6] text-black overflow-hidden">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
-                {/* Section Header */}
                 <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-24 md:mb-32 opacity-0 translate-y-8">
                     <div className="max-w-2xl">
                         <span className="text-xs font-bold tracking-[0.3em] text-black/40 uppercase mb-4 block">Archive 2025 — 2026</span>
@@ -79,14 +78,12 @@ export default function Projects() {
                     </div>
                 </div>
 
-                {/* Projects List */}
                 <div className="space-y-32 md:space-y-48">
                     {projects.map((p, idx) => (
                         <ScrollReveal key={p.title} delay={idx * 0.1}>
                             <div
                                 className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}
                             >
-                                {/* Image Container */}
                                 <div className="w-full md:w-3/5 group">
                                     <a
                                         href={p.live}
@@ -105,14 +102,12 @@ export default function Projects() {
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>
                                             </div>
                                         </div>
-                                        {/* Project Number Background */}
                                         <div className="absolute -bottom-10 -right-6 text-[15vw] font-serif italic text-black/[0.03] select-none pointer-events-none z-0">
                                             0{idx + 1}
                                         </div>
                                     </a>
                                 </div>
 
-                                {/* Content Container */}
                                 <div className="w-full md:w-2/5 space-y-8">
                                     <div className="space-y-6">
                                         <div className="flex items-center gap-4">
@@ -125,7 +120,6 @@ export default function Projects() {
                                         </p>
                                     </div>
 
-                                    {/* Tech Stack */}
                                     <div className="flex flex-wrap gap-x-6 gap-y-3">
                                         {p.tech.map((t) => (
                                             <span key={t} className="text-[10px] font-bold uppercase tracking-widest text-black/60 border-b border-black/10 pb-1">
@@ -134,7 +128,6 @@ export default function Projects() {
                                         ))}
                                     </div>
 
-                                    {/* Link */}
                                     <div className="pt-4">
                                         <a
                                             href={p.github}
@@ -156,7 +149,6 @@ export default function Projects() {
                     ))}
                 </div>
 
-                {/* Bottom Footer Call to action */}
                 <div className="mt-32 pt-24 border-t border-black/5 text-center">
                     <p className="font-serif italic text-2xl mb-8">Want to see more?</p>
                     <a
@@ -170,7 +162,6 @@ export default function Projects() {
                 </div>
             </div>
 
-            {/* Toast Notification */}
             <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
                 <div className="bg-black/80 backdrop-blur-md text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-4">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
