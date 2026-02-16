@@ -7,7 +7,8 @@ const skillRows = [
             { name: 'PostgreSQL', icon: 'postgres' },
             { name: 'Redux', icon: 'redux' },
             { name: 'Tailwind CSS', icon: 'tailwind' },
-            { name: 'JavaScript', icon: 'js' }
+            { name: 'JavaScript', icon: 'js' },
+            { name: 'FastAPI', icon: 'fastapi' }
         ]
     },
     {
