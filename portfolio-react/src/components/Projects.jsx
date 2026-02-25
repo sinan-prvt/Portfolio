@@ -6,8 +6,8 @@ const projects = [
     {
         title: 'AIVENT',
         tag: 'Universal Event Operating System — 01',
-        desc: 'An AI-powered universal event operating system for complex event management and architectural vendor coordination.',
-        tech: ['React 19', 'DRF', 'Docker'],
+        desc: 'Aivent is an AI-powered, microservices-based event management platform that enables end-to-end event planning, vendor coordination, and real-time operations for corporate and personal events. It features intelligent vendor matching, AI-powered event planning via a Hybrid RAG engine, real-time WebSocket chat, integrated payments, and a multi-role dashboard system (Admin, Vendor, Customer).',
+        tech: ['React', 'Python', 'Django', 'DRF', 'Docker', 'WebSocket', 'Pika', 'Boto3', 'LangChain', 'Kubernetes',],
         live: '#',
         github: 'https://github.com/sinan-prvt/Aivent_frontend',
         img: '/assets/aivent.jpeg',
