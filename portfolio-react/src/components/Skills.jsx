@@ -2,25 +2,34 @@ const skillRows = [
     {
         direction: 'animate-marquee',
         skills: [
-            { name: 'Python', icon: 'python' },
-            { name: 'Django', icon: 'django' },
-            { name: 'PostgreSQL', icon: 'postgres' },
-            { name: 'Redux', icon: 'redux' },
-            { name: 'Tailwind CSS', icon: 'tailwind' },
-            { name: 'JavaScript', icon: 'js' },
-            { name: 'FastAPI', icon: 'fastapi' }
+            { name: 'Python', icon: '/python.svg' },
+            { name: 'Django', icon: '/django.svg' },
+            { name: 'PostgreSQL', icon: '/postgres.svg' },
+            { name: 'FastAPI', icon: 'fastapi' },
+            { name: 'DRF', icon: '/django.svg' },
+            { name: 'LangGraph', icon: '/langgraph.svg' },
+            { name: 'Agentic AI', icon: 'ai' },
+            { name: 'Groq', icon: '/groq.svg' },
+            { name: 'SQLAlchemy', icon: 'python' },
+            { name: 'Pydantic', icon: '/pydantic.svg' },
+            { name: 'Celery', icon: '/celery.svg' },
+            { name: 'LangChain', icon: '/langchain.svg' },
+            { name: 'Pytest', icon: '/pytest.svg' }
         ]
     },
     {
         direction: 'animate-marquee-reverse',
         skills: [
             { name: 'React', icon: 'react' },
+            { name: 'Redux', icon: 'redux' },
             { name: 'HTML', icon: 'html' },
+            { name: 'JavaScript', icon: 'js' },
             { name: 'CSS', icon: 'css' },
-            { name: 'Postman', icon: 'postman' },
-            { name: 'DRF', icon: 'django' },
+            { name: 'Tailwind CSS', icon: 'tailwind' },
             { name: 'Axios', icon: 'js' },
-            { name: 'Jira', icon: 'jira' }
+            { name: 'Jinja', icon: 'jinja' },
+            { name: 'Razorpay', icon: 'js' },
+            { name: 'Swagger', icon: 'postman' },
         ]
     },
     {
@@ -30,8 +39,14 @@ const skillRows = [
             { name: 'Docker', icon: 'docker' },
             { name: 'Git', icon: 'git' },
             { name: 'GitHub', icon: 'github' },
-            { name: 'Lambda', icon: 'aws' },
-            { name: 'S3', icon: 'aws' }
+            { name: 'Postman', icon: 'postman' },
+            { name: 'Vercel', icon: 'vercel' },
+            { name: 'Redis', icon: 'redis' },
+            { name: 'Jira', icon: 'atlassian' },
+            { name: 'Kubernetes', icon: 'kubernetes' },
+            { name: 'Nginx', icon: 'nginx' },
+            { name: 'Vitest', icon: 'vitest' },
+            { name: 'Boto3', icon: 'aws' },
         ]
     }
 ];
@@ -65,7 +80,7 @@ export default function Skills() {
                                         className="flex items-center gap-4 bg-white px-8 py-5 rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] border border-black/5 hover:border-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group"
                                     >
                                         <img
-                                            src={`https://skillicons.dev/icons?i=${skill.icon}`}
+                                            src={skill.icon.startsWith('/') ? skill.icon : `https://skillicons.dev/icons?i=${skill.icon}`}
                                             alt={skill.name}
                                             className="w-6 h-6 object-contain group-hover:scale-110 transition-transform duration-300"
                                         />

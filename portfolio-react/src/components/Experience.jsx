@@ -2,7 +2,7 @@ const experiences = [
     {
         year: '2025 — PRESENT',
         role: 'Python Full Stack Developer Intern',
-        company: 'Bridgeon Solutions LLP, Calicut',
+        company: 'Bridgeon Skillversity LLP, Calicut',
         desc: 'Engineered scalable REST APIs and responsive UIs using Django & React. Optimized backend performance by ~20%, implemented secure JWT authentication, and integrated payment gateways in an Agile environment.'
     }
 ];
