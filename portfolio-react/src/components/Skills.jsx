@@ -47,6 +47,9 @@ const skillRows = [
             { name: 'Vitest', icon: 'vitest' },
             { name: 'Boto3', icon: '/boto3.svg' },
             { name: 'RabbitMQ', icon: '/rabbitmq.svg' },
+            { name: 'Netlify', icon: '/netlify.svg' },
+            { name: 'PythonAnywhere', icon: '/pythonanywhere.svg' },
+            { name: 'Render', icon: '/render.svg' },
         ]
     }
 ];
