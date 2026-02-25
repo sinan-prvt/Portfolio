@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Boto3 / AWS SDK cube logo -->
+  <g transform="translate(14, 8)">
+    <!-- Back face (top-right) -->
+    <polygon points="50,10 90,30 90,75 50,55" fill="#E8E8E8" stroke="#6B6B6B" stroke-width="2.5"/>
+    <!-- Back face (top-left) -->
+    <polygon points="50,10 10,30 10,75 50,55" fill="#D4D4D4" stroke="#6B6B6B" stroke-width="2.5"/>
+    <!-- Top face -->
+    <polygon points="50,10 90,30 50,50 10,30" fill="#F5F5F5" stroke="#6B6B6B" stroke-width="2.5"/>
+    <!-- Front yellow cube - right face -->
+    <polygon points="50,35 80,50 80,85 50,70" fill="#F0C040" stroke="#6B6B6B" stroke-width="2"/>
+    <!-- Front yellow cube - left face -->
+    <polygon points="50,35 20,50 20,85 50,70" fill="#E0A820" stroke="#6B6B6B" stroke-width="2"/>
+    <!-- Front yellow cube - top face -->
+    <polygon points="50,35 80,50 50,65 20,50" fill="#F5D060" stroke="#6B6B6B" stroke-width="2"/>
+  </g>
+</svg>

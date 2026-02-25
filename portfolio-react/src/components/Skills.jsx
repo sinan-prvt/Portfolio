@@ -26,10 +26,9 @@ const skillRows = [
             { name: 'JavaScript', icon: 'js' },
             { name: 'CSS', icon: 'css' },
             { name: 'Tailwind CSS', icon: 'tailwind' },
-            { name: 'Axios', icon: 'js' },
-            { name: 'Jinja', icon: 'jinja' },
-            { name: 'Razorpay', icon: 'js' },
-            { name: 'Swagger', icon: 'postman' },
+            { name: 'Axios', icon: '/axios.svg' },
+            { name: 'Jinja', icon: '/jinja.svg' },
+            { name: 'Swagger', icon: '/swagger.svg' },
         ]
     },
     {
@@ -42,11 +41,12 @@ const skillRows = [
             { name: 'Postman', icon: 'postman' },
             { name: 'Vercel', icon: 'vercel' },
             { name: 'Redis', icon: 'redis' },
-            { name: 'Jira', icon: 'atlassian' },
+            { name: 'Jira', icon: '/jira.svg' },
             { name: 'Kubernetes', icon: 'kubernetes' },
             { name: 'Nginx', icon: 'nginx' },
             { name: 'Vitest', icon: 'vitest' },
-            { name: 'Boto3', icon: 'aws' },
+            { name: 'Boto3', icon: '/boto3.svg' },
+            { name: 'RabbitMQ', icon: '/rabbitmq.svg' },
         ]
     }
 ];
