@@ -13,8 +13,17 @@ const projects = [
         img: '/assets/aivent.jpeg',
     },
     {
+        title: 'AIRES',
+        tag: 'AI Resume Optimization Agent — 02',
+        desc: 'AiRes is an AI-powered resume optimization system built with LangGraph that automatically analyzes, scores, and iteratively improves resumes to match job descriptions. It features ATS scoring, cover letter generation, a missing skills analyzer, and a full resume builder with 9 HTML templates and LaTeX support — all streamed in real-time via SSE.',
+        tech: ['React', 'FastAPI', 'LangGraph', 'Groq AI', 'PostgreSQL', 'WeasyPrint'],
+        live: 'https://aires-agent.vercel.app',
+        github: 'https://github.com/agenitic-lab/Resume-Agent',
+        img: '/assets/aires.png',
+    },
+    {
         title: 'HOPYFY CART',
-        tag: 'Scalable E-Commerce Solution — 02',
+        tag: 'Scalable E-Commerce Solution — 03',
         desc: 'A unified e-commerce platform with multi-vendor support, integrated payment systems, and streamlined user experiences.',
         tech: ['React', 'DRF', 'Razorpay'],
         live: '#',
@@ -23,7 +32,7 @@ const projects = [
     },
     {
         title: 'SKILLORIA',
-        tag: 'Academic Data Ecosystem — 03',
+        tag: 'Academic Data Ecosystem — 04',
         desc: 'Skilloria is a mini learning management system (LMS) built with Django. It lets administrators create courses and lessons, while students can sign up, enroll in courses, track lesson completion, and view progress dashboards.',
         tech: ['Python', 'Django', 'PostgreSQL', 'HTML / CSS'],
         live: '#',
@@ -32,7 +41,7 @@ const projects = [
     },
     {
         title: 'MEDI SYNC',
-        tag: 'Healthcare Data Nexus — 04',
+        tag: 'Healthcare Data Nexus — 05',
         desc: 'Built to bridge the gap between patients and healthcare providers. Features a robust booking engine and a dynamic directory system developed with Django, prioritizing data integrity.',
         tech: ['Python', 'Django', 'DRF', 'React'],
         live: 'https://cinaney.pythonanywhere.com/',
