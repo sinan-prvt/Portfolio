@@ -42,11 +42,11 @@ const projects = [
     {
         title: 'MEDI SYNC',
         tag: 'Healthcare Data Nexus — 05',
-        desc: 'Built to bridge the gap between patients and healthcare providers. Features a robust booking engine and a dynamic directory system developed with Django, prioritizing data integrity.',
-        tech: ['Python', 'Django', 'DRF', 'React'],
-        live: 'https://cinaney.pythonanywhere.com/',
+        desc: 'MediSync is a Hospital Management Web Application that allows patients to browse hospital information, view available doctors and departments, and book appointments online. It also has an admin panel for hospital staff to manage data',
+        tech: ['Python', 'Django', 'SQLite', 'HTML / CSS', 'Bootstrap', 'Pillow', 'Render'],
+        live: 'https://medisync-v8va.onrender.com/',
         github: 'https://github.com/sinan-prvt/MediSync',
-        img: '/assets/medisync.jpeg',
+        img: '/assets/medisync.jpg',
     },
 ];
 
