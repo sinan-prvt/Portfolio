@@ -129,9 +129,9 @@ export default function Projects() {
                                         </p>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-x-6 gap-y-3">
+                                    <div className="flex flex-wrap gap-2 md:gap-3">
                                         {p.tech.map((t) => (
-                                            <span key={t} className="text-[10px] font-bold uppercase tracking-widest text-black/60 border-b border-black/10 pb-1">
+                                            <span key={t} className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 bg-black/5 hover:bg-black/10 hover:-translate-y-0.5 rounded-full transition-all duration-300 border border-black/5 backdrop-blur-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)]">
                                                 {t}
                                             </span>
                                         ))}

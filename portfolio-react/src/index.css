@@ -104,8 +104,13 @@
     animation: marquee-reverse 35s linear infinite;
 }
 
-.marquee-container:hover .animate-marquee {
+.marquee-container:hover .animate-marquee,
+.marquee-container:hover .animate-marquee-reverse {
     animation-play-state: paused;
+}
+
+.skill-card {
+    box-shadow: 0 4px 20px -6px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.03);
 }
 
 .py-editorial {
