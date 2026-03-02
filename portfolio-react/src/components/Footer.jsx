@@ -10,8 +10,8 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-12 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-400">
-            <a href="https://github.com/sinan-prvt" className="hover:text-black transition-colors">GitHub</a>
-            <a href="https://linkedin.com/in/mohamed-sinan-75107a364" className="hover:text-black transition-colors">LinkedIn</a>
+            <a href="https://github.com/sinan-prvt" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">GitHub</a>
+            <a href="https://linkedin.com/in/mohamed-sinan-75107a364" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">LinkedIn</a>
           </div>
 
           <span className="text-[9px] font-bold tracking-[0.2em] text-gray-300 uppercase">
