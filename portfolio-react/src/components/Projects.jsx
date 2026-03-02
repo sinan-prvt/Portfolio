@@ -13,13 +13,13 @@ const projects = [
         img: '/assets/aivent.jpeg',
     },
     {
-        title: 'AIRES',
+        title: 'RESIKO',
         tag: 'AI Resume Optimization Agent — 02',
-        desc: 'AiRes is an AI-powered resume optimization system built with LangGraph that automatically analyzes, scores, and iteratively improves resumes to match job descriptions. It features ATS scoring, cover letter generation, a missing skills analyzer, and a full resume builder with 9 HTML templates and LaTeX support — all streamed in real-time via SSE.',
+        desc: 'Resiko is an AI-powered resume optimization system built with LangGraph that automatically analyzes, scores, and iteratively improves resumes to match job descriptions. It features ATS scoring, cover letter generation, a missing skills analyzer, and a full resume builder with 9 HTML templates and LaTeX support — all streamed in real-time via SSE.',
         tech: ['React', 'FastAPI', 'LangGraph', 'Groq AI', 'PostgreSQL', 'WeasyPrint'],
-        live: 'https://aires-agent.vercel.app',
+        live: 'https://resiko.app',
         github: 'https://github.com/agenitic-lab/Resume-Agent',
-        img: '/assets/aires.png',
+        img: '/assets/resiko.png',
     },
     {
         title: 'HOPYFY CART',

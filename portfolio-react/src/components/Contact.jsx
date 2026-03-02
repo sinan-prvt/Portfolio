@@ -98,7 +98,7 @@ export default function Contact() {
                             </div>
                             <div className="pt-6">
                                 <a
-                                    href="/Mohamed-Sinan-FullStack-CV.pdf"
+                                    href="/Mohamed_Sinan-FullStack.pdf"
                                     download
                                     className="inline-flex items-center gap-4 bg-black text-white px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-gray-800 transition-all shadow-xl shadow-black/10 group"
                                 >
