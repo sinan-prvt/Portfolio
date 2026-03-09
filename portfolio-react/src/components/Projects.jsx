@@ -4,15 +4,6 @@ import ScrollReveal from './ScrollReveal';
 
 const projects = [
     {
-        title: 'AIVENT',
-        tag: 'Universal Event Operating System — 01',
-        desc: 'Aivent is an AI-powered, microservices-based event management platform that enables end-to-end event planning, vendor coordination, and real-time operations for corporate and personal events. It features intelligent vendor matching, AI-powered event planning via a Hybrid RAG engine, real-time WebSocket chat, integrated payments, and a multi-role dashboard system (Admin, Vendor, Customer).',
-        tech: ['React', 'Python', 'Django', 'DRF', 'Docker', 'WebSocket', 'Pika', 'Boto3', 'LangChain', 'Kubernetes',],
-        live: '#',
-        github: 'https://github.com/sinan-prvt/Aivent_frontend',
-        img: '/assets/aivent.jpeg',
-    },
-    {
         title: 'RESIKO',
         tag: 'AI Resume Optimization Agent — 02',
         desc: 'Resiko is an AI-powered resume optimization system built with LangGraph that automatically analyzes, scores, and iteratively improves resumes to match job descriptions. It features ATS scoring, cover letter generation, a missing skills analyzer, and a full resume builder with 9 HTML templates and LaTeX support — all streamed in real-time via SSE.',
@@ -20,6 +11,15 @@ const projects = [
         live: 'https://resiko.app',
         github: 'https://github.com/agenitic-lab/Resume-Agent',
         img: '/assets/resiko.png',
+    },
+    {
+        title: 'AIVENT',
+        tag: 'Universal Event Operating System — 01',
+        desc: 'Aivent is an AI-powered, microservices-based event management platform that enables end-to-end event planning, vendor coordination, and real-time operations for corporate and personal events. It features intelligent vendor matching, AI-powered event planning via a Hybrid RAG engine, real-time WebSocket chat, integrated payments, and a multi-role dashboard system (Admin, Vendor, Customer).',
+        tech: ['React', 'Python', 'Django', 'DRF', 'Docker', 'WebSocket', 'Pika', 'Boto3', 'LangChain', 'Kubernetes',],
+        live: '#',
+        github: 'https://github.com/sinan-prvt/Aivent_frontend',
+        img: '/assets/aivent.jpeg',
     },
     {
         title: 'HOPYFY CART',
