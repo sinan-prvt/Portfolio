@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const SKILLS = [
-    'python', 'django', 'react', 'postgresql', 'redux', 'tailwind', 'javascript',
-    'docker', 'aws', 'redis', 'git', 'html', 'css', 'kubernetes', 'celery', 'orm'
+    'python', 'django', 'fastapi', 'drf', 'react', 'postgresql', 'redux', 'tailwind',
+    'javascript', 'docker', 'aws', 'redis', 'git', 'github', 'html', 'css', 'kubernetes',
+    'celery', 'orm', 'langgraph', 'langchain', 'groq', 'agentic ai', 'sqlalchemy',
+    'pydantic', 'pytest', 'vitest', 'rabbitmq', 'websocket', 'boto3', 'nginx',
+    'postman', 'vercel', 'render', 'netlify', 'pythonanywhere'
 ];
 
 const PROJECTS = [
-    'easemytrip', 'skilloria', 'hopyfy', 'medi sync', 'medisync', 'aivent'
+    'resiko', 'aivent', 'hopyfy cart', 'hopyfy', 'skilloria', 'medi sync', 'medisync'
 ];
 
 const KNOWLEDGE_BASE = [
@@ -19,7 +22,7 @@ const KNOWLEDGE_BASE = [
     {
         category: 'professional_summary',
         keywords: ['professional', 'summary', 'profile', 'engineer', 'developer'],
-        response: "I’m a backend-focused Full Stack Developer with strong experience in Django, REST APIs, PostgreSQL, and event-driven systems. I design scalable, maintainable software with a strong emphasis on system design, data consistency, and production readiness.",
+        response: "I’m a backend-focused Full Stack Developer with hands-on experience in Django, FastAPI, REST APIs, PostgreSQL, and event-driven systems. I build scalable, maintainable products with strong system design, real-time architecture, and production readiness in mind.",
         suggestions: ["What problems do you solve?", "Tell me about your backend experience", "What kind of roles are you looking for?"]
     },
     {
@@ -31,7 +34,7 @@ const KNOWLEDGE_BASE = [
     {
         category: 'age',
         keywords: ['age', 'old', 'born', 'birth', 'dob'],
-        response: "I'm 19 years old. I was born on August 18, 2006. Time flies when you're coding!",
+        response: `I’m currently ${new Date().getFullYear() - 2006 - (new Date() < new Date(new Date().getFullYear(), 7, 18) ? 1 : 0)} years old. I was born on August 18, 2006.`,
         suggestions: ["Where are you from?", "What did you study?", "Tell me about your work"]
     },
     {
@@ -49,26 +52,26 @@ const KNOWLEDGE_BASE = [
     {
         category: 'skills',
         keywords: ['skill', 'tech', 'toolkit', 'language', 'stack', 'know'],
-        response: "My main toolkit consists of Python (Django), React, and PostgreSQL. I also work a lot with Docker, AWS, and modern DevOps tools to make sure everything I build is resilient and high-performing.",
+        response: "My core stack is Python (Django/FastAPI), React, and PostgreSQL. I also work with LangGraph/LangChain, Docker, Kubernetes, AWS, Redis, RabbitMQ, and testing tools like Pytest/Vitest to ship robust production-ready systems.",
         suggestions: ["Do you know Django?", "Tell me about Docker", "Show me your projects"]
     },
     {
         category: 'projects',
         keywords: ['project', 'work', 'portfolio', 'build', 'made'],
-        response: "I've built some cool things! Here are a few highlights:\n1. AIVENT: An AI-powered event management system\n2. MEDI SYNC: A healthcare platform connecting patients and doctors\n3. HOPYFY CART: A multi-vendor e-commerce solution\n4. SKILLORIA: A learning management system built with Django",
-        suggestions: ["Tell me about Aivent", "What's Medi Sync?", "How can I see the code?"]
+        response: "Here are my current featured projects:\n1. RESIKO: AI resume optimization agent with ATS scoring, cover-letter generation, and real-time SSE streaming\n2. AIVENT: AI-powered, microservices-based event operating system\n3. HOPYFY CART: Multi-vendor e-commerce platform\n4. SKILLORIA: Django LMS for courses and progress tracking\n5. MEDI SYNC: Hospital management and appointment platform",
+        suggestions: ["Tell me about Resiko", "Tell me about Aivent", "How can I see the code?"]
     },
     {
         category: 'backend_expertise',
         keywords: ['backend', 'django', 'api', 'server', 'database'],
-        response: "My core strength is backend development using Django and Django REST Framework. I’ve built authentication systems (JWT, OTP), role-based access control, optimized PostgreSQL schemas, background workers with Celery, and event-driven communication using RabbitMQ.",
+        response: "My core strength is backend engineering with Django, DRF, and FastAPI. I’ve built secure auth (JWT/OTP), role-based access, optimized PostgreSQL data models, background workers with Celery, and event-driven services with RabbitMQ and WebSockets.",
         suggestions: ["How do you design APIs?", "Tell me about authentication", "Do you use microservices?"]
     },
     {
         category: 'contact',
         keywords: ['contact', 'email', 'reach', 'hire', 'call', 'message'],
-        response: "You can contact me directly via email at mohamedsinan.dev@gmail.com or connect with me on LinkedIn: https://www.linkedin.com/in/mohamed-sinan. I’m open to discussing projects, collaborations, or opportunities.",
-        suggestions: ["Open email", "View LinkedIn profile", "Go to contact form"]
+        response: "You can reach me at mohamedsinan9400@gmail.com, connect on LinkedIn (mohamedsinann), or check my GitHub (sinan-prvt). I’m open to projects, collaborations, and opportunities.",
+        suggestions: ["Open email", "View LinkedIn profile", "View GitHub profile"]
     },
     {
         category: 'mission',
@@ -91,20 +94,20 @@ const KNOWLEDGE_BASE = [
     {
         category: 'roles',
         keywords: ['role', 'job', 'looking for', 'hire'],
-        response: "I’m looking for backend or full stack roles where I can work on real-world systems, improve my system design skills, and contribute to production-grade applications.",
-        suggestions: ["Are you open to internships?", "Remote or onsite?", "What domains interest you?"]
+        response: "I’m currently working as a Python Full Stack Developer Intern at Bridgeon Skillversity LLP, Calicut. I’m open to backend/full stack opportunities where I can contribute to real production systems.",
+        suggestions: ["Tell me about your experience", "What stack do you use?", "How can I contact you?"]
     },
     {
         category: 'domains',
-        keywords: ['domain', 'interest', 'interests', 'domains', 'interests'],
-        response: "I’m interested in building scalable, high-performance digital solutions—basically, I love making complex backend logic work seamlessly with a beautiful frontend.",
-        suggestions: ["What kind of roles are you looking for?", "Tell me about your backend experience", "What kind of roles are you looking for?"]
+        keywords: ['domain', 'domains', 'industry', 'interested in'],
+        response: "I’m especially interested in AI-powered apps, scalable SaaS platforms, e-commerce systems, and healthcare workflows where architecture and reliability matter.",
+        suggestions: ["Tell me about Resiko", "Tell me about your backend experience", "What role are you in now?"]
     },
     {
         category: 'interests',
-        keywords: ['interest', 'interests', 'interests', 'interests', 'interests'],
-        response: "I’m interested in building scalable, high-performance digital solutions—basically, I love making complex backend logic work seamlessly with a beautiful frontend.",
-        suggestions: ["What kind of roles are you looking for?", "Tell me about your backend experience", "What kind of roles are you looking for?"]
+        keywords: ['interest', 'interests', 'passion', 'favorite work'],
+        response: "I enjoy designing backend-heavy systems, solving architecture challenges, and integrating AI features into products that are practical and user-friendly.",
+        suggestions: ["How do you solve problems?", "What technologies do you use?", "Show me your projects"]
     }
 
 ];
@@ -159,6 +162,10 @@ const ChatBot = () => {
             window.open("https://www.linkedin.com/in/mohamedsinann", "_blank");
             return;
         }
+        if (suggestion === "View GitHub profile") {
+            window.open("https://github.com/sinan-prvt", "_blank");
+            return;
+        }
         if (suggestion === "Go to contact form") {
             const contactSection = document.getElementById('contact');
             if (contactSection) {
@@ -184,8 +191,12 @@ const ChatBot = () => {
 
         const mentionedProject = PROJECTS.find(project => lowerQuery.includes(project));
         if (mentionedProject) {
+            if (mentionedProject === 'resiko') return {
+                response: "RESIKO is an AI resume optimization agent built with FastAPI + LangGraph. It supports ATS scoring, resume rewriting loops, cover letter generation, missing skills analysis, and real-time streamed updates via SSE.",
+                suggestions: ["What tech did you use?", "Show me more projects", "How can I contact you?"]
+            };
             if (mentionedProject === 'aivent') return {
-                response: "AIVENT is one of my favorite projects—it's an AI event management system built with React 19 and DRF. I designed it to handle complex vendor coordination.",
+                response: "AIVENT is an AI-powered event operating system built with a microservices architecture. It includes intelligent vendor matching, hybrid-RAG event planning, real-time chat, payments, and multi-role dashboards.",
                 suggestions: ["What tech did you use?", "Show me more projects", "How can I contact you?"]
             };
             if (mentionedProject === 'medi sync' || mentionedProject === 'medisync') return {
@@ -195,6 +206,10 @@ const ChatBot = () => {
             if (mentionedProject === 'skilloria') return {
                 response: "Skilloria is a Django-based LMS I developed. It handles everything from course creation to student progress tracking.",
                 suggestions: ["Show me more Django projects", "What are your skills?", "Tell me about yourself"]
+            };
+            if (mentionedProject === 'hopyfy cart' || mentionedProject === 'hopyfy') return {
+                response: "HOPYFY CART is a multi-vendor e-commerce platform with integrated payments and a smooth shopping flow across vendors.",
+                suggestions: ["Show me your projects", "What technologies do you use?", "How can I contact you?"]
             };
         }
 
