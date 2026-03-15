@@ -26,7 +26,7 @@ const projects = [
         tag: 'Scalable E-Commerce Solution — 03',
         desc: 'A unified e-commerce platform with multi-vendor support, integrated payment systems, and streamlined user experiences.',
         tech: ['React', 'DRF', 'Razorpay'],
-        live: '#',
+        live: 'http://hopyfy-cart-frontend-new.s3-website.ap-south-1.amazonaws.com/',
         github: 'https://github.com/sinan-prvt/Hopyfy_Cart',
         img: '/assets/hopyfycart.jpg',
     },
