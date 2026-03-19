@@ -22,6 +22,7 @@ const skillCategories = [
             { name: 'Pytest', icon: '/pytest.svg' },
         ],
     },
+
     {
         label: 'Frontend',
         direction: 'animate-marquee-reverse',
@@ -37,6 +38,7 @@ const skillCategories = [
             { name: 'Swagger', icon: '/swagger.svg' },
         ],
     },
+    
     {
         label: 'DevOps & Tools',
         direction: 'animate-marquee',
