@@ -37,7 +37,7 @@ const projects = [
         tech: ['React', 'Django', 'DRF', 'Supabase', 'Cloudinary', 'PostgreSQL'],
         live: 'https://sm-footware-store.vercel.app/',
         github: 'https://github.com/sinan-prvt/SmFootware',
-        img: '/assets/smfootware.png',
+        img: '/assets/smfootware.jpg',
     },
     {
         title: 'SKILLORIA',
