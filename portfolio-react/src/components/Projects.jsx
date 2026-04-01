@@ -31,8 +31,17 @@ const projects = [
         img: '/assets/hopyfycart.jpg',
     },
     {
+        title: 'SM FOOTWEAR',
+        tag: 'Premium Digital Footwear Catalog — 04',
+        desc: 'A high-end, mobile-first digital storefront and inventory system for footwear brands. Built with a decoupled architecture, it features advanced multi-image management, real-time search filtering, and seamless WhatsApp deep-linking for instant customer conversion.',
+        tech: ['React', 'Django', 'DRF', 'Supabase', 'Cloudinary', 'PostgreSQL'],
+        live: 'https://sm-footware-store.vercel.app/',
+        github: 'https://github.com/sinan-prvt/SmFootware',
+        img: '/assets/smfoot.jpeg',
+    },
+    {
         title: 'SKILLORIA',
-        tag: 'Academic Data Ecosystem — 04',
+        tag: 'Academic Data Ecosystem — 05',
         desc: 'Skilloria is a mini learning management system (LMS) built with Django. It lets administrators create courses and lessons, while students can sign up, enroll in courses, track lesson completion, and view progress dashboards.',
         tech: ['Python', 'Django', 'PostgreSQL', 'Django Templates', 'Gunicorn', 'Render'],
         live: 'https://student-mgmt-8v8p.onrender.com/',
@@ -41,7 +50,7 @@ const projects = [
     },
     {
         title: 'MEDI SYNC',
-        tag: 'Healthcare Data Nexus — 05',
+        tag: 'Healthcare Data Nexus — 06',
         desc: 'MediSync is a Hospital Management Web Application that allows patients to browse hospital information, view available doctors and departments, and book appointments online. It also has an admin panel for hospital staff to manage data',
         tech: ['Python', 'Django', 'SQLite', 'HTML / CSS', 'Bootstrap', 'Pillow', 'Render'],
         live: 'https://medisync-v8va.onrender.com/',
