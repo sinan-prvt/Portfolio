@@ -292,9 +292,9 @@ export default function Projects() {
                     {/* Horizontal scroll track */}
                     <div className="relative">
                         {/* Left fade */}
-                        <div className={`absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`} />
+                        <div className={`hidden md:block absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`} />
                         {/* Right fade */}
-                        <div className={`absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`} />
+                        <div className={`hidden md:block absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`} />
 
                         <div
                             ref={scrollRef}
