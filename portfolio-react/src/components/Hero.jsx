@@ -36,7 +36,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section ref={heroRef} id="home" className="relative min-h-screen bg-[#FDFCF6] flex flex-col items-center" style={{ overflow: 'hidden', maxWidth: '100%' }}>
+        <section ref={heroRef} id="home" className="relative min-h-screen bg-[#FDFCF6] flex flex-col items-center" style={{ overflow: 'clip', maxWidth: '100%' }}>
             <div className="absolute top-[10%] left-0 w-[60vw] h-[90vw] bg-[#FEF08A40] blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute top-[5%] right-0 w-[60vw] h-[85vw] bg-[#FEF08A30] blur-[130px] rounded-full pointer-events-none" />
             <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[90vw] h-[50vw] bg-[#FFFBEB30] blur-[100px] rounded-full pointer-events-none" />

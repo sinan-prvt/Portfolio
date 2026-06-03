@@ -15,9 +15,9 @@
 @layer base {
     html {
         scroll-behavior: smooth;
-        overflow-x: hidden;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        overflow-x: clip;
     }
 
     html::-webkit-scrollbar {
@@ -27,11 +27,11 @@
     body {
         background-color: var(--color-bg);
         @apply text-black font-sans antialiased;
-        overflow-x: hidden;
         min-height: 100vh;
         position: relative;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        overflow-x: clip;
     }
 
     body::-webkit-scrollbar {

@@ -39,9 +39,15 @@ const KNOWLEDGE_BASE = [
     },
     {
         category: 'education',
-        keywords: ['education', 'study', 'school', 'college', 'studied', 'pkmmhss'],
-        response: "I completed my Higher Secondary education at PKMMHSS Edarikode. It was a great foundation for my journey into tech!",
-        suggestions: ["What are your skills?", "Show me your projects", "Where are you based?"]
+        keywords: ['education', 'study', 'school', 'college', 'studied', 'pkmmhss', 'ignou', 'degree', 'bca', 'bachelor'],
+        response: "I'm currently pursuing my Bachelor of Computer Application (BCA) at IGNOU University. Prior to this, I completed my Higher Secondary Education at PKMMHSS Edarikode.",
+        suggestions: ["What are your skills?", "Do you have any certificates?", "Where are you based?"]
+    },
+    {
+        category: 'certificates',
+        keywords: ['certificate', 'certification', 'course', 'ibm', 'prompt engineering', 'generative ai'],
+        response: "I hold certifications in Prompt Engineering for Everyone from IBM Developer Skills Network and Generative AI Mastermind from Outskill.",
+        suggestions: ["Tell me about your projects", "What's your tech stack?"]
     },
     {
         category: 'location',
