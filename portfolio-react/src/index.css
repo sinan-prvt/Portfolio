@@ -92,7 +92,7 @@
     }
 
     100% {
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
 }
 
@@ -104,7 +104,7 @@
 
 @keyframes marquee-reverse {
     0% {
-        transform: translateX(-50%);
+        transform: translateX(-25%);
     }
 
     100% {
@@ -113,6 +113,8 @@
 }
 
 .animate-marquee-reverse {
+    display: flex;
+    width: max-content;
     animation: marquee-reverse 35s linear infinite;
 }
 

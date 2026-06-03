@@ -120,16 +120,15 @@ export default function Skills() {
                             </div>
 
                             {/* Marquee */}
-                            <div className="marquee-container flex overflow-hidden">
-                                <div
-                                    className={`${cat.direction} flex whitespace-nowrap gap-4 md:gap-5 py-3 px-4`}
-                                >
-                                    {[...cat.skills, ...cat.skills, ...cat.skills].map(
-                                        (skill, idx) => (
-                                            <div
-                                                key={`${skill.name}-${idx}`}
-                                                className="skill-card group relative flex items-center gap-3.5 bg-white/80 backdrop-blur-sm px-7 py-4 rounded-2xl border border-black/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] hover:border-black/[0.12]"
-                                            >
+                            <div className="marquee-container flex overflow-hidden py-3">
+                                <div className={`${cat.direction} flex whitespace-nowrap`}>
+                                    {[1, 2, 3, 4].map((group) => (
+                                        <div key={group} className="flex shrink-0 gap-4 md:gap-5 pr-4 md:pr-5">
+                                            {cat.skills.map((skill, idx) => (
+                                                <div
+                                                    key={`${skill.name}-${idx}`}
+                                                    className="skill-card group relative flex items-center gap-3.5 bg-white/80 backdrop-blur-sm px-7 py-4 rounded-2xl border border-black/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] hover:border-black/[0.12]"
+                                                >
                                                 {/* Hover glow */}
                                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-50/0 via-transparent to-yellow-50/0 group-hover:from-yellow-50/60 group-hover:to-amber-50/40 transition-all duration-500 pointer-events-none" />
 
@@ -148,8 +147,9 @@ export default function Skills() {
                                                     {skill.name}
                                                 </span>
                                             </div>
-                                        )
-                                    )}
+                                            ))}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
