@@ -73,7 +73,7 @@ export default function Contact() {
                                         href="mailto:mohamedsinan9400@gmail.com"
                                         onClick={handleCopyEmail}
                                         data-cursor="copy"
-                                        className="text-xl font-bold hover:text-gray-500 transition-colors"
+                                        className="text-sm sm:text-base md:text-lg lg:text-xl font-bold hover:text-gray-500 transition-colors break-all"
                                     >
                                         mohamedsinan9400@gmail.com
                                     </a>

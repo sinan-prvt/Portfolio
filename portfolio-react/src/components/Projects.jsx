@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import ScrollReveal from './ScrollReveal';
 
-const projects = [
+const mainProjects = [
     {
         title: 'RESIKO',
-        tag: 'AI Resume Optimization Agent — 02',
+        tag: 'AI Resume Optimization Agent — 01',
         desc: 'Resiko is an AI-powered resume optimization system built with LangGraph that automatically analyzes, scores, and iteratively improves resumes to match job descriptions. It features ATS scoring, cover letter generation, a missing skills analyzer, and a full resume builder with 9 HTML templates and LaTeX support — all streamed in real-time via SSE.',
         tech: ['React', 'FastAPI', 'LangGraph', 'Groq AI', 'PostgreSQL', 'WeasyPrint'],
         live: 'https://resiko.app',
@@ -14,9 +14,9 @@ const projects = [
     },
     {
         title: 'AIVENT',
-        tag: 'Universal Event Operating System — 01',
+        tag: 'Universal Event Operating System — 02',
         desc: 'Aivent is an AI-powered, microservices-based event management platform that enables end-to-end event planning, vendor coordination, and real-time operations for corporate and personal events. It features intelligent vendor matching, AI-powered event planning via a Hybrid RAG engine, real-time WebSocket chat, integrated payments, and a multi-role dashboard system (Admin, Vendor, Customer).',
-        tech: ['React', 'Python', 'Django', 'DRF', 'Docker', 'WebSocket', 'Pika', 'Boto3', 'LangChain', 'Kubernetes',],
+        tech: ['React', 'Python', 'Django', 'DRF', 'Docker', 'WebSocket', 'Pika', 'Boto3', 'LangChain', 'Kubernetes'],
         live: '#',
         github: 'https://github.com/sinan-prvt/Aivent_frontend',
         img: '/assets/aivent.jpeg',
@@ -26,42 +26,80 @@ const projects = [
         tag: 'Scalable E-Commerce Solution — 03',
         desc: 'A unified e-commerce platform with multi-vendor support, integrated payment systems, and streamlined user experiences.',
         tech: ['React', 'DRF', 'Razorpay'],
-        live: 'http://hopyfy-cart-frontend-new.s3-website.ap-south-1.amazonaws.com/',
+        live: '#',
         github: 'https://github.com/sinan-prvt/Hopyfy_Cart',
         img: '/assets/hopyfycart.jpg',
     },
+];
+
+const miniProjects = [
     {
         title: 'SM FOOTWEAR',
-        tag: 'Premium Digital Footwear Catalog — 04',
-        desc: 'A high-end, mobile-first digital storefront and inventory system for footwear brands. Built with a decoupled architecture, it features advanced multi-image management, real-time search filtering, and seamless WhatsApp deep-linking for instant customer conversion.',
+        tag: 'Premium Digital Footwear Catalog',
+        num: '04',
+        desc: 'A high-end, mobile-first digital storefront and inventory system for footwear brands. Features advanced multi-image management, real-time search filtering, and seamless WhatsApp deep-linking for instant customer conversion.',
         tech: ['React', 'Django', 'DRF', 'Supabase', 'Cloudinary', 'PostgreSQL'],
         live: 'https://sm-footware-store.vercel.app/',
         github: 'https://github.com/sinan-prvt/SmFootware',
         img: '/assets/smfootware.jpg',
+        accent: '#C8A96E',
+    },
+    {
+        title: 'SPEAKWELL',
+        tag: 'English Academy Promo Website',
+        num: '05',
+        desc: 'A fully-responsive single-page promotional website for SpeakWell English Academy, Kerala. Features a 3D tilt profile card, animated stats counters, typewriter role effect, WhatsApp enrollment form integration, and tabbed testimonials — all handcrafted without any CSS framework.',
+        tech: ['React 19', 'Vite', 'Vanilla CSS', 'WhatsApp API', 'Google Fonts'],
+        live: 'https://speakwellenglish.vercel.app/',
+        github: 'https://github.com/sinan-prvt/SpeakWell',
+        img: '/assets/speakwell.png ',
+        accent: '#4A7C59',
+    },
+    {
+        title: 'TASKIO',
+        tag: 'Full-Stack Task Manager',
+        num: '06',
+        desc: 'A comprehensive task management dashboard built with Django and React. Features JWT authentication, real-time optimistic UI updates, advanced task filtering/sorting, and CSV exports — all wrapped in a modern, responsive interface.',
+        tech: ['React', 'Tailwind CSS', 'Django', 'DRF', 'PostgreSQL', 'JWT'],
+        live: 'https://taskio-ecru.vercel.app/',
+        github: 'https://github.com/sinan-prvt/task-management-system',
+        img: '/assets/taskio.png',
+        accent: '#4A90E2',
     },
     {
         title: 'SKILLORIA',
-        tag: 'Academic Data Ecosystem — 05',
-        desc: 'Skilloria is a mini learning management system (LMS) built with Django. It lets administrators create courses and lessons, while students can sign up, enroll in courses, track lesson completion, and view progress dashboards.',
+        tag: 'Academic Data Ecosystem',
+        num: '07',
+        desc: 'A mini learning management system (LMS) built with Django. Lets administrators create courses and lessons, while students can sign up, enroll, track lesson completion, and view progress dashboards.',
         tech: ['Python', 'Django', 'PostgreSQL', 'Django Templates', 'Gunicorn', 'Render'],
         live: 'https://student-mgmt-8v8p.onrender.com/',
         github: 'https://github.com/sinan-prvt/Student_Management',
         img: '/assets/student.jpg',
+        accent: '#7C9EBE',
     },
     {
         title: 'MEDI SYNC',
-        tag: 'Healthcare Data Nexus — 06',
-        desc: 'MediSync is a Hospital Management Web Application that allows patients to browse hospital information, view available doctors and departments, and book appointments online. It also has an admin panel for hospital staff to manage data',
+        tag: 'Healthcare Data Nexus',
+        num: '08',
+        desc: 'A Hospital Management Web Application that allows patients to browse hospital information, view available doctors and departments, and book appointments online — with an admin panel for hospital staff.',
         tech: ['Python', 'Django', 'SQLite', 'HTML / CSS', 'Bootstrap', 'Pillow', 'Render'],
         live: 'https://medisync-v8va.onrender.com/',
         github: 'https://github.com/sinan-prvt/MediSync',
         img: '/assets/medisync.jpg',
+        accent: '#8ABE9E',
     },
 ];
 
 export default function Projects() {
     const [showToast, setShowToast] = useState(false);
     const headerRef = useScrollAnimation();
+    const miniHeaderRef = useScrollAnimation();
+    const scrollRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
 
     useEffect(() => {
         if (showToast) {
@@ -70,6 +108,21 @@ export default function Projects() {
         }
     }, [showToast]);
 
+    const updateScrollButtons = () => {
+        const el = scrollRef.current;
+        if (!el) return;
+        setCanScrollLeft(el.scrollLeft > 10);
+        setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+    };
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        el.addEventListener('scroll', updateScrollButtons, { passive: true });
+        updateScrollButtons();
+        return () => el.removeEventListener('scroll', updateScrollButtons);
+    }, []);
+
     const handleProjectClick = (e, liveUrl) => {
         if (!liveUrl || liveUrl === '#') {
             e.preventDefault();
@@ -77,13 +130,43 @@ export default function Projects() {
         }
     };
 
+    // Drag-to-scroll handlers
+    const onMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+        scrollRef.current.style.cursor = 'grabbing';
+    };
+    const onMouseLeave = () => {
+        setIsDragging(false);
+        if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
+    };
+    const onMouseUp = () => {
+        setIsDragging(false);
+        if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
+    };
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const scrollBy = (dir) => {
+        if (!scrollRef.current) return;
+        scrollRef.current.scrollBy({ left: dir * 480, behavior: 'smooth' });
+    };
+
     return (
         <section id="projects" className="relative py-24 md:py-32 bg-[#FDFCF6] text-black overflow-hidden">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
+
+                {/* ── Section Header ── */}
                 <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-24 md:mb-32 opacity-0 translate-y-8">
                     <div className="max-w-2xl">
                         <span className="text-xs font-bold tracking-[0.3em] text-black/40 uppercase mb-4 block">Archive 2025 — 2026</span>
-                        <h2 className="text-5xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-[0.9]">
+                        <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-[0.9]">
                             <span className="font-serif italic font-light lowercase">Selected</span><br />
                             <span className="font-black">Works</span>
                         </h2>
@@ -96,12 +179,11 @@ export default function Projects() {
                     </div>
                 </div>
 
+                {/* ── Main Projects ── */}
                 <div className="space-y-32 md:space-y-48">
-                    {projects.map((p, idx) => (
+                    {mainProjects.map((p, idx) => (
                         <ScrollReveal key={p.title} delay={idx * 0.1}>
-                            <div
-                                className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}
-                            >
+                            <div className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}>
                                 <div className="w-full md:w-3/5 group">
                                     <a
                                         href={p.live}
@@ -133,9 +215,7 @@ export default function Projects() {
                                             <p className="text-[10px] font-bold text-black/40 uppercase tracking-[0.4em]">{p.tag}</p>
                                         </div>
                                         <h3 className="text-4xl md:text-5xl font-black tracking-tighter uppercase leading-none">{p.title}</h3>
-                                        <p className="text-gray-500 font-medium leading-relaxed text-sm md:text-base">
-                                            {p.desc}
-                                        </p>
+                                        <p className="text-gray-500 font-medium leading-relaxed text-sm md:text-base">{p.desc}</p>
                                     </div>
 
                                     <div className="flex flex-wrap gap-2 md:gap-3">
@@ -167,6 +247,150 @@ export default function Projects() {
                     ))}
                 </div>
 
+                {/* ── Mini Projects Section ── */}
+                <div className="mt-40 md:mt-56">
+                    {/* Mini header */}
+                    <div ref={miniHeaderRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 opacity-0 translate-y-8">
+                        <div>
+                            <span className="text-xs font-bold tracking-[0.3em] text-black/30 uppercase mb-3 block">Side Experiments</span>
+                            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-tighter uppercase leading-[0.9]">
+                                <span className="font-serif italic font-light lowercase">Mini</span>{' '}
+                                <span className="font-black">Projects</span>
+                            </h2>
+                        </div>
+                        <div className="mt-6 md:mt-0 flex items-center gap-3">
+                            <button
+                                onClick={() => scrollBy(-1)}
+                                disabled={!canScrollLeft}
+                                aria-label="Scroll left"
+                                className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300
+                                    ${canScrollLeft
+                                        ? 'border-black/20 hover:bg-black hover:text-white hover:border-black cursor-pointer'
+                                        : 'border-black/10 text-black/20 cursor-not-allowed'}`}
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M19 12H5m7-7-7 7 7 7" />
+                                </svg>
+                            </button>
+                            <button
+                                onClick={() => scrollBy(1)}
+                                disabled={!canScrollRight}
+                                aria-label="Scroll right"
+                                className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300
+                                    ${canScrollRight
+                                        ? 'border-black/20 hover:bg-black hover:text-white hover:border-black cursor-pointer'
+                                        : 'border-black/10 text-black/20 cursor-not-allowed'}`}
+                            >
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M5 12h14m-7-7 7 7-7 7" />
+                                </svg>
+                            </button>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-black/30 ml-2">Drag to explore</span>
+                        </div>
+                    </div>
+
+                    {/* Horizontal scroll track */}
+                    <div className="relative">
+                        {/* Left fade */}
+                        <div className={`absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`} />
+                        {/* Right fade */}
+                        <div className={`absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-[#FDFCF6] to-transparent pointer-events-none transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`} />
+
+                        <div
+                            ref={scrollRef}
+                            className="mini-scroll flex gap-6 overflow-x-auto pb-6 select-none"
+                            style={{
+                                cursor: 'grab',
+                                scrollbarWidth: 'none',
+                                msOverflowStyle: 'none',
+                                WebkitOverflowScrolling: 'touch',
+                            }}
+                            onMouseDown={onMouseDown}
+                            onMouseLeave={onMouseLeave}
+                            onMouseUp={onMouseUp}
+                            onMouseMove={onMouseMove}
+                        >
+                            {miniProjects.map((p, idx) => (
+                                <div
+                                    key={p.title}
+                                    className="flex-shrink-0 w-[360px] md:w-[440px] group"
+                                    style={{ animationDelay: `${idx * 100}ms` }}
+                                >
+                                    <div className="rounded-2xl overflow-hidden border border-black/5 bg-white shadow-[0_8px_40px_-12px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_60px_-16px_rgba(0,0,0,0.18)] transition-all duration-500 hover:-translate-y-1">
+                                        {/* Image */}
+                                        <div className="relative aspect-[16/10] overflow-hidden">
+                                            <img
+                                                src={p.img}
+                                                alt={p.title}
+                                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-[1.5s]"
+                                                draggable={false}
+                                            />
+                                            {/* Number badge */}
+                                            <div
+                                                className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-[10px] font-black tracking-wider text-white shadow-lg"
+                                                style={{ backgroundColor: p.accent }}
+                                            >
+                                                {p.num}
+                                            </div>
+                                            {/* Overlay */}
+                                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5 gap-3">
+                                                <a
+                                                    href={p.live}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    onClick={(e) => handleProjectClick(e, p.live)}
+                                                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-200 shadow"
+                                                    draggable={false}
+                                                >
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>
+                                                    Live
+                                                </a>
+                                                <a
+                                                    href={p.github}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-200 border border-white/30"
+                                                    draggable={false}
+                                                >
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
+                                                    Code
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        {/* Card body */}
+                                        <div className="p-6 space-y-4">
+                                            <div className="flex items-start justify-between gap-3">
+                                                <div>
+                                                    <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-black/35 mb-1">{p.tag}</p>
+                                                    <h3 className="text-xl font-black tracking-tight uppercase leading-none">{p.title}</h3>
+                                                </div>
+                                                <div className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: p.accent }}>
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path d="M7 17l9.2-9.2M17 17V7H7" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-500 text-xs leading-relaxed line-clamp-3">{p.desc}</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {p.tech.map((t) => (
+                                                    <span
+                                                        key={t}
+                                                        className="px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest rounded-full border border-black/8 text-black/55 bg-black/[0.03]"
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* ── CTA ── */}
                 <div className="mt-32 pt-24 border-t border-black/5 text-center">
                     <p className="font-serif italic text-2xl mb-8">Want to see more?</p>
                     <a
@@ -180,6 +404,7 @@ export default function Projects() {
                 </div>
             </div>
 
+            {/* Toast */}
             <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'}`}>
                 <div className="bg-black/80 backdrop-blur-md text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-4">
                     <div className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />

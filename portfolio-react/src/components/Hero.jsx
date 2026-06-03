@@ -36,9 +36,9 @@ export default function Hero() {
     }, []);
 
     return (
-        <section ref={heroRef} id="home" className="relative min-h-screen bg-[#FDFCF6] flex flex-col items-center overflow-hidden">
-            <div className="absolute top-[10%] left-[-15%] w-[80vw] h-[90vw] bg-[#FEF08A40] blur-[150px] rounded-full pointer-events-none" />
-            <div className="absolute top-[5%] right-[-15%] w-[75vw] h-[85vw] bg-[#FEF08A30] blur-[130px] rounded-full pointer-events-none" />
+        <section ref={heroRef} id="home" className="relative min-h-screen bg-[#FDFCF6] flex flex-col items-center" style={{ overflow: 'hidden', maxWidth: '100%' }}>
+            <div className="absolute top-[10%] left-0 w-[60vw] h-[90vw] bg-[#FEF08A40] blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute top-[5%] right-0 w-[60vw] h-[85vw] bg-[#FEF08A30] blur-[130px] rounded-full pointer-events-none" />
             <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[90vw] h-[50vw] bg-[#FFFBEB30] blur-[100px] rounded-full pointer-events-none" />
 
             <div className="relative w-full max-w-[1800px] h-screen px-10">
@@ -60,8 +60,8 @@ export default function Hero() {
                     </h2>
                 </div>
 
-                <div className="absolute bottom-0 left-[53%] md:left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
-                    <div className="relative h-[85vh] md:h-[85vh] w-auto">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex justify-center z-10 select-none pointer-events-none">
+                    <div className="relative h-[98vh] md:h-[85vh] w-auto">
                         <img
                             ref={imageRef}
                             src="/assets/sinan_nobg.png"
@@ -79,7 +79,7 @@ export default function Hero() {
 
                 <div className="relative h-full w-full z-20 pointer-events-none ">
 
-                    <div ref={titleRef} className="absolute left-0 bottom-[18%] md:bottom-[12%]">
+                    <div ref={titleRef} className="absolute left-0 bottom-[16%] md:bottom-[12%]">
                         <h1
                             className="text-[10vw] md:text-[6vw] font-black leading-[0.8] uppercase tracking-tighter text-black transition-transform duration-500 hover:scale-105 origin-bottom-left pointer-events-auto cursor-none"
                             data-cursor="text"
@@ -88,9 +88,9 @@ export default function Hero() {
                         </h1>
                     </div>
 
-                    <div ref={roleRef} className="absolute right-0 bottom-[19%] md:bottom-[12%] text-right">
+                    <div ref={roleRef} className="absolute right-0 bottom-[16%] md:bottom-[12%] text-right">
                         <h2
-                            className="text-[4vw] md:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black transition-transform duration-500 hover:scale-105 origin-bottom-right pointer-events-auto cursor-none"
+                            className="text-[5.5vw] md:text-[3.5vw] font-black uppercase tracking-tighter leading-[0.85] text-black transition-transform duration-500 hover:scale-105 origin-bottom-right pointer-events-auto cursor-none"
                             data-cursor="text"
                         >
                             PYTHON<br />FULL STACK<br />DEVELOPER

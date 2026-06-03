@@ -72,8 +72,8 @@ export default function Skills() {
             className="relative py-24 md:py-32 bg-transparent text-black overflow-hidden"
         >
             {/* Background Glows */}
-            <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#FEF08A20] blur-[150px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[-15%] w-[50vw] h-[50vw] bg-slate-100/40 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute top-[-10%] left-0 w-[60vw] h-[60vw] bg-[#FEF08A20] blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-0 w-[50vw] h-[50vw] bg-slate-100/40 blur-[120px] rounded-full pointer-events-none" />
 
             {/* Header — editorial style matching Projects */}
             <div className="mx-auto max-w-7xl px-6 mb-20 md:mb-28 relative z-10">
@@ -85,7 +85,7 @@ export default function Skills() {
                         <span className="text-xs font-bold tracking-[0.3em] text-black/40 uppercase mb-4 block">
                             Capabilities
                         </span>
-                        <h2 className="text-5xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-[0.9]">
+                        <h2 className="text-4xl md:text-7xl lg:text-8xl tracking-tighter uppercase leading-[0.9]">
                             <span className="font-serif italic font-light lowercase">Tech</span>
                             <br />
                             <span className="font-black">Stack</span>

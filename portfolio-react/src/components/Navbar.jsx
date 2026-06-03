@@ -20,12 +20,12 @@ export default function Navbar() {
 
     useEffect(() => {
         if (open) {
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflowY = 'hidden';
         } else {
-            document.body.style.overflow = 'auto';
+            document.body.style.overflowY = '';
         }
         return () => {
-            document.body.style.overflow = 'auto';
+            document.body.style.overflowY = '';
         };
     }, [open]);
 

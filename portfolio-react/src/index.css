@@ -15,6 +15,13 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    html::-webkit-scrollbar {
+        display: none;
     }
 
     body {
@@ -22,8 +29,13 @@
         @apply text-black font-sans antialiased;
         overflow-x: hidden;
         min-height: 100vh;
-        height: auto;
         position: relative;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
     }
 
     body,
@@ -160,4 +172,13 @@
 
 .animate-fade-in-up {
     animation: fade-in-up 0.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+/* Hide scrollbar for mini-projects carousel */
+.mini-scroll::-webkit-scrollbar {
+    display: none;
+}
+.mini-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
