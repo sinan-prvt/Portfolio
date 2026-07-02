@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import ScrollReveal from './ScrollReveal';
 
@@ -63,6 +63,173 @@ const skillCategories = [
     },
 ];
 
+const DraggableMarquee = ({ items, direction, speed = 1.5 }) => {
+    const containerRef = useRef(null);
+    const contentRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
+    
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    // Use a ref for position to avoid re-renders during animation
+    const posRef = useRef(0);
+
+    const actualSpeed = direction === 'animate-marquee-reverse' ? -speed : speed;
+
+    useEffect(() => {
+        if (isHovered || isDragging) return;
+
+        let animationId;
+        const contentNode = contentRef.current;
+        if (!contentNode) return;
+
+        const scroll = () => {
+            posRef.current += actualSpeed;
+            
+            const maxScroll = contentNode.scrollWidth / 2;
+            
+            if (actualSpeed > 0) {
+                if (posRef.current >= maxScroll) posRef.current -= maxScroll;
+            } else {
+                if (posRef.current <= 0) posRef.current += maxScroll;
+            }
+            
+            contentNode.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+            animationId = requestAnimationFrame(scroll);
+        };
+
+        animationId = requestAnimationFrame(scroll);
+        return () => cancelAnimationFrame(animationId);
+    }, [isHovered, isDragging, actualSpeed]);
+
+    useEffect(() => {
+        if (actualSpeed < 0 && contentRef.current) {
+            posRef.current = contentRef.current.scrollWidth / 2;
+            contentRef.current.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+        }
+    }, [actualSpeed]);
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setIsHovered(true);
+        setStartX(e.pageX + posRef.current);
+        if (containerRef.current) containerRef.current.style.cursor = 'grabbing';
+    };
+
+    const handleMouseLeave = () => {
+        setIsDragging(false);
+        setIsHovered(false);
+        if (containerRef.current) containerRef.current.style.cursor = 'grab';
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+        if (containerRef.current) containerRef.current.style.cursor = 'grab';
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX;
+        posRef.current = startX - x;
+        
+        const contentNode = contentRef.current;
+        if (contentNode) {
+            const maxScroll = contentNode.scrollWidth / 2;
+            if (posRef.current >= maxScroll) {
+                posRef.current -= maxScroll;
+                setStartX(startX - maxScroll);
+            } else if (posRef.current <= 0) {
+                posRef.current += maxScroll;
+                setStartX(startX + maxScroll);
+            }
+            contentNode.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+        }
+    };
+
+    // Touch events for mobile dragging
+    const [touchStartX, setTouchStartX] = useState(0);
+    
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setIsHovered(true);
+        setTouchStartX(e.touches[0].clientX + posRef.current);
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
+        setIsHovered(false);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].clientX;
+        posRef.current = touchStartX - x;
+
+        const contentNode = contentRef.current;
+        if (contentNode) {
+            const maxScroll = contentNode.scrollWidth / 2;
+            if (posRef.current >= maxScroll) {
+                posRef.current -= maxScroll;
+                setTouchStartX(touchStartX - maxScroll);
+            } else if (posRef.current <= 0) {
+                posRef.current += maxScroll;
+                setTouchStartX(touchStartX + maxScroll);
+            }
+            contentNode.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+        }
+    };
+
+    return (
+        <div 
+            ref={containerRef}
+            className="marquee-container relative flex overflow-hidden py-3 cursor-grab w-full"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={handleMouseLeave}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
+        >
+            <div 
+                ref={contentRef} 
+                className="flex whitespace-nowrap w-max select-none will-change-transform"
+                style={{ transform: `translate3d(${-posRef.current}px, 0, 0)` }}
+            >
+                {[1, 2, 3, 4].map((group) => (
+                    <div key={group} className="flex shrink-0 gap-4 md:gap-5 pr-4 md:pr-5">
+                        {items.map((skill, idx) => (
+                            <div
+                                key={`${skill.name}-${idx}`}
+                                className="skill-card group relative flex items-center gap-3.5 bg-white/80 backdrop-blur-sm px-7 py-4 rounded-2xl border border-black/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] hover:border-black/[0.12]"
+                            >
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-50/0 via-transparent to-yellow-50/0 group-hover:from-yellow-50/60 group-hover:to-amber-50/40 transition-all duration-500 pointer-events-none" />
+
+                                <div className="relative z-10 w-7 h-7 flex items-center justify-center">
+                                    <img
+                                        src={
+                                            skill.icon.startsWith('/')
+                                                ? skill.icon
+                                                : `https://skillicons.dev/icons?i=${skill.icon}`
+                                        }
+                                        alt={skill.name}
+                                        className="w-7 h-7 object-contain group-hover:scale-110 transition-transform duration-500 pointer-events-none"
+                                        draggable="false"
+                                    />
+                                </div>
+                                <span className="relative z-10 text-sm font-bold tracking-tight text-black/75 group-hover:text-black transition-colors duration-300">
+                                    {skill.name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 export default function Skills() {
     const headerRef = useScrollAnimation();
 
@@ -119,39 +286,7 @@ export default function Skills() {
                                 </div>
                             </div>
 
-                            {/* Marquee */}
-                            <div className="marquee-container flex overflow-hidden py-3">
-                                <div className={`${cat.direction} flex whitespace-nowrap`}>
-                                    {[1, 2, 3, 4].map((group) => (
-                                        <div key={group} className="flex shrink-0 gap-4 md:gap-5 pr-4 md:pr-5">
-                                            {cat.skills.map((skill, idx) => (
-                                                <div
-                                                    key={`${skill.name}-${idx}`}
-                                                    className="skill-card group relative flex items-center gap-3.5 bg-white/80 backdrop-blur-sm px-7 py-4 rounded-2xl border border-black/[0.06] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] hover:border-black/[0.12]"
-                                                >
-                                                {/* Hover glow */}
-                                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-50/0 via-transparent to-yellow-50/0 group-hover:from-yellow-50/60 group-hover:to-amber-50/40 transition-all duration-500 pointer-events-none" />
-
-                                                <div className="relative z-10 w-7 h-7 flex items-center justify-center">
-                                                    <img
-                                                        src={
-                                                            skill.icon.startsWith('/')
-                                                                ? skill.icon
-                                                                : `https://skillicons.dev/icons?i=${skill.icon}`
-                                                        }
-                                                        alt={skill.name}
-                                                        className="w-7 h-7 object-contain group-hover:scale-110 transition-transform duration-500"
-                                                    />
-                                                </div>
-                                                <span className="relative z-10 text-sm font-bold tracking-tight text-black/75 group-hover:text-black transition-colors duration-300">
-                                                    {skill.name}
-                                                </span>
-                                            </div>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <DraggableMarquee items={cat.skills} direction={cat.direction} />
                         </div>
                     </ScrollReveal>
                 ))}
