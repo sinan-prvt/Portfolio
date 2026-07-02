@@ -232,6 +232,22 @@ const DraggableMarquee = ({ items, direction, speed = 1.5 }) => {
 
 export default function Skills() {
     const headerRef = useScrollAnimation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [activeTab, setActiveTab] = useState(0);
+
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+            // Reset tab when modal closes
+            setTimeout(() => setActiveTab(0), 300);
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isModalOpen]);
 
     return (
         <section
@@ -258,15 +274,26 @@ export default function Skills() {
                             <span className="font-black">Stack</span>
                         </h2>
                     </div>
-                    <div className="mt-8 md:mt-0 text-right">
+                    <div className="mt-8 md:mt-0 text-right flex flex-col items-end">
                         <div className="h-[1px] w-24 bg-black/10 inline-block mb-8 md:block md:ml-auto" />
-                        <p className="text-xs font-medium text-black/60 uppercase tracking-widest leading-loose">
-                            <span className="text-3xl font-black text-black block mb-1">
-                                30+
-                            </span>
-                            Technologies
-                            <br />& Tools
-                        </p>
+                        <div className="flex flex-col items-end gap-6">
+                            <p className="text-xs font-medium text-black/60 uppercase tracking-widest leading-loose">
+                                <span className="text-3xl font-black text-black block mb-1">
+                                    30+
+                                </span>
+                                Technologies
+                                <br />& Tools
+                            </p>
+                            <button 
+                                onClick={() => setIsModalOpen(true)}
+                                className="group relative px-6 py-3 text-[10px] font-bold tracking-[0.2em] uppercase overflow-hidden rounded-full border border-black/10 bg-white/50 hover:border-black/30 transition-colors duration-300"
+                            >
+                                <div className="absolute inset-0 bg-black translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                <span className="relative z-10 text-black group-hover:text-white transition-colors duration-300">
+                                    View All
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,6 +322,103 @@ export default function Skills() {
                 <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-gradient-to-r from-[#FDFCF6] via-[#FDFCF6]/80 to-transparent z-10 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-gradient-to-l from-[#FDFCF6] via-[#FDFCF6]/80 to-transparent z-10 pointer-events-none" />
             </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6 mt-10">
+                    {/* Backdrop */}
+                    <div 
+                        className="absolute inset-0 bg-black/20 backdrop-blur-md transition-opacity"
+                        onClick={() => setIsModalOpen(false)}
+                    />
+                    
+                    {/* Modal Content */}
+                    <div className="relative w-full max-w-5xl bg-[#FDFCF6] rounded-3xl shadow-2xl border border-black/10 max-h-[90vh] overflow-y-auto overflow-x-hidden mini-scroll animate-fade-in-up flex flex-col">
+                        <div className="sticky top-0 bg-[#FDFCF6]/90 backdrop-blur-md z-10 p-6 sm:p-10 pb-4 sm:pb-6 border-b border-black/5 flex flex-col gap-6 sm:gap-8">
+                            <div className="flex justify-between items-center">
+                                <h3 className="text-2xl font-black uppercase tracking-tighter">All Skills</h3>
+                                <button 
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-colors shrink-0"
+                                >
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13 1L1 13M1 1L13 13" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            {/* Tabs */}
+                            <div className="flex items-center gap-2 overflow-x-auto mini-scroll pb-2 -mx-2 px-2 sm:mx-0 sm:px-0">
+                                {skillCategories.map((cat, idx) => (
+                                    <button
+                                        key={`tab-${cat.label}`}
+                                        onClick={() => setActiveTab(idx)}
+                                        className={`px-5 py-2.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest whitespace-nowrap transition-all duration-300 ${
+                                            activeTab === idx 
+                                                ? 'bg-black text-white' 
+                                                : 'bg-black/5 text-black/60 hover:bg-black/10 hover:text-black'
+                                        }`}
+                                    >
+                                        {cat.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className="p-6 sm:p-10 flex-1 flex flex-col">
+                            {/* Content based on activeTab */}
+                            <div className="flex-1" key={activeTab}>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 animate-fade-in-up">
+                                    {skillCategories[activeTab].skills.map((skill, idx) => (
+                                        <div
+                                            key={`modal-skill-${skill.name}-${idx}`}
+                                            className="flex items-center gap-3 bg-white px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border border-black/5 hover:border-black/15 hover:shadow-lg transition-all duration-300"
+                                        >
+                                            <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shrink-0">
+                                                <img
+                                                    src={
+                                                        skill.icon.startsWith('/')
+                                                            ? skill.icon
+                                                            : `https://skillicons.dev/icons?i=${skill.icon}`
+                                                    }
+                                                    alt={skill.name}
+                                                    className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
+                                                />
+                                            </div>
+                                            <span className="text-xs sm:text-sm font-bold tracking-tight text-black/80">
+                                                {skill.name}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            
+                            {/* Navigation Arrows */}
+                            <div className="flex justify-between items-center mt-10 sm:mt-16 pt-6 border-t border-black/5">
+                                <button 
+                                    onClick={() => setActiveTab(prev => Math.max(0, prev - 1))}
+                                    className={`flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${activeTab === 0 ? 'text-black/20 cursor-not-allowed' : 'text-black hover:text-black/60'}`}
+                                    disabled={activeTab === 0}
+                                >
+                                    &larr; Prev
+                                </button>
+                                <div className="flex gap-1.5 sm:gap-2">
+                                    {skillCategories.map((_, idx) => (
+                                        <div key={`dot-${idx}`} className={`h-1.5 rounded-full transition-all duration-500 ${activeTab === idx ? 'bg-black w-4 sm:w-6' : 'bg-black/20 w-1.5'}`} />
+                                    ))}
+                                </div>
+                                <button 
+                                    onClick={() => setActiveTab(prev => Math.min(skillCategories.length - 1, prev + 1))}
+                                    className={`flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-colors ${activeTab === skillCategories.length - 1 ? 'text-black/20 cursor-not-allowed' : 'text-black hover:text-black/60'}`}
+                                    disabled={activeTab === skillCategories.length - 1}
+                                >
+                                    Next &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
