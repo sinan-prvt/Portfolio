@@ -1,7 +1,4 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-    plugins: [react()],
-    assetsInclude: ['**/*.glb'],
-})
+// The site is a single static page (index.html) with Three.js, GSAP and Lenis loaded from CDNs.
+export default defineConfig({})
