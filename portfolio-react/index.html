@@ -276,7 +276,7 @@ section{position:relative}
   .pj-info{top:auto;bottom:86px;transform:none;width:auto;right:var(--gutter);padding:18px;border-radius:20px;background:rgba(14,15,20,.78);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .pj-info.swap{transform:translateY(12px)}
   .pj-info h3{font-size:44px}
-  .pj-info p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .pj-info p{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .pj-info .pills{display:none}
   .pj-nav button span{font-size:12px}.pj-nav button small{display:none}
 }
@@ -507,14 +507,14 @@ footer a:hover{color:var(--fg)}
     <div class="about-grid">
       <div class="me" id="me">
         <img src="/assets/sinan_nobg.png" alt="Portrait of Mohamed Sinan">
-        <div class="badge"><span>Mohamed Sinan · 19</span><b>● Open to work</b></div>
+        <div class="badge"><span>Mohamed Sinan · 20</span><b>● Open to work</b></div>
       </div>
       <div style="min-width:0">
-        <p class="words" id="words">I'm a full stack developer driven by *backend-centric* development and *system* *design.* I build resilient, scalable architectures with Python, Django and FastAPI, and connect them to fluid React interfaces. I care about performance, clean code and products that are *built* *to* *last.*</p>
+        <p class="words" id="words">As a *full* *stack* *developer,* I bridge the gap between powerful backends and seamless frontends. My core stack revolves around *Python,* *Django,* and *React,* but I also craft custom e-commerce experiences using *WordPress,* *WooCommerce,* and *Shopify.* By integrating an *AI* *vibe* *coding* workflow, I ensure every project is engineered for speed, scalability, and *clean* *code.*</p>
         <div class="facts">
           <div><b><span data-count="30">30</span>+</b><span>Technologies in my toolkit</span></div>
           <div><b data-count="8">8</b><span>Projects shipped</span></div>
-          <div><b>~<span data-count="20">20</span>%</b><span>Backend speed-up delivered</span></div>
+          <div><b><span data-count="100">100</span>%</b><span>Client satisfaction</span></div>
         </div>
       </div>
     </div>
@@ -631,10 +631,10 @@ const store = { get(k){ try { return localStorage.getItem(k); } catch (e) { retu
 const loader = $('#loader'); loader.classList.remove('autohide');
 let lp = 0;
 const lt = setInterval(() => {
-  lp = Math.min(100, lp + 1 + Math.floor(Math.random() * 6));
+  lp = Math.min(100, lp + 3 + Math.floor(Math.random() * 10));
   $('#lnum').textContent = lp; $('#lbar').style.transform = `scaleX(${lp / 100})`;
-  if (lp >= 100) { clearInterval(lt); setTimeout(() => { loader.classList.add('done'); intro(); }, 300); }
-}, reduce ? 4 : 28);
+  if (lp >= 100) { clearInterval(lt); setTimeout(() => { loader.classList.add('done'); intro(); }, 150); }
+}, reduce ? 4 : 12);
 
 /* ================= small UI ================= */
 // stack marquee
@@ -1182,9 +1182,9 @@ function buildRoad(canvas, stage, MS, getP, opts){
   const sec = $('#experience'); if (!$('#rdCanvas')) return;
   const MS = [
     { t: .16, year: '2023', dates: '06/2023 — 03/2025', title: 'Higher Secondary Education', org: 'PKMMHSS Edarikode', kind: 'Education', color: '#5b8def', label: 'School' },
-    { t: .40, year: '2025', dates: '2025 — Present', title: 'Python Full Stack Developer Intern', org: 'Bridgeon Skillversity LLP · Calicut', kind: 'Work', color: '#ffd43b', label: 'Bridgeon', pts: ['REST APIs and React UIs with Django', '~20% faster backend', 'JWT auth and payment gateways'] },
-    { t: .62, year: '2025', dates: '07/2025 — Present', title: 'Bachelor of Computer Applications', org: 'Indira Gandhi National Open University', kind: 'Education', color: '#5b8def', label: 'BCA' },
-    { t: .86, year: '2026', dates: '05/2026 — Present', title: 'Web Developer', org: 'CreativHeads', kind: 'Work', color: '#44d19a', label: 'CreativHeads', now: true }
+    { t: .40, year: '2025', dates: '05/2025 — 07/2026', title: 'Software Developer Intern', org: 'Bridgeon', kind: 'Work', color: '#ffd43b', label: 'Bridgeon', pts: ['Developed scalable backend workflows', 'Built responsive React components', 'Amazon EC2 and HTML5 deployment'] },
+    { t: .62, year: '2025', dates: '07/2025 — Present', title: 'Bachelor of Computer Applications', org: 'IGNOU University', kind: 'Education', color: '#5b8def', label: 'BCA' },
+    { t: .86, year: '2026', dates: '07/2026 — Present', title: 'Web Developer', org: 'CreativHeads Agency', kind: 'Work', color: '#44d19a', label: 'CreativHeads', pts: ['WordPress Theme Customization', 'WooCommerce Integration', 'Full-Stack Web Development'], now: true }
   ];
   const card = $('#rdCard'), stopsEl = $('#rdStops'), rail = $('#rdRail'), yearEl = $('#rdYear'), stepEl = $('#rdStep');
   $('#rdList').innerHTML = MS.map(m => `<li><div class="d">${m.dates} · ${m.kind}</div><b>${m.title}</b><span>${m.org}</span></li>`).join('');
