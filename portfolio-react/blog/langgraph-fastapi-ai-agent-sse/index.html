@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Building an AI Agent with LangGraph, FastAPI and SSE | Mohamed Sinan</title>
+<meta name="description" content="How I structure a LangGraph agent that scores and iteratively improves a resume, and stream every step to a React frontend with FastAPI and Server-Sent Events. Lessons from building Resiko.">
+<meta name="author" content="Mohamed Sinan">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://mohamedsinan.tech/blog/langgraph-fastapi-ai-agent-sse/">
+<link rel="icon" type="image/png" href="/assets/sinan_nobg.png">
+<meta name="theme-color" content="#0b0c0f">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Mohamed Sinan">
+<meta property="og:title" content="Building an AI Agent with LangGraph, FastAPI and SSE">
+<meta property="og:description" content="A loop-based LangGraph agent streamed to React over Server-Sent Events. Lessons from building Resiko.">
+<meta property="og:url" content="https://mohamedsinan.tech/blog/langgraph-fastapi-ai-agent-sse/">
+<meta property="og:image" content="https://mohamedsinan.tech/assets/resiko.png">
+<meta property="article:published_time" content="2026-10-04">
+<meta property="article:author" content="https://mohamedsinan.tech/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Building an AI Agent with LangGraph, FastAPI and SSE">
+<meta name="twitter:description" content="A loop-based LangGraph agent streamed to React over Server-Sent Events. Lessons from building Resiko.">
+<meta name="twitter:image" content="https://mohamedsinan.tech/assets/resiko.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Building an AI Agent with LangGraph, FastAPI and SSE",
+      "description": "How to structure a LangGraph agent that scores and iteratively improves a resume, and stream every step to a React frontend with FastAPI and Server-Sent Events.",
+      "datePublished": "2026-10-04",
+      "dateModified": "2026-10-04",
+      "mainEntityOfPage": "https://mohamedsinan.tech/blog/langgraph-fastapi-ai-agent-sse/",
+      "image": "https://mohamedsinan.tech/assets/resiko.png",
+      "author": { "@type": "Person", "@id": "https://mohamedsinan.tech/#person", "name": "Mohamed Sinan", "url": "https://mohamedsinan.tech/" },
+      "publisher": { "@type": "Person", "@id": "https://mohamedsinan.tech/#person", "name": "Mohamed Sinan" },
+      "proficiencyLevel": "Intermediate",
+      "keywords": "LangGraph tutorial, FastAPI SSE, AI agent Python, LangGraph FastAPI streaming, agentic AI developer"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohamedsinan.tech/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mohamedsinan.tech/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "AI Agent with LangGraph, FastAPI and SSE", "item": "https://mohamedsinan.tech/blog/langgraph-fastapi-ai-agent-sse/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="/src/content.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><i>MS</i>Mohamed Sinan</a>
+    <nav class="menu" aria-label="Primary"><a href="/">Home</a><a href="/services/">Services</a><a href="/blog/" aria-current="page">Blog</a><a href="/#contact">Contact</a></nav>
+    <a class="btn pri" href="/#contact">Hire me</a>
+  </div>
+</header>
+
+<main>
+  <article>
+    <div class="wrap head" style="max-width:calc(720px + 2 * var(--gutter))">
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li>AI engineering</li></ol>
+      <h1>Building an AI agent with LangGraph, FastAPI and <span class="serif">SSE</span></h1>
+      <p class="lede">An LLM call is a function. An agent is a loop: it checks its own output and decides whether to try again. Here's how I structure that loop, and how I stream every step to the browser.</p>
+      <div class="meta"><span>By Mohamed Sinan</span><time datetime="2026-10-04">4 Oct 2026</time><span>8 min read</span></div>
+    </div>
+
+    <div class="wrap"><div class="prose">
+      <p><a href="https://resiko.app/" target="_blank" rel="noopener">Resiko</a> is an AI resume optimization agent I built with React, FastAPI, LangGraph, Groq and PostgreSQL. You give it a resume and a job description. It scores the resume against the job, rewrites it, scores it again and keeps going until the score is good enough. The user watches it happen live.</p>
+      <p>This post walks through the pattern behind it. The code is simplified to show the idea, not copied from the production app.</p>
+
+      <h2>Why a graph and not a single prompt?</h2>
+      <p>A single "improve this resume" prompt gives you one attempt and no way to tell whether it got better. Splitting the work into steps gives you three things:</p>
+      <ul>
+        <li><strong>Measurable progress.</strong> A scoring step after every rewrite tells you if the change helped.</li>
+        <li><strong>A stopping rule.</strong> Stop when the score passes a threshold or after N attempts, so cost stays predictable.</li>
+        <li><strong>Visibility.</strong> Every step is an event you can stream to the UI.</li>
+      </ul>
+      <p>LangGraph models this as a state machine: nodes are functions, edges decide what runs next, and a shared state object flows through it.</p>
+
+      <h2>1. Define the state</h2>
+      <pre><code>from typing import TypedDict
+
+class ResumeState(TypedDict):
+    resume: str
+    job_description: str
+    ats_score: int
+    missing_skills: list[str]
+    attempts: int</code></pre>
+      <p>Keep the state small and explicit. Everything a node needs to read or write goes here, and nothing else.</p>
+
+      <h2>2. Write the nodes</h2>
+      <p>Each node takes the state and returns only the keys it changed. The LLM calls sit behind small helper functions, which keeps the nodes easy to test.</p>
+      <pre><code>async def score_ats(state: ResumeState) -&gt; dict:
+    result = await llm_score(state["resume"], state["job_description"])
+    return {"ats_score": result.score, "missing_skills": result.missing}
+
+async def rewrite(state: ResumeState) -&gt; dict:
+    new_resume = await llm_rewrite(
+        state["resume"], state["job_description"], state["missing_skills"]
+    )
+    return {"resume": new_resume, "attempts": state["attempts"] + 1}</code></pre>
+      <p>Ask the model for <strong>structured output</strong> (a JSON schema or a Pydantic model) in the scoring step. A number you can compare is much more useful than a paragraph of feedback.</p>
+
+      <h2>3. Wire the loop</h2>
+      <pre><code>from langgraph.graph import StateGraph, START, END
+
+TARGET_SCORE = 85
+MAX_ATTEMPTS = 3
+
+def should_iterate(state: ResumeState) -&gt; str:
+    if state["ats_score"] &gt;= TARGET_SCORE or state["attempts"] &gt;= MAX_ATTEMPTS:
+        return "done"
+    return "again"
+
+graph = StateGraph(ResumeState)
+graph.add_node("score_ats", score_ats)
+graph.add_node("rewrite", rewrite)
+graph.add_edge(START, "score_ats")
+graph.add_conditional_edges("score_ats", should_iterate, {"again": "rewrite", "done": END})
+graph.add_edge("rewrite", "score_ats")
+
+agent = graph.compile()</code></pre>
+      <p>The conditional edge is what turns this into an agent. <code>MAX_ATTEMPTS</code> is not optional. Without it, a model that can't reach the target score will loop and burn tokens forever.</p>
+
+      <h2>4. Stream the steps with FastAPI and SSE</h2>
+      <p>An optimization run takes several LLM calls. Making the user stare at a spinner for that long feels broken. Server-Sent Events (SSE) let the backend push each step as it finishes, over a normal HTTP response.</p>
+      <pre><code>import json
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class OptimizeRequest(BaseModel):
+    resume: str
+    job_description: str
+
+@app.post("/optimize")
+async def optimize(req: OptimizeRequest):
+    initial = {**req.model_dump(), "ats_score": 0, "missing_skills": [], "attempts": 0}
+
+    async def events():
+        async for update in agent.astream(initial, stream_mode="updates"):
+            for node, changes in update.items():
+                yield f"event: {node}\ndata: {json.dumps(changes)}\n\n"
+        yield "event: done\ndata: {}\n\n"
+
+    return StreamingResponse(events(), media_type="text/event-stream")</code></pre>
+      <p><code>stream_mode="updates"</code> gives you one item per finished node with only the keys that node changed, which maps neatly onto one SSE event per step.</p>
+
+      <h2>5. Read the stream in React</h2>
+      <p>The browser's built-in <code>EventSource</code> only supports GET requests. Because the resume goes in a POST body, I read the stream with <code>fetch</code> instead:</p>
+      <pre><code>const res = await fetch("/optimize", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ resume, job_description }),
+});
+const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
+let buffer = "";
+while (true) {
+  const { value, done } = await reader.read();
+  if (done) break;
+  buffer += value;
+  const events = buffer.split("\n\n");
+  buffer = events.pop();               // keep any half-received event
+  for (const raw of events) handleEvent(raw);  // update score, show diff, etc.
+}</code></pre>
+
+      <h2>Lessons from production</h2>
+      <ul>
+        <li><strong>Pick a fast inference provider.</strong> In a loop, latency multiplies. Fast inference (I use Groq) is the difference between a live feel and a long wait.</li>
+        <li><strong>Cap everything.</strong> Max attempts, max tokens per call and a request timeout. Agents fail in creative ways.</li>
+        <li><strong>Persist the result, not the stream.</strong> Save the final state to PostgreSQL once the run ends. The stream is for the user's eyes.</li>
+        <li><strong>Disable proxy buffering.</strong> Some reverse proxies buffer responses and your "live" stream arrives all at once. Send <code>X-Accel-Buffering: no</code> or turn buffering off for that route.</li>
+        <li><strong>Make the output useful outside the app.</strong> Resiko renders the final resume to PDF with WeasyPrint. The agent is only valuable if the result leaves the screen.</li>
+      </ul>
+
+      <div class="cta">
+        <h2>Need an AI feature in your product?</h2>
+        <p>I build LangGraph agents, RAG pipelines and streaming AI features on top of FastAPI and Django, as a freelancer.</p>
+        <div class="row"><a class="btn pri" href="/services/">View services ↗</a><a class="btn" href="https://resiko.app/" target="_blank" rel="noopener">Try Resiko ↗</a></div>
+      </div>
+    </div></div>
+  </article>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Mohamed Sinan · Kerala, India</span><nav aria-label="Footer"><a href="/">Home</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="https://github.com/sinan-prvt" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/mohamedsinann" target="_blank" rel="noopener">LinkedIn</a></nav></div></footer>
+</body>
+</html>
