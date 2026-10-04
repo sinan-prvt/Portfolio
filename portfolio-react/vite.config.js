@@ -2,13 +2,12 @@ import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
 
 // The home page (index.html) is a single static page with Three.js, GSAP and Lenis loaded from CDNs.
-// Services and blog pages are plain static HTML, built as extra Vite entry points so they get real, crawlable URLs.
+// Blog pages are plain static HTML, built as extra Vite entry points so they get real, crawlable URLs.
 export default defineConfig({
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        services: resolve(__dirname, 'services/index.html'),
         blog: resolve(__dirname, 'blog/index.html'),
         'blog-langgraph': resolve(__dirname, 'blog/langgraph-fastapi-ai-agent-sse/index.html'),
         'blog-django-perf': resolve(__dirname, 'blog/django-rest-api-performance-checklist/index.html'),
