@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Django REST Framework Performance: A Practical Checklist | Mohamed Sinan</title>
+<meta name="description" content="A practical checklist for making a slow Django REST Framework API faster: measuring first, fixing N+1 queries with select_related and prefetch_related, indexes, pagination, caching and background jobs.">
+<meta name="author" content="Mohamed Sinan">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://mohamedsinan.tech/blog/django-rest-api-performance-checklist/">
+<link rel="icon" type="image/png" href="/assets/sinan_nobg.png">
+<meta name="theme-color" content="#0b0c0f">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Mohamed Sinan">
+<meta property="og:title" content="Django REST Framework Performance: A Practical Checklist">
+<meta property="og:description" content="Measure first, fix N+1 queries, add the right indexes, paginate, cache and move slow work to the background.">
+<meta property="og:url" content="https://mohamedsinan.tech/blog/django-rest-api-performance-checklist/">
+<meta property="og:image" content="https://mohamedsinan.tech/assets/sinan_nobg.png">
+<meta property="article:published_time" content="2026-10-04">
+<meta property="article:author" content="https://mohamedsinan.tech/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Django REST Framework Performance: A Practical Checklist">
+<meta name="twitter:description" content="Measure first, fix N+1 queries, add the right indexes, paginate, cache and move slow work to the background.">
+<meta name="twitter:image" content="https://mohamedsinan.tech/assets/sinan_nobg.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Django REST Framework Performance: A Practical Checklist",
+      "description": "A practical checklist for making a slow Django REST Framework API faster: measuring first, fixing N+1 queries, indexes, pagination, caching and background jobs.",
+      "datePublished": "2026-10-04",
+      "dateModified": "2026-10-04",
+      "mainEntityOfPage": "https://mohamedsinan.tech/blog/django-rest-api-performance-checklist/",
+      "image": "https://mohamedsinan.tech/assets/sinan_nobg.png",
+      "author": { "@type": "Person", "@id": "https://mohamedsinan.tech/#person", "name": "Mohamed Sinan", "url": "https://mohamedsinan.tech/" },
+      "publisher": { "@type": "Person", "@id": "https://mohamedsinan.tech/#person", "name": "Mohamed Sinan" },
+      "proficiencyLevel": "Intermediate",
+      "keywords": "Django performance, Django REST Framework optimization, select_related prefetch_related, N+1 query Django, speed up Django API"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohamedsinan.tech/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mohamedsinan.tech/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Django REST Framework Performance Checklist", "item": "https://mohamedsinan.tech/blog/django-rest-api-performance-checklist/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="/src/content.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><i>MS</i>Mohamed Sinan</a>
+    <nav class="menu" aria-label="Primary"><a href="/">Home</a><a href="/blog/" aria-current="page">Blog</a><a href="/#contact">Contact</a></nav>
+    <a class="btn pri" href="/#contact">Hire me</a>
+  </div>
+</header>
+
+<main>
+  <article>
+    <div class="wrap head" style="max-width:calc(720px + 2 * var(--gutter))">
+      <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li>Django</li></ol>
+      <h1>Django REST Framework performance: a practical <span class="serif">checklist</span></h1>
+      <p class="lede">Most slow Django APIs aren't slow because of Python. They're slow because of the database. This is the order I work through when an endpoint needs to get faster.</p>
+      <div class="meta"><span>By Mohamed Sinan</span><time datetime="2026-10-04">4 Oct 2026</time><span>7 min read</span></div>
+    </div>
+
+    <div class="wrap"><div class="prose">
+      <h2>0. Measure before you touch anything</h2>
+      <p>Guessing wastes time. Find out <em>which</em> endpoint is slow and <em>why</em> before changing code.</p>
+      <ul>
+        <li><strong>django-debug-toolbar</strong> or <strong>django-silk</strong> in development show every SQL query an endpoint runs and how long each took.</li>
+        <li>Look at the <strong>query count</strong> first. A list endpoint running 1 query per row is the most common problem by far.</li>
+        <li>Write a test that pins the query count, so the problem can't quietly come back:</li>
+      </ul>
+      <pre><code>def test_order_list_query_count(self):
+    with self.assertNumQueries(3):
+        self.client.get("/api/orders/")</code></pre>
+
+      <h2>1. Kill N+1 queries</h2>
+      <p>A serializer that touches a related object triggers one extra query per row. With 50 orders, that's 51 queries instead of 1.</p>
+      <pre><code>class OrderSerializer(serializers.ModelSerializer):
+    customer_name = serializers.CharField(source="customer.name")
+    items = OrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ["id", "customer_name", "items", "total"]</code></pre>
+      <p>Fix it in the view's queryset:</p>
+      <pre><code>class OrderViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return (
+            Order.objects
+            .select_related("customer")              # ForeignKey / OneToOne: SQL JOIN
+            .prefetch_related("items__product")      # reverse FK / M2M: one extra query
+        )</code></pre>
+      <ul>
+        <li><code>select_related</code> for forward ForeignKey and OneToOne relations.</li>
+        <li><code>prefetch_related</code> for reverse relations and ManyToMany. Use a <code>Prefetch()</code> object when you need to filter or order the related rows.</li>
+      </ul>
+
+      <h2>2. Only fetch what you send</h2>
+      <p>If the list view shows five fields, don't load a model with a large text column for every row.</p>
+      <pre><code>Product.objects.only("id", "name", "price", "thumbnail")</code></pre>
+      <p>Compute counts and totals in the database with <code>annotate()</code> instead of in a Python loop or a <code>SerializerMethodField</code> that runs a query per row:</p>
+      <pre><code>from django.db.models import Count
+Vendor.objects.annotate(product_count=Count("products"))</code></pre>
+
+      <h2>3. Add the right indexes</h2>
+      <p>Any field you filter, order or search by on a large table is a candidate for an index. Check the plan with <code>queryset.explain()</code> and look for sequential scans on big tables.</p>
+      <pre><code>class Order(models.Model):
+    # ...
+    class Meta:
+        indexes = [models.Index(fields=["customer", "-created_at"])]</code></pre>
+
+      <h2>4. Always paginate</h2>
+      <p>An unpaginated list endpoint gets slower every day your product grows. Set a default in settings:</p>
+      <pre><code>REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+}</code></pre>
+      <p>For very large or fast-changing tables, <code>CursorPagination</code> avoids expensive <code>COUNT(*)</code> and <code>OFFSET</code> queries.</p>
+
+      <h2>5. Cache what rarely changes</h2>
+      <p>Category lists, settings and public catalog pages are read thousands of times and change rarely. Cache them in Redis:</p>
+      <pre><code>from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+@method_decorator(cache_page(60 * 5), name="list")
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    ...</code></pre>
+      <p>Only cache responses that are the same for every user, or include the user in the cache key. Serving one user's data to another is far worse than a slow page.</p>
+
+      <h2>6. Move slow work out of the request</h2>
+      <p>Sending emails, generating PDFs, calling a slow third-party API or resizing images shouldn't block the response. Hand it to a background worker with <strong>Celery</strong> and a broker such as Redis or RabbitMQ, then return immediately.</p>
+      <pre><code>@shared_task
+def send_order_confirmation(order_id):
+    ...
+
+# in the view
+send_order_confirmation.delay(order.id)</code></pre>
+
+      <h2>7. Then look at the server</h2>
+      <p>Only after the database work is done does it make sense to tune the server: enough Gunicorn workers for your CPU count, persistent DB connections (<code>CONN_MAX_AGE</code>), gzip and a CDN for static and media files.</p>
+
+      <h2>The short version</h2>
+      <ol>
+        <li>Measure query count and time per endpoint.</li>
+        <li>Fix N+1 with <code>select_related</code> and <code>prefetch_related</code>.</li>
+        <li>Fetch fewer columns and aggregate in SQL.</li>
+        <li>Index what you filter and sort on.</li>
+        <li>Paginate every list.</li>
+        <li>Cache shared, rarely changing data.</li>
+        <li>Push slow work to Celery.</li>
+      </ol>
+      <p>On my internship work at Bridgeon I delivered around a 20% backend speed-up on REST APIs built with Django. Most of that kind of gain comes from steps 1 to 4. They're unglamorous, but they compound.</p>
+
+      <div class="cta">
+        <h2>Is your Django app slow?</h2>
+        <p>I audit and speed up Django and DRF backends as a freelancer. Send me the slow endpoint and I'll tell you where the time goes.</p>
+        <div class="row"><a class="btn pri" href="/#contact">Contact me ↗</a><a class="btn" href="/#work">See my work</a></div>
+      </div>
+    </div></div>
+  </article>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Mohamed Sinan · Kerala, India</span><nav aria-label="Footer"><a href="/">Home</a><a href="/blog/">Blog</a><a href="https://github.com/sinan-prvt" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/mohamedsinann" target="_blank" rel="noopener">LinkedIn</a></nav></div></footer>
+</body>
+</html>

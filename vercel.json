@@ -1,5 +1,7 @@
 {
   "buildCommand": "cd portfolio-react && npm install && npm run build",
   "outputDirectory": "portfolio-react/dist",
-  "framework": "vite"
+  "framework": "vite",
+  "cleanUrls": true,
+  "trailingSlash": true
 }
